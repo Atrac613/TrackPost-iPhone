@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'TrackPostTests' target in the 'TrackPostTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+#endif
