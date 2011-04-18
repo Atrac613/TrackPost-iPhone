@@ -125,6 +125,7 @@
 		06137A2B135B2DD700B2273D /* ScrobblerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrobblerViewController.h; sourceTree = "<group>"; };
 		06137A2C135B2DD700B2273D /* ScrobblerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrobblerViewController.m; sourceTree = "<group>"; };
 		06137A30135B2DF400B2273D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScrobblerViewController.xib; sourceTree = "<group>"; };
+		06B7C566135C7938006EE22B /* apikey.sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apikey.sample.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +204,7 @@
 				061379A1135B24F600B2273D /* Supporting Files */,
 				061379DB135B268800B2273D /* version.h */,
 				06137A27135B2D8F00B2273D /* apikey.h */,
+				06B7C566135C7938006EE22B /* apikey.sample.h */,
 			);
 			path = TrackPost;
 			sourceTree = "<group>";
@@ -668,6 +670,7 @@
 				061379CF135B24F700B2273D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		061379D0135B24F700B2273D /* Build configuration list for PBXNativeTarget "TrackPostTests" */ = {
 			isa = XCConfigurationList;
@@ -676,6 +679,7 @@
 				061379D2135B24F700B2273D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
