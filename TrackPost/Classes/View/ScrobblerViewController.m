@@ -10,6 +10,8 @@
 #import "TrackPostAppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "LastFMService.h"
+#import "RecentTracksViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ScrobblerViewController
 
@@ -19,6 +21,12 @@
 @synthesize scrobblerButton;
 @synthesize loveButton;
 @synthesize bannerIsVisible;
+@synthesize isPlaying;
+@synthesize tagTextView;
+@synthesize tagArray;
+@synthesize trackInfo;
+@synthesize trackImageView;
+@synthesize lovedTrack;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,7 +64,7 @@
     
     UILabel *appNameView = [[[UILabel alloc] init] autorelease];
     [appNameView setFrame:CGRectMake(0, 0, 140, 28)];
-    [appNameView setText:@"Scrobbler"];
+    [appNameView setText:@"TrackPost"];
     [appNameView setFont:[UIFont systemFontOfSize:17]];
     [appNameView setBackgroundColor:[UIColor clearColor]];
     [appNameView setTextColor:[UIColor whiteColor]];
@@ -65,7 +73,7 @@
     [titleView addSubview:appNameView];
     
     UILabel *titleSubView = [[[UILabel alloc] init] autorelease];
-    [titleSubView setFrame:CGRectMake(0, 23, 140, 13)];
+    [titleSubView setFrame:CGRectMake(0, 26, 140, 13)];
     [titleSubView setText:[NSString stringWithFormat:@"from %@", username]];
     [titleSubView setFont:[UIFont systemFontOfSize:13]];
     [titleSubView setBackgroundColor:[UIColor clearColor]];
@@ -77,9 +85,22 @@
     self.navigationItem.titleView = titleView;
     
     self.bannerIsVisible = NO;
+    self.lovedTrack = NO;
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonPressed:)] autorelease];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"♫" style:UIControlStateNormal target:self action:@selector(recentTracksButtonPressed:)];
+    
+    self.trackImageView.backgroundColor = [UIColor lightGrayColor];
+    self.trackImageView.alpha = 0.5f;
+    self.trackImageView.layer.cornerRadius = 10.f;
+    self.trackImageView.clipsToBounds = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refreshCurrentTracks];
 }
 
 - (void)viewDidUnload
@@ -120,22 +141,47 @@
 	[alert show];
 }
 
+- (void)recentTracksButtonPressed:(id)sender {
+    NSLog(@"Recent Tracks Button Pressed.");
+    
+    RecentTracksViewController *recentTracksViewController = [[[RecentTracksViewController alloc] init] autorelease];
+    [self.navigationController pushViewController:recentTracksViewController animated:YES];
+}
+
 - (IBAction)refreshButtonPressed:(id)sender {
     NSLog(@"Refresh Button Pressed.");
+    
+    [self refreshCurrentTracks];
+}
+
+- (void)refreshCurrentTracks {
+    TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     MPMusicPlayerController *iPodController = [MPMusicPlayerController iPodMusicPlayer];
     
     float time = [iPodController currentPlaybackTime];
-    int isPlaying = [iPodController playbackState];
+    isPlaying = [iPodController playbackState];
     
-    NSString *title	= [[iPodController nowPlayingItem] valueForProperty:MPMediaItemPropertyTitle];
-    NSString *artist	= [[iPodController nowPlayingItem] valueForProperty:MPMediaItemPropertyArtist];
+    if (isPlaying) {
+        NSString *title	= [[iPodController nowPlayingItem] valueForProperty:MPMediaItemPropertyTitle];
+        NSString *artist = [[iPodController nowPlayingItem] valueForProperty:MPMediaItemPropertyArtist];
+        
+        [artistNameLabel setText:artist];
+        [trackNameLabel setText:title];
+        
+        NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackInfoAction) object:nil] autorelease];
+        [operation setQueuePriority:NSOperationQueuePriorityHigh];
+        [trackPostAppDelegate.operationQueue addOperation:operation];
+    } else {
+        [artistNameLabel setText:@"unknown"];
+        [trackNameLabel setText:@"unknown"];
+    }
     
-    [artistNameLabel setText:artist];
-    [trackNameLabel setText:title];
+    time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
     
     NSLog(@"Time: %f", time);
     NSLog(@"Play State: %d", isPlaying);
+    NSLog(@"Time: %ld", unixTime);
     
     if (isPlaying == MPMusicPlaybackStatePlaying) {
         NSLog(@"Playing...");
@@ -145,27 +191,37 @@
 - (IBAction)scrobblerButtonPressed:(id)sender {
     NSLog(@"Scrobbler Button Pressed.");
     
-    [scrobblerButton setEnabled:NO];
-    [scrobblerButton setAlpha:0.5f];
-    
-    TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeScrobblerAction) object:nil] autorelease];
-    [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [trackPostAppDelegate.operationQueue addOperation:operation];
+    if (isPlaying) {
+        [scrobblerButton setEnabled:NO];
+        [scrobblerButton setAlpha:0.5f];
+        
+        TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeScrobblerAction) object:nil] autorelease];
+        [operation setQueuePriority:NSOperationQueuePriorityHigh];
+        [trackPostAppDelegate.operationQueue addOperation:operation];
+    }
 }
 
 - (IBAction)loveButtonPressed:(id)sender {
     NSLog(@"Love Button Pressed.");
-    
-    [loveButton setEnabled:NO];
-    [loveButton setAlpha:0.5f];
-    
-    TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeLoveAction) object:nil] autorelease];
-    [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [trackPostAppDelegate.operationQueue addOperation:operation];
+    NSLog(@"trackInfo: %@", self.trackInfo);
+    if (isPlaying) {
+        if (lovedTrack) {
+            lovedTrack = NO;
+        } else {
+            lovedTrack = YES;
+        }
+        
+        [loveButton setEnabled:NO];
+        [loveButton setAlpha:0.5f];
+        
+        TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeLoveAction) object:nil] autorelease];
+        [operation setQueuePriority:NSOperationQueuePriorityHigh];
+        [trackPostAppDelegate.operationQueue addOperation:operation];
+    }
     
 }
 
@@ -175,11 +231,15 @@
     service.session = session;
     NSLog(@"session: %@", session);
     
-    [service nowPlayingTrack:trackNameLabel.text byArtist:artistNameLabel.text onAlbum:@"" withDuration:1];
+    time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
+    
+    //[service nowPlayingTrack:trackNameLabel.text byArtist:artistNameLabel.text onAlbum:@"" withDuration:1];
+    [service scrobbleTrack:trackNameLabel.text byArtist:artistNameLabel.text onAlbum:@"" withDuration:1 timestamp:unixTime];
     
     NSLog(@"code %d", [service.error code]);
     NSLog(@"domain %@", [service.error domain]);
     NSLog(@"desc %@", [service.error localizedDescription]);
+    NSLog(@"Time: %ld", unixTime);
 	
 	[self performSelectorOnMainThread:@selector(completeScrobblerAction:) withObject:service.error waitUntilDone:YES];
 }
@@ -218,8 +278,14 @@
     LastFMService *service = [[[LastFMService alloc] init] autorelease];
     service.session = session;
     NSLog(@"session: %@", session);
-    
-    [service loveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+    NSLog(@"loved: %d", lovedTrack);
+    if (lovedTrack) {
+        NSLog(@"loveTrack");
+        [service loveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+    } else {
+        NSLog(@"unloveTrack");
+        [service unloveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+    }
     
     NSLog(@"%d", [LastFMService sharedInstance].error.code);
     NSLog(@"%@", [LastFMService sharedInstance].error.domain);
@@ -240,6 +306,11 @@
                                            delegate:self
                                   cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
                                   otherButtonTitles:nil, nil] autorelease];
+        if (lovedTrack) {
+            lovedTrack = NO;
+        } else {
+            lovedTrack = YES;
+        }
     } else {
         alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_SUCCESS_TITLE", @"Love successful title")
                                             message:NSLocalizedString(@"LOVE_SUCCESS_BODY",@"Love Successfull")
@@ -247,6 +318,13 @@
                                   cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
                                   otherButtonTitles:nil, nil] autorelease];
     }
+    
+    if (lovedTrack) {
+        [self.loveButton setHighlighted:YES];
+    } else {
+        [self.loveButton setHighlighted:NO];
+    }
+    
 	[alert show];
 }
 
@@ -273,6 +351,70 @@
         [UIView commitAnimations];
         self.bannerIsVisible = NO;
     }
+}
+
+- (void)synchronizeGetTrackInfoAction {
+	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
+    LastFMService *service = [[[LastFMService alloc] init] autorelease];
+    service.session = session;
+    NSLog(@"session: %@", session);
+    
+    NSString *artistName = artistNameLabel.text;
+    NSString *trackName = trackNameLabel.text;
+    
+    //NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
+    self.trackInfo = [service metadataForTrack:trackName byArtist:artistName inLanguage:@""];
+    NSLog(@"trackInfo: %@", self.trackInfo);
+    
+    NSLog(@"code %d", [service.error code]);
+    NSLog(@"domain %@", [service.error domain]);
+    NSLog(@"desc %@", [service.error localizedDescription]);
+	
+	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:service.error waitUntilDone:YES];
+}
+
+- (void)completeGetTrackInfoAction:(NSError*)error {
+    NSLog(@"GetTrackInfoAction Success");
+    
+    NSLog(@"code %d", [error code]);
+    NSLog(@"domain %@", [error domain]);
+    NSLog(@"desc %@", [error localizedDescription]);
+    
+    if (![error code]) {
+        if ([[self.trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[self.trackInfo objectForKey:@"image"] length]) {
+            NSURL *url = [NSURL URLWithString:[self.trackInfo objectForKey:@"image"]];
+            NSData* data = [NSData dataWithContentsOfURL:url];
+            UIImage* img = [[UIImage alloc] initWithData:data];
+            self.trackImageView.image = img;
+            self.trackImageView.clipsToBounds = NO;
+            self.trackImageView.alpha = 1.f;
+        } else {
+            self.trackImageView.image = nil;
+            self.trackImageView.clipsToBounds = YES;
+            self.trackImageView.alpha = 0.5f;
+        }
+        
+        if ([[self.trackInfo objectForKey:@"userloved"] intValue]) {
+            [self.loveButton setHighlighted:YES];
+            self.lovedTrack = YES;
+        } else {
+            [self.loveButton setHighlighted:NO];
+            self.lovedTrack = NO;
+        }
+        
+        NSMutableString *tagString = [[[NSMutableString alloc] init] autorelease];
+        if ([[trackInfo objectForKey:@"tags"] isKindOfClass:[NSArray class]]) {
+            for (NSString *tag in [trackInfo objectForKey:@"tags"]) {
+                [tagString appendFormat:@"%@ ", tag];
+            }
+        }
+        
+        NSLog(@"Tags: %@", tagString);
+        tagTextView.text = tagString;
+    }
+    //NSLog(@"%@", self.recentTracksArray);
+    
+    //[tableView reloadData];
 }
 
 @end

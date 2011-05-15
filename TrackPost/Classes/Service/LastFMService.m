@@ -372,20 +372,23 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 
 - (NSDictionary *)metadataForTrack:(NSString *)track byArtist:(NSString *)artist inLanguage:(NSString *)lang {
 	NSDictionary *metadata = nil;
-	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:7*DAYS XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
+	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:0 XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
 										[NSString stringWithFormat:@"artist=%@", [artist URLEscaped]],
 										[NSString stringWithFormat:@"username=%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"] URLEscaped]], 
 										[NSString stringWithFormat:@"lang=%@", lang], nil];
 	if([nodes count]) {
 		CXMLNode *node = [nodes objectAtIndex:0];
 		metadata = [self _convertNode:node
-					 toDictionaryWithXPaths:[NSArray arrayWithObjects:@"./name", @"./artist/name", @"./duration", @"./playcount", @"./listeners", @"./userplaycount", @"./wiki/summary", @"./album/image[@size=\"extralarge\"]", @"./album/title", nil]
-													forKeys:[NSArray arrayWithObjects:@"name", @"artist", @"duration", @"playcount", @"listeners", @"userplaycount", @"wiki", @"image", @"album", nil]];
+					 toDictionaryWithXPaths:[NSArray arrayWithObjects:@"./name", @"./artist/name", @"./duration", @"./playcount", @"./listeners", @"./userplaycount", @"./wiki/summary", @"./album/image[@size=\"extralarge\"]", @"./album/title", @"./toptags/tag/name", @"./userloved", nil]
+													forKeys:[NSArray arrayWithObjects:@"name", @"artist", @"duration", @"playcount", @"listeners", @"userplaycount", @"wiki", @"image", @"album", @"tags", @"userloved", nil]];
 	}
 	return metadata;
 }
 - (void)loveTrack:(NSString *)title byArtist:(NSString *)artist {
 	[self doMethod:@"track.love" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], nil];
+}
+- (void)unloveTrack:(NSString *)title byArtist:(NSString *)artist {
+	[self doMethod:@"track.unlove" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], nil];
 }
 - (void)addTrackToLibrary:(NSString *)title byArtist:(NSString *)artist {
 	[self doMethod:@"library.addTrack" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], nil];

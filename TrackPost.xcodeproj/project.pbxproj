@@ -46,6 +46,12 @@
 		06137A2D135B2DD800B2273D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06137A2A135B2DD700B2273D /* RootViewController.m */; };
 		06137A2E135B2DD800B2273D /* ScrobblerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06137A2C135B2DD700B2273D /* ScrobblerViewController.m */; };
 		06137A31135B2DF500B2273D /* ScrobblerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06137A2F135B2DF400B2273D /* ScrobblerViewController.xib */; };
+		06B7C56B135C7AB3006EE22B /* RecentTracksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7C569135C7AB3006EE22B /* RecentTracksViewController.m */; };
+		06B7C56C135C7AB3006EE22B /* RecentTracksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B7C56A135C7AB3006EE22B /* RecentTracksViewController.xib */; };
+		06B7C570135C80EB006EE22B /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7C56F135C80EB006EE22B /* TrackCell.m */; };
+		06B7C57413607AD6006EE22B /* TrackInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7C57213607AD6006EE22B /* TrackInfoViewController.m */; };
+		06B7C57513607AD6006EE22B /* TrackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B7C57313607AD6006EE22B /* TrackInfoViewController.xib */; };
+		06BDAF1E137FF9CB00BC7EA9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 06BDAF1D137FF9CB00BC7EA9 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +132,15 @@
 		06137A2C135B2DD700B2273D /* ScrobblerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrobblerViewController.m; sourceTree = "<group>"; };
 		06137A30135B2DF400B2273D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScrobblerViewController.xib; sourceTree = "<group>"; };
 		06B7C566135C7938006EE22B /* apikey.sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apikey.sample.h; sourceTree = "<group>"; };
+		06B7C568135C7AB3006EE22B /* RecentTracksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTracksViewController.h; sourceTree = "<group>"; };
+		06B7C569135C7AB3006EE22B /* RecentTracksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTracksViewController.m; sourceTree = "<group>"; };
+		06B7C56A135C7AB3006EE22B /* RecentTracksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentTracksViewController.xib; sourceTree = "<group>"; };
+		06B7C56E135C80EB006EE22B /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
+		06B7C56F135C80EB006EE22B /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
+		06B7C57113607AD6006EE22B /* TrackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackInfoViewController.h; sourceTree = "<group>"; };
+		06B7C57213607AD6006EE22B /* TrackInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackInfoViewController.m; sourceTree = "<group>"; };
+		06B7C57313607AD6006EE22B /* TrackInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackInfoViewController.xib; sourceTree = "<group>"; };
+		06BDAF1D137FF9CB00BC7EA9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +178,7 @@
 				061379C0135B24F700B2273D /* TrackPostTests */,
 				06137999135B24F600B2273D /* Frameworks */,
 				06137997135B24F600B2273D /* Products */,
+				06BDAF19137FF96C00BC7EA9 /* Resource */,
 			);
 			sourceTree = "<group>";
 		};
@@ -320,13 +336,37 @@
 		06137A28135B2DD700B2273D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06B7C56D135C80B5006EE22B /* Cell */,
 				06137A29135B2DD700B2273D /* RootViewController.h */,
 				06137A2A135B2DD700B2273D /* RootViewController.m */,
 				06137A2B135B2DD700B2273D /* ScrobblerViewController.h */,
 				06137A2C135B2DD700B2273D /* ScrobblerViewController.m */,
+				06B7C568135C7AB3006EE22B /* RecentTracksViewController.h */,
+				06B7C569135C7AB3006EE22B /* RecentTracksViewController.m */,
+				06B7C56A135C7AB3006EE22B /* RecentTracksViewController.xib */,
+				06B7C57113607AD6006EE22B /* TrackInfoViewController.h */,
+				06B7C57213607AD6006EE22B /* TrackInfoViewController.m */,
+				06B7C57313607AD6006EE22B /* TrackInfoViewController.xib */,
 			);
 			name = View;
 			path = Classes/View;
+			sourceTree = "<group>";
+		};
+		06B7C56D135C80B5006EE22B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				06B7C56E135C80EB006EE22B /* TrackCell.h */,
+				06B7C56F135C80EB006EE22B /* TrackCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		06BDAF19137FF96C00BC7EA9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				06BDAF1D137FF9CB00BC7EA9 /* README.md */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +443,9 @@
 				061379AE135B24F700B2273D /* MainWindow.xib in Resources */,
 				061379B4135B24F700B2273D /* RootViewController.xib in Resources */,
 				06137A31135B2DF500B2273D /* ScrobblerViewController.xib in Resources */,
+				06B7C56C135C7AB3006EE22B /* RecentTracksViewController.xib in Resources */,
+				06B7C57513607AD6006EE22B /* TrackInfoViewController.xib in Resources */,
+				06BDAF1E137FF9CB00BC7EA9 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +503,9 @@
 				06137A18135B27A700B2273D /* CTidy.m in Sources */,
 				06137A2D135B2DD800B2273D /* RootViewController.m in Sources */,
 				06137A2E135B2DD800B2273D /* ScrobblerViewController.m in Sources */,
+				06B7C56B135C7AB3006EE22B /* RecentTracksViewController.m in Sources */,
+				06B7C570135C80EB006EE22B /* TrackCell.m in Sources */,
+				06B7C57413607AD6006EE22B /* TrackInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

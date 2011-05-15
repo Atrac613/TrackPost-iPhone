@@ -100,6 +100,7 @@ enum eventStatus {
 
 - (NSDictionary *)metadataForTrack:(NSString *)track byArtist:(NSString *)artist inLanguage:(NSString *)lang;
 - (void)loveTrack:(NSString *)title byArtist:(NSString *)artist;
+- (void)unloveTrack:(NSString *)title byArtist:(NSString *)artist;
 - (void)banTrack:(NSString *)title byArtist:(NSString *)artist;
 - (NSArray *)fansOfTrack:(NSString *)track byArtist:(NSString *)artist;
 - (NSArray *)topTagsForTrack:(NSString *)track byArtist:(NSString *)artist;

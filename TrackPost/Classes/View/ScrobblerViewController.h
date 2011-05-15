@@ -17,6 +17,13 @@
     IBOutlet UIButton *loveButton;
     ADBannerView *adView;
     BOOL bannerIsVisible;
+    BOOL isPlaying;
+    BOOL lovedTrack;
+    
+    IBOutlet UIImageView *trackImageView;
+    IBOutlet UITextView *tagTextView;
+    NSDictionary *trackInfo;
+    NSArray *tagArray;
 }
 
 @property (nonatomic, retain) UILabel *artistNameLabel;
@@ -24,9 +31,21 @@
 //@property (nonatomic, retain) UIButton *refreshButton;
 @property (nonatomic, retain) UIButton *scrobblerButton;
 @property (nonatomic, retain) UIButton *loveButton;
-@property (nonatomic,assign) BOOL bannerIsVisible;
+@property (nonatomic, assign) BOOL bannerIsVisible;
+@property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, assign) BOOL lovedTrack;
+
+@property (nonatomic, retain) UIImageView *trackImageView;
+
+@property (nonatomic, retain) UITextView *tagTextView;
+
+@property (nonatomic, retain) NSDictionary *trackInfo;
+
+@property (nonatomic, retain) NSArray *tagArray;
 
 - (void)logoutButtonPressed:(id)sender;
 - (void)logoutAction;
+
+-(void)refreshCurrentTracks;
 
 @end
