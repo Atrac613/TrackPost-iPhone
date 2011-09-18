@@ -371,7 +371,7 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 
 - (NSDictionary *)metadataForTrack:(NSString *)track byArtist:(NSString *)artist inLanguage:(NSString *)lang {
 	NSDictionary *metadata = nil;
-	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:7*DAYS XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
+	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:0 XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
 										[NSString stringWithFormat:@"artist=%@", [artist URLEscaped]],
 										[NSString stringWithFormat:@"username=%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"] URLEscaped]], 
 										[NSString stringWithFormat:@"lang=%@", lang], nil];
