@@ -1,3 +1,34 @@
 "PLEASE_WAIT" = "Please wait";
+"LOGOUT" = "Logout";
+"LOGIN" = "Login";
+"TAGS" = "Tags";
+"LOGIN_WITH_LASTFM_ACCOUNT" = "Login with your Last.fm account.";
+"USERNAME" = "Username";
+"PASSWORD" = "Password";
+"CANCEL" = "Cancel";
+"OK" = "OK";
+"SCROBBLER" = "Scrobbler";
+"REFRESH" = "Refresh";
+
+"LOGOUT_TITLE" = "Logout";
+"LOGOUT_BODY" = "Are you sure you want to logout?";
+
+"WAITING_FOR_PLAYING" = "Waiting for playing.";
+
+"POST_ERROR_TITLE" = "Error";
+"POST_SUCCESS_TITLE" = "Success";
+"POST_SUCCESS_BODY" = "Scrobbler successful.";
+
+"LOVE_ERROR_TITLE" = "Error";
+"LOVE_SUCCESS_TITLE" = "Success";
+"LOVE_SUCCESS_BODY" = "Love successful.";
+"UNLOVE_SUCCESS_BODY" = "Unlove successful.";
+
+"RECENT_TRACKS" = "Recent Tracks";
+
+"TRACK_INFO" = "Track Info";
+"LISTENERS" = "Listeners";
+"PLAY_COUNT" = "Play Count";
+"YOUR_PLAY_COUNT" = "Your PLay Count";
 
 "AUTH_ERROR_TITLE" = "Failed Authentication";

@@ -17,9 +17,10 @@
 @synthesize artistNameLabel;
 @synthesize trackInfo;
 @synthesize trackImageView;
-@synthesize listenersLabel;
-@synthesize playcountLabel;
-@synthesize userplaycountLabel;
+@synthesize listenersTitleLabel;
+@synthesize playcountTitleLabel;
+@synthesize tagsTitleLabel;
+@synthesize userplaycountTitleLabel;
 @synthesize loveButton;
 @synthesize tagTextView;
 @synthesize tagArray;
@@ -52,9 +53,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    [self.navigationItem setTitle:@"Track Info"];
+    [self.navigationItem setTitle:NSLocalizedString(@"TRACK_INFO", @"Track Info")];
     
     self.artistNameLabel.text = [trackInfo objectForKey:@"artist"];
     self.trackNameLabel.text = [trackInfo objectForKey:@"name"];
@@ -68,14 +68,15 @@
     [formatter setGroupingSeparator:@","];
     [formatter setGroupingSize:3];
     
-    self.listenersLabel.text = [formatter stringForObjectValue:listenersNumber];
-    self.playcountLabel.text = [formatter stringForObjectValue:playcountNumber];
-    self.userplaycountLabel.text = [formatter stringForObjectValue:userplaycountNumber];
+    [listenersTitleLabel setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"LISTENERS", @"Listeners"), [formatter stringForObjectValue:listenersNumber]]];
+    [playcountTitleLabel setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"PLAY_COUNT", @"Play Count"), [formatter stringForObjectValue:playcountNumber]]];
+    [userplaycountTitleLabel setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"YOUR_PLAY_COUNT", @"Your Play Count"), [formatter stringForObjectValue:userplaycountNumber]]];
+    [tagsTitleLabel setText:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"TAGS", @"Tags")]];
     
     if ([[trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[trackInfo objectForKey:@"image"] length]) {
         NSURL *url = [NSURL URLWithString:[trackInfo objectForKey:@"image"]];
-        NSData* data = [NSData dataWithContentsOfURL:url];
-        UIImage* img = [[UIImage alloc] initWithData:data];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[[UIImage alloc] initWithData:data] autorelease];
         self.trackImageView.image = img;
         self.trackImageView.backgroundColor = [UIColor clearColor];
     } else {
@@ -86,10 +87,10 @@
     }
     
     if ([[trackInfo objectForKey:@"userloved"] intValue]) {
-        [self.loveButton setHighlighted:YES];
+        [loveButton setHighlighted:YES];
         lovedTrack = YES;
     } else {
-        [self.loveButton setHighlighted:NO];
+        [loveButton setHighlighted:NO];
         lovedTrack = NO;
     }
     
@@ -135,7 +136,6 @@
     [trackPostAppDelegate.operationQueue addOperation:operation];
 }
 
-
 - (void)synchronizeLoveAction {
 	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
     LastFMService *service = [[[LastFMService alloc] init] autorelease];
@@ -156,7 +156,7 @@
 }
 
 - (void)completeLoveAction:(NSError*)error {
-    NSLog(@"Love Success");
+    NSLog(@"completeLoveAction");
     
     [loveButton setEnabled:YES];
     [loveButton setAlpha:1];
@@ -164,7 +164,7 @@
     UIAlertView *alert;
     
     if ([error code]) {
-        alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_ERROR_TITLE", @"Love successful title")
+        alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_ERROR_TITLE", @"Love error title")
                                             message:NSLocalizedString([error localizedDescription], @"error")
                                            delegate:self
                                   cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
@@ -175,22 +175,29 @@
             lovedTrack = YES;
         }
     } else {
-        alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_SUCCESS_TITLE", @"Love successful title")
-                                            message:NSLocalizedString(@"LOVE_SUCCESS_BODY",@"Love Successfull")
-                                           delegate:self
-                                  cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
-                                  otherButtonTitles:nil, nil] autorelease];
+        if (lovedTrack) {
+            alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_SUCCESS_TITLE", @"Love successful title")
+                                                message:NSLocalizedString(@"LOVE_SUCCESS_BODY",@"Love successfull")
+                                               delegate:self
+                                      cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
+                                      otherButtonTitles:nil, nil] autorelease];
+        } else {
+            alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_SUCCESS_TITLE", @"Love successful title")
+                                                message:NSLocalizedString(@"UNLOVE_SUCCESS_BODY",@"Unlove successfull")
+                                               delegate:self
+                                      cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
+                                      otherButtonTitles:nil, nil] autorelease];
+        }
     }
     
     if (lovedTrack) {
-        [self.loveButton setHighlighted:YES];
+        [loveButton setHighlighted:YES];
     } else {
-        [self.loveButton setHighlighted:NO];
+        [loveButton setHighlighted:NO];
     }
     
 	[alert show];
 }
-
 
 - (void)synchronizeGetTagsAction {
 	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
@@ -207,7 +214,7 @@
 }
 
 - (void)completeGetTagsAction:(NSError*)error {
-    NSLog(@"Get Tags Success");
+    NSLog(@"completeGetTagsAction");
 
     if ([error code]) {
         tagTextView.text = @"Error...";
@@ -216,11 +223,7 @@
         for (NSDictionary *tag in tagArray) {
             [tags appendFormat:@"%@(%@) ", [tag objectForKey:@"name"], [tag objectForKey:@"count"]];
         }
-        //NSLog(@"Tags; %@", tags);
-        //tagTextView.text = tags;
     }
 }
-
-
 
 @end

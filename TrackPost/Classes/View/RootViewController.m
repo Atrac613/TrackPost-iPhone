@@ -17,6 +17,7 @@
 @synthesize passwordField;
 @synthesize loginButton;
 @synthesize pendingView;
+@synthesize messageLabel;
 
 - (void)viewDidLoad
 {
@@ -32,6 +33,11 @@
         ScrobblerViewController *scrobblerViewController = [[[ScrobblerViewController alloc] init] autorelease];
         [self.navigationController pushViewController:scrobblerViewController animated:YES];
     }
+    
+    [messageLabel setText:NSLocalizedString(@"LOGIN_WITH_LASTFM_ACCOUNT", @"Login with your Last.fm account.")];
+    [loginButton setTitle:NSLocalizedString(@"LOGIN", @"Login") forState:UIControlStateNormal];
+    [usernameField setPlaceholder:NSLocalizedString(@"USERNAME", @"Username")];
+    [passwordField setPlaceholder:NSLocalizedString(@"PASSWORD", @"Password")];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,7 +89,6 @@
     [super dealloc];
 }
 
-
 -(IBAction)loginButtonPressed:(id)sender {
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
@@ -101,10 +106,10 @@
     NSString *username = usernameField.text;
     NSString *password = passwordField.text;
     
-    NSLog(@"Username: %@, Password: %@", username, password);
+    //NSLog(@"Username: %@, Password: %@", username, password);
     
     NSDictionary *session = [[LastFMService sharedInstance] getMobileSessionForUser:username password:password];
-    NSLog(@"%@", session);
+    //NSLog(@"%@", session);
     if([[session objectForKey:@"key"] length]) {
         [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"lastfm_user"];
         [[NSUserDefaults standardUserDefaults] setObject:[session objectForKey:@"key"] forKey:@"lastfm_session"];
@@ -118,7 +123,7 @@
 }
 
 - (void)completeLoginAction:(NSError*)error {
-    NSLog(@"Login Action Success");
+    NSLog(@"completeLoginAction");
     
     NSLog(@"code %d", [error code]);
     NSLog(@"domain %@", [error domain]);

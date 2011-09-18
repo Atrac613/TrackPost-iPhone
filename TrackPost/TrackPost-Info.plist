@@ -13,9 +13,10 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon@2x.png</string>
+		<string>icon.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>jp.envision.iphone.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>io.atrac613.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

@@ -1,3 +1,33 @@
 "PLEASE_WAIT" = "お待ちください";
+"LOGOUT" = "ログアウト";
+"LOGIN" = "ログイン";
+"TAGS" = "タグ";
+"LOGIN_WITH_LASTFM_ACCOUNT" = "Last.fm アカウントでログインしてください。";
+"USERNAME" = "アカウント";
+"PASSWORD" = "パスワード";
+"CANCEL" = "キャンセル";
+"OK" = "OK";
+"SCROBBLER" = "スクラバー";
+"REFRESH" = "更新";
+
+"LOGOUT_TITLE" = "ログアウト";
+"LOGOUT_BODY" = "本当にログアウトしますか？";
+
+"WAITING_FOR_PLAYING" = "iPod を再生してください。";
+"POST_ERROR_TITLE" = "失敗";
+"POST_SUCCESS_TITLE" = "成功";
+"POST_SUCCESS_BODY" = "スクラバーしました。";
+
+"LOVE_ERROR_TITLE" = "失敗";
+"LOVE_SUCCESS_TITLE" = "成功";
+"LOVE_SUCCESS_BODY" = "Love の設定をしました。";
+"UNLOVE_SUCCESS_BODY" = "Love を解除しました。";
+
+"RECENT_TRACKS" = "最近の再生";
+
+"TRACK_INFO" = "トラック情報";
+"LISTENERS" = "リスナー";
+"PLAY_COUNT" = "再生回数";
+"YOUR_PLAY_COUNT" = "あなたの再生回数";
 
 "AUTH_ERROR_TITLE" = "認証に失敗";

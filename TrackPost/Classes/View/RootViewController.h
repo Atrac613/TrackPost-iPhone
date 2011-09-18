@@ -13,6 +13,7 @@
     IBOutlet UITextField *usernameField;
     IBOutlet UITextField *passwordField;
     IBOutlet UIButton *loginButton;
+    IBOutlet UILabel *messageLabel;
     
     PendingView *pendingView;
 }
@@ -20,6 +21,7 @@
 @property (nonatomic, retain) UITextField *usernameField;
 @property (nonatomic, retain) UITextField *passwordField;
 @property (nonatomic, retain) UIButton *loginButton;
+@property (nonatomic, retain) UILabel *messageLabel;
 
 @property (nonatomic, retain) PendingView *pendingView;
 

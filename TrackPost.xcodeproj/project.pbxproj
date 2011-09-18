@@ -46,6 +46,7 @@
 		06137A2D135B2DD800B2273D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06137A2A135B2DD700B2273D /* RootViewController.m */; };
 		06137A2E135B2DD800B2273D /* ScrobblerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06137A2C135B2DD700B2273D /* ScrobblerViewController.m */; };
 		06137A31135B2DF500B2273D /* ScrobblerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06137A2F135B2DF400B2273D /* ScrobblerViewController.xib */; };
+		06643A16142643040072CC37 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06643A15142643040072CC37 /* icon.png */; };
 		06B7C56B135C7AB3006EE22B /* RecentTracksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7C569135C7AB3006EE22B /* RecentTracksViewController.m */; };
 		06B7C56C135C7AB3006EE22B /* RecentTracksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B7C56A135C7AB3006EE22B /* RecentTracksViewController.xib */; };
 		06B7C570135C80EB006EE22B /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7C56F135C80EB006EE22B /* TrackCell.m */; };
@@ -135,6 +136,7 @@
 		06137A2B135B2DD700B2273D /* ScrobblerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrobblerViewController.h; sourceTree = "<group>"; };
 		06137A2C135B2DD700B2273D /* ScrobblerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrobblerViewController.m; sourceTree = "<group>"; };
 		06137A30135B2DF400B2273D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScrobblerViewController.xib; sourceTree = "<group>"; };
+		06643A15142643040072CC37 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		06B7C566135C7938006EE22B /* apikey.sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apikey.sample.h; sourceTree = "<group>"; };
 		06B7C568135C7AB3006EE22B /* RecentTracksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTracksViewController.h; sourceTree = "<group>"; };
 		06B7C569135C7AB3006EE22B /* RecentTracksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTracksViewController.m; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		0613798B135B24F600B2273D = {
 			isa = PBXGroup;
 			children = (
+				06643A15142643040072CC37 /* icon.png */,
 				06BDAF381389263B00BC7EA9 /* icon@2x.png */,
 				061379A0135B24F600B2273D /* TrackPost */,
 				061379C0135B24F700B2273D /* TrackPostTests */,
@@ -344,15 +347,15 @@
 		06137A28135B2DD700B2273D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				06137A2F135B2DF400B2273D /* ScrobblerViewController.xib */,
-				061379B2135B24F700B2273D /* RootViewController.xib */,
 				06D2BA29142592CA00F1D68A /* PendingView.h */,
 				06D2BA2A142592CA00F1D68A /* PendingView.m */,
 				06B7C56D135C80B5006EE22B /* Cell */,
 				06137A29135B2DD700B2273D /* RootViewController.h */,
 				06137A2A135B2DD700B2273D /* RootViewController.m */,
+				061379B2135B24F700B2273D /* RootViewController.xib */,
 				06137A2B135B2DD700B2273D /* ScrobblerViewController.h */,
 				06137A2C135B2DD700B2273D /* ScrobblerViewController.m */,
+				06137A2F135B2DF400B2273D /* ScrobblerViewController.xib */,
 				06B7C568135C7AB3006EE22B /* RecentTracksViewController.h */,
 				06B7C569135C7AB3006EE22B /* RecentTracksViewController.m */,
 				06B7C56A135C7AB3006EE22B /* RecentTracksViewController.xib */,
@@ -480,6 +483,7 @@
 				06BDAF391389263B00BC7EA9 /* icon@2x.png in Resources */,
 				06D2BA341425A8A700F1D68A /* Localizable.strings in Resources */,
 				06D2BA371425A8B200F1D68A /* Localizable.strings in Resources */,
+				06643A16142643040072CC37 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

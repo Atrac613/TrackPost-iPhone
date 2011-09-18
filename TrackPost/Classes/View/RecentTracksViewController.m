@@ -46,11 +46,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
-    [self.navigationItem setTitle:@"Recent Tracks"];
+    [self.navigationItem setTitle:NSLocalizedString(@"RECENT_TRACKS", @"Recent Tracks")];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(recentTracksUpdate)];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(recentTracksUpdate)] autorelease];
     
     [self recentTracksUpdate];
 }
@@ -96,7 +95,7 @@
 }
 
 - (void)completeGetRecentTracksAction:(NSError*)error {
-    NSLog(@"completeGetRecentTracksAction Success");
+    NSLog(@"completeGetRecentTracksAction");
     
     [self hidePendingView];
     
@@ -117,10 +116,7 @@
         cell = [[[TrackCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"] autorelease];
     }
     
-    NSDictionary *rowData = [self.recentTracksArray objectAtIndex:indexPath.row];
-    
-    NSTimeInterval timeInterval = [[rowData objectForKey:@"uts"] doubleValue];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDictionary *rowData = [NSDictionary dictionaryWithDictionary:[self.recentTracksArray objectAtIndex:indexPath.row]];
     
     cell.artistNameLabel.text = [rowData objectForKey:@"artist"];
     cell.trackNameLabel.text = [rowData objectForKey:@"name"];
@@ -132,7 +128,10 @@
     if ([[rowData objectForKey:@"nowplaying"] boolValue]) {
         cell.dateLabel.text = @"nowplaying";
     } else {
-        cell.dateLabel.text = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+        NSTimeInterval timeInterval = [[rowData objectForKey:@"uts"] doubleValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+        
+        cell.dateLabel.text = [[[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate:date]] autorelease];
     }
     
     return cell;
@@ -172,7 +171,7 @@
 }
 
 - (void)completeGetTrackInfoAction:(NSError*)error {
-    NSLog(@"completeGetTrackInfoAction Success");
+    NSLog(@"completeGetTrackInfoAction");
     
     if (![error code]) {
         TrackInfoViewController *trackInfoViewController = [[[TrackInfoViewController alloc] init] autorelease];
@@ -185,7 +184,7 @@
     if (![self.view.subviews containsObject:pendingView]) {
         pendingView = [[[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)] autorelease];
         pendingView.titleLabel.text = NSLocalizedString(@"PLEASE_WAIT", @"Please wait");
-        pendingView.userInteractionEnabled = YES;
+        pendingView.userInteractionEnabled = NO;
         [self.view addSubview:pendingView];
     }
     

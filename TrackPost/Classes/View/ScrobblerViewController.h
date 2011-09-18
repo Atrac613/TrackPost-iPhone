@@ -13,7 +13,8 @@
     IBOutlet UILabel *artistNameLabel;
     IBOutlet UILabel *trackNameLabel;
     IBOutlet UILabel *waitingForiPodLabel;
-    //IBOutlet UIButton *refreshButton;
+    IBOutlet UILabel *tagsLabel;
+    IBOutlet UIButton *refreshButton;
     IBOutlet UIButton *scrobblerButton;
     IBOutlet UIButton *loveButton;
     ADBannerView *adView;
@@ -30,7 +31,8 @@
 @property (nonatomic, retain) UILabel *artistNameLabel;
 @property (nonatomic, retain) UILabel *trackNameLabel;
 @property (nonatomic, retain) UILabel *waitingForiPodLabel;
-//@property (nonatomic, retain) UIButton *refreshButton;
+@property (nonatomic, retain) UILabel *tagsLabel;
+@property (nonatomic, retain) UIButton *refreshButton;
 @property (nonatomic, retain) UIButton *scrobblerButton;
 @property (nonatomic, retain) UIButton *loveButton;
 @property (nonatomic, assign) BOOL bannerIsVisible;
@@ -48,6 +50,6 @@
 - (void)logoutButtonPressed:(id)sender;
 - (void)logoutAction;
 
--(void)refreshCurrentTracks;
+- (void)refreshCurrentTracks;
 
 @end

@@ -69,8 +69,7 @@
 
 BOOL shouldUseCache(NSString *file, double seconds) {
 	NSDate *age = [[[NSFileManager defaultManager] fileAttributesAtPath:file traverseLink:YES] objectForKey:NSFileModificationDate];
-	//NSDate *age = [[NSFileManager defaultManager] setAttributes:file error:nil];
-    if(age==nil) return NO;
+	if(age==nil) return NO;
 	if(([age timeIntervalSinceNow] * -1) > seconds && [((TrackPostAppDelegate *)[UIApplication sharedApplication].delegate) hasNetworkConnection]) {
 		return NO;
 	} else
@@ -102,7 +101,7 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 	error = nil;
 	
 	NSArray *sortedParams = [[params arrayByAddingObjectsFromArray:[NSArray arrayWithObjects:[NSString stringWithFormat:@"method=%@",method],(session && authenticated)?[NSString stringWithFormat:@"sk=%@",session]:nil,nil]] sortedArrayUsingSelector:@selector(compare:)];
-	NSMutableString *signature = [[NSMutableString alloc] init];
+	NSMutableString *signature = [[[NSMutableString alloc] init] autorelease];
 	for(NSString *param in sortedParams) {
 		[signature appendString:[[param stringByReplacingOccurrencesOfString:@"=" withString:@""] unURLEscape]];
 	}
@@ -115,31 +114,28 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 		[theRequest setValue:kUserAgent forHTTPHeaderField:@"User-Agent"];
 		[theRequest setHTTPMethod:@"POST"];
 		[theRequest setHTTPBody:[[NSString stringWithFormat:@"%@&api_sig=%@", [sortedParams componentsJoinedByString:@"&"], [signature md5sum]] dataUsingEncoding:NSUTF8StringEncoding]];
-		NSLog(@"method: %@ : params: %@", method, [NSString stringWithFormat:@"%@&api_sig=%@", [sortedParams componentsJoinedByString:@"&"], [signature md5sum]]);
+		//NSLog(@"method: %@ : params: %@", method, [NSString stringWithFormat:@"%@&api_sig=%@", [sortedParams componentsJoinedByString:@"&"], [signature md5sum]]);
 		
 		theResponseData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&theResponse error:&theError];
-		[theResponseData writeToFile:CACHE_FILE([signature md5sum]) atomically:YES];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	} else {
 		error = [[NSError alloc] initWithDomain:NSURLErrorDomain code:0 userInfo:nil];
-		[signature release];
 		return nil;
 	}
-	[signature release];
 	
 	if(theError) {
 		error = [theError retain];
 		return nil;
 	}
 	
-	NSLog(@"Response: %s\n", [theResponseData bytes]);
+	//NSLog(@"Response: %s\n", [theResponseData bytes]);
 	
 	CXMLDocument *d = [[[CXMLDocument alloc] initWithData:theResponseData options:0 error:&theError] autorelease];
 	if(theError) {
 		error = [theError retain];
 		return nil;
 	}
-	
+
 	NSArray *output = [[d rootElement] nodesForXPath:XPath error:&theError];
 	if(![[[d rootElement] objectAtXPath:@"./@status"] isEqualToString:@"ok"]) {
 		error = [[NSError alloc] initWithDomain:LastFMServiceErrorDomain
@@ -151,6 +147,9 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 #endif
 		return nil;
 	}
+	//Cache the response
+	[theResponseData writeToFile:CACHE_FILE([signature md5sum]) atomically:YES];
+
 	return output;
 }
 - (NSArray *)doMethod:(NSString *)method maxCacheAge:(double)seconds XPath:(NSString *)XPath withParameters:(NSString *)firstParam, ... {
@@ -166,8 +165,8 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 			[params addObject: eachParam];
 		}
 		va_end(argumentList);
-    }
-    
+  }
+	
 	[params addObject:[NSString stringWithFormat:@"api_key=%s", API_KEY]];
 	
 	output = [self _doMethod:method maxCacheAge:seconds XPath:XPath withParams:params authenticated:YES];
@@ -372,7 +371,7 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 
 - (NSDictionary *)metadataForTrack:(NSString *)track byArtist:(NSString *)artist inLanguage:(NSString *)lang {
 	NSDictionary *metadata = nil;
-	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:0 XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
+	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:7*DAYS XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
 										[NSString stringWithFormat:@"artist=%@", [artist URLEscaped]],
 										[NSString stringWithFormat:@"username=%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"] URLEscaped]], 
 										[NSString stringWithFormat:@"lang=%@", lang], nil];
@@ -399,10 +398,11 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 - (void)removeNowPlayingTrack:(NSString *)title byArtist:(NSString *)artist onAlbum:(NSString *)album {
 	[self doMethod:@"track.removeNowPlaying" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], [NSString stringWithFormat:@"album=%@", [album URLEscaped]], nil];
 }
-- (void)scrobbleTrack:(NSString *)title byArtist:(NSString *)artist onAlbum:(NSString *)album withDuration:(int)duration timestamp:(int)timestamp {
+- (void)scrobbleTrack:(NSString *)title byArtist:(NSString *)artist onAlbum:(NSString *)album withDuration:(int)duration timestamp:(int)timestamp streamId:(NSString *)streamId {
 	[self doMethod:@"track.scrobble" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], 
 	 [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], 
 	 [NSString stringWithFormat:@"album=%@", [album URLEscaped]], 
+	 [NSString stringWithFormat:@"streamId=%@", streamId], 
 	 [NSString stringWithFormat:@"timestamp=%i", timestamp], 
 	 [NSString stringWithFormat:@"duration=%i", duration], nil];
 }
@@ -476,7 +476,8 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 - (NSDictionary *)weeklyArtistsForUser:(NSString *)username {
 	CXMLNode *node = [[self doMethod:@"user.getWeeklyArtistChart" maxCacheAge:5*MINUTES XPath:@"./weeklyartistchart" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil] objectAtIndex:0];
 	if( !node ) return nil;
-	
+
+	NSDictionary *result = nil;
 	NSString* from = [node objectAtXPath: @"@from"];
 	NSString* to = [node objectAtXPath: @"@to"];
 	NSError* nodeError;
@@ -484,7 +485,8 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 	NSArray* artists = [self _convertNodes:nodes
 						toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./playcount", @"./streamable", @"./image[@size=\"large\"]", nil]
 						forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"streamable", @"image", nil]];
-	NSDictionary* result = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects: from, to, artists, nil ] 
+	if(from != nil && to != nil && artists != nil)
+		result = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects: from, to, artists, nil ] 
 													   forKeys: [NSArray arrayWithObjects: @"from", @"to", @"artists", nil ]];
 	return result;
 }
@@ -687,11 +689,11 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 	if([((TrackPostAppDelegate *)[UIApplication sharedApplication].delegate) hasWiFiConnection]) {
 		network = @"wifi";
 		bitrate = @"128";
-		speed = @"2";
+		speed = @"8";
 	} else {
 		network = @"wwan";
 		bitrate = [[NSUserDefaults standardUserDefaults] objectForKey:@"bitrate"];
-		speed = @"2";
+		speed = @"8";
 	}
 	
 	NSArray *nodes = [[[[[self doMethod:@"radio.getPlaylist" maxCacheAge:0 XPath:@"." withParameters:

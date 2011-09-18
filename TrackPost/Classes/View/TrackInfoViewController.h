@@ -13,9 +13,10 @@
     IBOutlet UILabel *trackNameLabel;
     IBOutlet UILabel *artistNameLabel;
     
-    IBOutlet UILabel *listenersLabel;
-    IBOutlet UILabel *playcountLabel;
-    IBOutlet UILabel *userplaycountLabel;
+    IBOutlet UILabel *listenersTitleLabel;
+    IBOutlet UILabel *playcountTitleLabel;
+    IBOutlet UILabel *userplaycountTitleLabel;
+    IBOutlet UILabel *tagsTitleLabel;
     
     IBOutlet UIImageView *trackImageView;
     
@@ -31,9 +32,10 @@
 @property (nonatomic, retain) UILabel *trackNameLabel;
 @property (nonatomic, retain) UILabel *artistNameLabel;
 
-@property (nonatomic, retain) UILabel *listenersLabel;
-@property (nonatomic, retain) UILabel *playcountLabel;
-@property (nonatomic, retain) UILabel *userplaycountLabel;
+@property (nonatomic, retain) UILabel *listenersTitleLabel;
+@property (nonatomic, retain) UILabel *playcountTitleLabel;
+@property (nonatomic, retain) UILabel *userplaycountTitleLabel;
+@property (nonatomic, retain) UILabel *tagsTitleLabel;
 
 @property (nonatomic, retain) UIImageView *trackImageView;
 @property (nonatomic, retain) UIButton *loveButton;
