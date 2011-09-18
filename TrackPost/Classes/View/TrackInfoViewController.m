@@ -2,8 +2,8 @@
 //  TrackInfoViewController.m
 //  TrackPost
 //
-//  Created by Noguchi Osamu on 11/04/21.
-//  Copyright 2011 envision. All rights reserved.
+//  Created by Osamu Noguchi on 11/04/21.
+//  Copyright 2011 atrac613.io All rights reserved.
 //
 
 #import "TrackInfoViewController.h"
@@ -72,11 +72,12 @@
     self.playcountLabel.text = [formatter stringForObjectValue:playcountNumber];
     self.userplaycountLabel.text = [formatter stringForObjectValue:userplaycountNumber];
     
-    if ([[trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]]) {
+    if ([[trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[trackInfo objectForKey:@"image"] length]) {
         NSURL *url = [NSURL URLWithString:[trackInfo objectForKey:@"image"]];
         NSData* data = [NSData dataWithContentsOfURL:url];
         UIImage* img = [[UIImage alloc] initWithData:data];
         self.trackImageView.image = img;
+        self.trackImageView.backgroundColor = [UIColor clearColor];
     } else {
         self.trackImageView.backgroundColor = [UIColor lightGrayColor];
         self.trackImageView.alpha = 0.5f;

@@ -2,8 +2,8 @@
 //  RecentTracksViewController.m
 //  TrackPost
 //
-//  Created by Noguchi Osamu on 11/04/18.
-//  Copyright 2011 envision. All rights reserved.
+//  Created by Osamu Noguchi on 04/18/11.
+//  Copyright 2011 atrac613.io All rights reserved.
 //
 
 #import "RecentTracksViewController.h"
@@ -17,6 +17,7 @@
 @synthesize tableView;
 @synthesize recentTracksArray;
 @synthesize trackInfo;
+@synthesize pendingView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +56,8 @@
 }
 
 - (void)recentTracksUpdate {
+    [self showPendingView];
+    
     TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetRecentTracksAction) object:nil] autorelease];
@@ -67,6 +70,12 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self hidePendingView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -88,6 +97,8 @@
 
 - (void)completeGetRecentTracksAction:(NSError*)error {
     NSLog(@"completeGetRecentTracksAction Success");
+    
+    [self hidePendingView];
     
     [tableView reloadData];
 }
@@ -127,7 +138,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *rowData = [self.recentTracksArray objectAtIndex:indexPath.row];
@@ -137,6 +148,9 @@
     
     NSLog(@"artistName: %@", artistName);
     NSLog(@"trackName: %@", trackName);
+    
+    [tv deselectRowAtIndexPath:indexPath animated:YES];
+    [self showPendingView];
     
     NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackInfoAction:) object:rowData] autorelease];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
@@ -164,6 +178,23 @@
         TrackInfoViewController *trackInfoViewController = [[[TrackInfoViewController alloc] init] autorelease];
         trackInfoViewController.trackInfo = self.trackInfo;
         [self.navigationController pushViewController:trackInfoViewController animated:YES];
+    }
+}
+
+- (void)showPendingView {
+    if (![self.view.subviews containsObject:pendingView]) {
+        pendingView = [[[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)] autorelease];
+        pendingView.titleLabel.text = NSLocalizedString(@"PLEASE_WAIT", @"Please wait");
+        pendingView.userInteractionEnabled = YES;
+        [self.view addSubview:pendingView];
+    }
+    
+    [pendingView showPendingView];
+}
+
+- (void)hidePendingView {
+    if ([self.view.subviews containsObject:pendingView]) {
+        [pendingView hidePendingView];
     }
 }
 

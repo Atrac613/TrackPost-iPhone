@@ -2,8 +2,8 @@
 //  RootViewController.m
 //  TrackPost
 //
-//  Created by Noguchi Osamu on 11/04/17.
-//  Copyright 2011 envision. All rights reserved.
+//  Created by Osamu Noguchi on 04/17/11.
+//  Copyright 2011 atrac613.io All rights reserved.
 //
 
 #import "RootViewController.h"
@@ -16,6 +16,7 @@
 @synthesize usernameField;
 @synthesize passwordField;
 @synthesize loginButton;
+@synthesize pendingView;
 
 - (void)viewDidLoad
 {
@@ -87,6 +88,8 @@
     [usernameField resignFirstResponder];
     [passwordField resignFirstResponder];
     
+    [self showPendingView];
+    
     TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeLoginAction) object:nil] autorelease];
@@ -121,6 +124,8 @@
     NSLog(@"domain %@", [error domain]);
     NSLog(@"desc %@", [error localizedDescription]);
     
+    [self hidePendingView];
+    
     if ([error code]) {
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AUTH_ERROR_TITLE", @"Auth error title")
                                                          message:NSLocalizedString([error localizedDescription], @"error")
@@ -135,5 +140,21 @@
     
 }
 
+- (void)showPendingView {
+    if (![self.view.subviews containsObject:pendingView]) {
+        pendingView = [[[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)] autorelease];
+        pendingView.titleLabel.text = NSLocalizedString(@"PLEASE_WAIT", @"Please wait");
+        pendingView.userInteractionEnabled = NO;
+        [self.view addSubview:pendingView];
+    }
+    
+    [pendingView showPendingView];
+}
+
+- (void)hidePendingView {
+    if ([self.view.subviews containsObject:pendingView]) {
+        [pendingView hidePendingView];
+    }
+}
 
 @end

@@ -52,6 +52,10 @@
 		06B7C57413607AD6006EE22B /* TrackInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06B7C57213607AD6006EE22B /* TrackInfoViewController.m */; };
 		06B7C57513607AD6006EE22B /* TrackInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06B7C57313607AD6006EE22B /* TrackInfoViewController.xib */; };
 		06BDAF1E137FF9CB00BC7EA9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 06BDAF1D137FF9CB00BC7EA9 /* README.md */; };
+		06BDAF391389263B00BC7EA9 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06BDAF381389263B00BC7EA9 /* icon@2x.png */; };
+		06D2BA2B142592CA00F1D68A /* PendingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D2BA2A142592CA00F1D68A /* PendingView.m */; };
+		06D2BA341425A8A700F1D68A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06D2BA321425A8A700F1D68A /* Localizable.strings */; };
+		06D2BA371425A8B200F1D68A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06D2BA351425A8B200F1D68A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +145,11 @@
 		06B7C57213607AD6006EE22B /* TrackInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackInfoViewController.m; sourceTree = "<group>"; };
 		06B7C57313607AD6006EE22B /* TrackInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrackInfoViewController.xib; sourceTree = "<group>"; };
 		06BDAF1D137FF9CB00BC7EA9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		06BDAF381389263B00BC7EA9 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		06D2BA29142592CA00F1D68A /* PendingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingView.h; sourceTree = "<group>"; };
+		06D2BA2A142592CA00F1D68A /* PendingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingView.m; sourceTree = "<group>"; };
+		06D2BA331425A8A700F1D68A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = TrackPost/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		06D2BA361425A8B200F1D68A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TrackPost/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +183,7 @@
 		0613798B135B24F600B2273D = {
 			isa = PBXGroup;
 			children = (
+				06BDAF381389263B00BC7EA9 /* icon@2x.png */,
 				061379A0135B24F600B2273D /* TrackPost */,
 				061379C0135B24F700B2273D /* TrackPostTests */,
 				06137999135B24F600B2273D /* Frameworks */,
@@ -215,8 +225,6 @@
 				061379A9135B24F700B2273D /* TrackPostAppDelegate.h */,
 				061379AA135B24F700B2273D /* TrackPostAppDelegate.m */,
 				061379AC135B24F700B2273D /* MainWindow.xib */,
-				06137A2F135B2DF400B2273D /* ScrobblerViewController.xib */,
-				061379B2135B24F700B2273D /* RootViewController.xib */,
 				061379A1135B24F600B2273D /* Supporting Files */,
 				061379DB135B268800B2273D /* version.h */,
 				06137A27135B2D8F00B2273D /* apikey.h */,
@@ -336,6 +344,10 @@
 		06137A28135B2DD700B2273D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06137A2F135B2DF400B2273D /* ScrobblerViewController.xib */,
+				061379B2135B24F700B2273D /* RootViewController.xib */,
+				06D2BA29142592CA00F1D68A /* PendingView.h */,
+				06D2BA2A142592CA00F1D68A /* PendingView.m */,
 				06B7C56D135C80B5006EE22B /* Cell */,
 				06137A29135B2DD700B2273D /* RootViewController.h */,
 				06137A2A135B2DD700B2273D /* RootViewController.m */,
@@ -364,9 +376,27 @@
 		06BDAF19137FF96C00BC7EA9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				06D2BA311425A88F00F1D68A /* ja.lproj */,
+				06D2BA301425A88100F1D68A /* en.lproj */,
 				06BDAF1D137FF9CB00BC7EA9 /* README.md */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		06D2BA301425A88100F1D68A /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				06D2BA351425A8B200F1D68A /* Localizable.strings */,
+			);
+			name = en.lproj;
+			sourceTree = "<group>";
+		};
+		06D2BA311425A88F00F1D68A /* ja.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				06D2BA321425A8A700F1D68A /* Localizable.strings */,
+			);
+			name = ja.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,6 +452,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 			);
 			mainGroup = 0613798B135B24F600B2273D;
 			productRefGroup = 06137997135B24F600B2273D /* Products */;
@@ -446,6 +477,9 @@
 				06B7C56C135C7AB3006EE22B /* RecentTracksViewController.xib in Resources */,
 				06B7C57513607AD6006EE22B /* TrackInfoViewController.xib in Resources */,
 				06BDAF1E137FF9CB00BC7EA9 /* README.md in Resources */,
+				06BDAF391389263B00BC7EA9 /* icon@2x.png in Resources */,
+				06D2BA341425A8A700F1D68A /* Localizable.strings in Resources */,
+				06D2BA371425A8B200F1D68A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +540,7 @@
 				06B7C56B135C7AB3006EE22B /* RecentTracksViewController.m in Sources */,
 				06B7C570135C80EB006EE22B /* TrackCell.m in Sources */,
 				06B7C57413607AD6006EE22B /* TrackInfoViewController.m in Sources */,
+				06D2BA2B142592CA00F1D68A /* PendingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +585,7 @@
 				061379B3135B24F700B2273D /* en */,
 			);
 			name = RootViewController.xib;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		061379C3135B24F700B2273D /* InfoPlist.strings */ = {
@@ -566,6 +602,23 @@
 				06137A30135B2DF400B2273D /* en */,
 			);
 			name = ScrobblerViewController.xib;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		06D2BA321425A8A700F1D68A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06D2BA331425A8A700F1D68A /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		06D2BA351425A8B200F1D68A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06D2BA361425A8B200F1D68A /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -575,7 +628,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 修 Noguchi (BQY439J4V9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Osamu Noguchi (BQY439J4V9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -594,7 +647,7 @@
 					"-ObjC",
 					"-lz",
 				);
-				PROVISIONING_PROFILE = "4EA4AA45-7E9F-46B4-87D9-CF2AD8A48BD1";
+				PROVISIONING_PROFILE = "5FB26EB7-5CA2-436E-A191-21540F9BBF4D";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -603,7 +656,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 修 Noguchi (BQY439J4V9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Osamu Noguchi (BQY439J4V9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -620,7 +673,7 @@
 					"-ObjC",
 					"-lz",
 				);
-				PROVISIONING_PROFILE = "4EA4AA45-7E9F-46B4-87D9-CF2AD8A48BD1";
+				PROVISIONING_PROFILE = "5FB26EB7-5CA2-436E-A191-21540F9BBF4D";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -629,12 +682,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Osamu Noguchi (BQY439J4V9)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
 				INFOPLIST_FILE = "TrackPost/TrackPost-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5FB26EB7-5CA2-436E-A191-21540F9BBF4D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -643,11 +698,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Osamu Noguchi (BQY439J4V9)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
 				INFOPLIST_FILE = "TrackPost/TrackPost-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5FB26EB7-5CA2-436E-A191-21540F9BBF4D";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

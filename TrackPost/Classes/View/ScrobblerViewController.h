@@ -2,8 +2,8 @@
 //  ScrobblerViewController.h
 //  TrackPost
 //
-//  Created by Noguchi Osamu on 11/04/17.
-//  Copyright 2011 envision. All rights reserved.
+//  Created by Osamu Noguchi on 04/17/11.
+//  Copyright 2011 atrac613.io All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,6 +12,7 @@
 @interface ScrobblerViewController : UIViewController <ADBannerViewDelegate> {
     IBOutlet UILabel *artistNameLabel;
     IBOutlet UILabel *trackNameLabel;
+    IBOutlet UILabel *waitingForiPodLabel;
     //IBOutlet UIButton *refreshButton;
     IBOutlet UIButton *scrobblerButton;
     IBOutlet UIButton *loveButton;
@@ -28,6 +29,7 @@
 
 @property (nonatomic, retain) UILabel *artistNameLabel;
 @property (nonatomic, retain) UILabel *trackNameLabel;
+@property (nonatomic, retain) UILabel *waitingForiPodLabel;
 //@property (nonatomic, retain) UIButton *refreshButton;
 @property (nonatomic, retain) UIButton *scrobblerButton;
 @property (nonatomic, retain) UIButton *loveButton;

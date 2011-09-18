@@ -2,8 +2,8 @@
 //  ScrobblerViewController.m
 //  TrackPost
 //
-//  Created by Noguchi Osamu on 11/04/17.
-//  Copyright 2011 envision. All rights reserved.
+//  Created by Osamu Noguchi on 04/17/11.
+//  Copyright 2011 atrac613.io All rights reserved.
 //
 
 #import "ScrobblerViewController.h"
@@ -17,6 +17,7 @@
 
 @synthesize artistNameLabel;
 @synthesize trackNameLabel;
+@synthesize waitingForiPodLabel;
 //@synthesize refreshButton;
 @synthesize scrobblerButton;
 @synthesize loveButton;
@@ -172,9 +173,23 @@
         NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackInfoAction) object:nil] autorelease];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
         [trackPostAppDelegate.operationQueue addOperation:operation];
+        
+        [artistNameLabel setHidden:NO];
+        [trackNameLabel setHidden:NO];
+        [waitingForiPodLabel setHidden:YES];
+        
+        [scrobblerButton setEnabled:YES];
+        [loveButton setEnabled:YES];
     } else {
-        [artistNameLabel setText:@"unknown"];
-        [trackNameLabel setText:@"unknown"];
+        //[artistNameLabel setText:@"unknown"];
+        //[trackNameLabel setText:@"unknown"];
+        
+        [artistNameLabel setHidden:YES];
+        [trackNameLabel setHidden:YES];
+        [waitingForiPodLabel setHidden:NO];
+        
+        [scrobblerButton setEnabled:NO];
+        [loveButton setEnabled:NO];
     }
     
     time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
@@ -388,10 +403,12 @@
             self.trackImageView.image = img;
             self.trackImageView.clipsToBounds = NO;
             self.trackImageView.alpha = 1.f;
+            self.trackImageView.backgroundColor = [UIColor clearColor];
         } else {
             self.trackImageView.image = nil;
             self.trackImageView.clipsToBounds = YES;
             self.trackImageView.alpha = 0.5f;
+            self.trackImageView.backgroundColor = [UIColor lightGrayColor];
         }
         
         if ([[self.trackInfo objectForKey:@"userloved"] intValue]) {
