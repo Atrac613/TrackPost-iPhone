@@ -15,7 +15,7 @@
     IBOutlet UILabel *waitingForiPodLabel;
     IBOutlet UILabel *tagsLabel;
     IBOutlet UIButton *refreshButton;
-    IBOutlet UIButton *scrobblerButton;
+    IBOutlet UIButton *scrobbleButton;
     IBOutlet UIButton *loveButton;
     ADBannerView *adView;
     BOOL bannerIsVisible;
@@ -33,7 +33,7 @@
 @property (nonatomic, retain) UILabel *waitingForiPodLabel;
 @property (nonatomic, retain) UILabel *tagsLabel;
 @property (nonatomic, retain) UIButton *refreshButton;
-@property (nonatomic, retain) UIButton *scrobblerButton;
+@property (nonatomic, retain) UIButton *scrobbleButton;
 @property (nonatomic, retain) UIButton *loveButton;
 @property (nonatomic, assign) BOOL bannerIsVisible;
 @property (nonatomic, assign) BOOL isPlaying;

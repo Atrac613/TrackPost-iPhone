@@ -20,7 +20,7 @@
 @synthesize waitingForiPodLabel;
 @synthesize tagsLabel;
 @synthesize refreshButton;
-@synthesize scrobblerButton;
+@synthesize scrobbleButton;
 @synthesize loveButton;
 @synthesize bannerIsVisible;
 @synthesize isPlaying;
@@ -100,7 +100,7 @@
     
     [tagsLabel setText:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"TAGS", @"Tags")]];
     [waitingForiPodLabel setText:NSLocalizedString(@"WAITING_FOR_PLAYING", @"Waiting for playing.")];
-    [scrobblerButton setTitle:NSLocalizedString(@"SCROBBLER", @"Scrobbler") forState:UIControlStateNormal];
+    [scrobbleButton setTitle:NSLocalizedString(@"SCROBBLE", @"Scrobble") forState:UIControlStateNormal];
     [refreshButton setTitle:NSLocalizedString(@"REFRESH", @"Refresh") forState:UIControlStateNormal];
 }
 
@@ -185,8 +185,8 @@
         [trackNameLabel setHidden:NO];
         [waitingForiPodLabel setHidden:YES];
         
-        [scrobblerButton setEnabled:YES];
-        [scrobblerButton setAlpha:1];
+        [scrobbleButton setEnabled:YES];
+        [scrobbleButton setAlpha:1];
         
         [loveButton setEnabled:YES];
         [loveButton setAlpha:1];
@@ -198,8 +198,8 @@
         [trackNameLabel setHidden:YES];
         [waitingForiPodLabel setHidden:NO];
         
-        [scrobblerButton setEnabled:NO];
-        [scrobblerButton setAlpha:0.5f];
+        [scrobbleButton setEnabled:NO];
+        [scrobbleButton setAlpha:0.5f];
         
         [loveButton setEnabled:NO];
         [loveButton setAlpha:0.5f];
@@ -216,16 +216,16 @@
     }
 }
 
-- (IBAction)scrobblerButtonPressed:(id)sender {
-    NSLog(@"scrobblerButtonPressed");
+- (IBAction)scrobbleButtonPressed:(id)sender {
+    NSLog(@"scrobbleButtonPressed");
     
     if (isPlaying) {
-        [scrobblerButton setEnabled:NO];
-        [scrobblerButton setAlpha:0.5f];
+        [scrobbleButton setEnabled:NO];
+        [scrobbleButton setAlpha:0.5f];
         
         TrackPostAppDelegate *trackPostAppDelegate = (TrackPostAppDelegate *)[[UIApplication sharedApplication] delegate];
         
-        NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeScrobblerAction) object:nil] autorelease];
+        NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeScrobbleAction) object:nil] autorelease];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
         [trackPostAppDelegate.operationQueue addOperation:operation];
     }
@@ -254,7 +254,7 @@
     
 }
 
-- (void)synchronizeScrobblerAction {
+- (void)synchronizeScrobbleAction {
 	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
     LastFMService *service = [[[LastFMService alloc] init] autorelease];
     service.session = session;
@@ -270,14 +270,14 @@
     NSLog(@"desc %@", [service.error localizedDescription]);
     NSLog(@"Time: %ld", unixTime);
 	
-	[self performSelectorOnMainThread:@selector(completeScrobblerAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeScrobbleAction:) withObject:service.error waitUntilDone:YES];
 }
 
-- (void)completeScrobblerAction:(NSError*)error {
-    NSLog(@"completeScrobblerAction");
+- (void)completeScrobbleAction:(NSError*)error {
+    NSLog(@"completeScrobbleAction");
     
-    [scrobblerButton setEnabled:YES];
-    [scrobblerButton setAlpha:1];
+    [scrobbleButton setEnabled:YES];
+    [scrobbleButton setAlpha:1];
     
     NSLog(@"code %d", [error code]);
     NSLog(@"domain %@", [error domain]);

@@ -7,7 +7,7 @@
 "PASSWORD" = "パスワード";
 "CANCEL" = "キャンセル";
 "OK" = "OK";
-"SCROBBLER" = "スクラバー";
+"SCROBBLE" = "スクラブ";
 "REFRESH" = "更新";
 
 "LOGOUT_TITLE" = "ログアウト";
@@ -16,7 +16,7 @@
 "WAITING_FOR_PLAYING" = "iPod を再生してください。";
 "POST_ERROR_TITLE" = "失敗";
 "POST_SUCCESS_TITLE" = "成功";
-"POST_SUCCESS_BODY" = "スクラバーしました。";
+"POST_SUCCESS_BODY" = "スクラブしました。";
 
 "LOVE_ERROR_TITLE" = "失敗";
 "LOVE_SUCCESS_TITLE" = "成功";
