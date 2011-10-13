@@ -123,7 +123,7 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Logout", @"Logout")]){
+	if(buttonIndex == 1){
 		[self performSelectorOnMainThread:@selector(logoutAction) withObject:nil waitUntilDone:YES];
     }
 }

@@ -146,7 +146,7 @@
 }
 
 - (void)showPendingView {
-    if (![self.view.subviews containsObject:pendingView]) {
+    if (pendingView == nil && ![self.view.subviews containsObject:pendingView]) {
         pendingView = [[[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)] autorelease];
         pendingView.titleLabel.text = NSLocalizedString(@"PLEASE_WAIT", @"Please wait");
         pendingView.userInteractionEnabled = NO;
@@ -159,6 +159,8 @@
 - (void)hidePendingView {
     if ([self.view.subviews containsObject:pendingView]) {
         [pendingView hidePendingView];
+        
+        pendingView = nil;
     }
 }
 

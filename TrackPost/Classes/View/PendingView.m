@@ -36,11 +36,13 @@
         [pendingView addSubview:maskView];
         
         indicatorView = [[UIActivityIndicatorView alloc] init];
-        [indicatorView setFrame:CGRectMake(85,60,80,80)];
+        [indicatorView setFrame:CGRectMake(85,60,40,40)];
+        [indicatorView setAlpha:0.0f];
+        [indicatorView setCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2-45)];
         [indicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
         [indicatorView setHidesWhenStopped:YES];
-        [pendingView addSubview:indicatorView];
-        [indicatorView startAnimating];
+        [self addSubview:indicatorView];
+        [indicatorView stopAnimating];
         
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 180, 250, 33)];
         [titleLabel setTextColor:[UIColor whiteColor]];
@@ -49,6 +51,8 @@
         [titleLabel setBackgroundColor:[UIColor clearColor]];
         [titleLabel setText:@"Now Loading..."];
         [pendingView addSubview:titleLabel];
+        
+        pendingView.transform = CGAffineTransformScale(pendingView.transform, 0.6, 0.6);
     }
     return self;
 }
@@ -57,13 +61,16 @@
     if (!pendingViewEnabled) {
         pendingViewEnabled = YES;
         
+        [indicatorView startAnimating];
+        
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         [UIView setAnimationBeginsFromCurrentState:YES];
         
+        [indicatorView setAlpha:1.f];
         [maskView setAlpha:0.5f];
-        pendingView.transform = CGAffineTransformScale(pendingView.transform, 0.6, 0.6);
+        //pendingView.transform = CGAffineTransformScale(pendingView.transform, 0.6, 0.6);
         
         [UIView commitAnimations];
     }
@@ -78,8 +85,9 @@
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         [UIView setAnimationBeginsFromCurrentState:YES];
         
+        [indicatorView setAlpha:0.0f];
         [pendingView setAlpha:0.0f];
-        pendingView.transform = CGAffineTransformScale(pendingView.transform, 0.1, 0.1);
+        //pendingView.transform = CGAffineTransformScale(pendingView.transform, 0.1, 0.1);
         
         [UIView commitAnimations];
         
