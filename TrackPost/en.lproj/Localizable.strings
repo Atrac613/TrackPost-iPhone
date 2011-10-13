@@ -7,7 +7,7 @@
 "PASSWORD" = "Password";
 "CANCEL" = "Cancel";
 "OK" = "OK";
-"SCROBBLER" = "Scrobbler";
+"SCROBBLE" = "Scrobble";
 "REFRESH" = "Refresh";
 
 "LOGOUT_TITLE" = "Logout";
@@ -17,7 +17,7 @@
 
 "POST_ERROR_TITLE" = "Error";
 "POST_SUCCESS_TITLE" = "Success";
-"POST_SUCCESS_BODY" = "Scrobbler successful.";
+"POST_SUCCESS_BODY" = "Scrobble successful.";
 
 "LOVE_ERROR_TITLE" = "Error";
 "LOVE_SUCCESS_TITLE" = "Success";
