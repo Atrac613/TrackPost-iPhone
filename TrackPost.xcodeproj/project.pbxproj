@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06285B331510EC370005ECF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B321510EC370005ECF5 /* UIKit.framework */; };
+		06285B351510EC370005ECF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B341510EC370005ECF5 /* Foundation.framework */; };
+		06285B371510EC370005ECF5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B361510EC370005ECF5 /* CoreGraphics.framework */; };
+		06285B3D1510EC370005ECF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06285B3B1510EC370005ECF5 /* InfoPlist.strings */; };
+		06285B3F1510EC370005ECF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B3E1510EC370005ECF5 /* main.m */; };
+		06285B431510EC370005ECF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B421510EC370005ECF5 /* AppDelegate.m */; };
+		06285B461510EC370005ECF5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06285B441510EC370005ECF5 /* MainStoryboard.storyboard */; };
+		06285B491510EC370005ECF5 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B481510EC370005ECF5 /* MasterViewController.m */; };
+		06285B541510EC370005ECF5 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B531510EC370005ECF5 /* SenTestingKit.framework */; };
+		06285B551510EC370005ECF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B321510EC370005ECF5 /* UIKit.framework */; };
+		06285B561510EC370005ECF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B341510EC370005ECF5 /* Foundation.framework */; };
+		06285B5E1510EC370005ECF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06285B5C1510EC370005ECF5 /* InfoPlist.strings */; };
+		06285B611510EC370005ECF5 /* TrackPostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B601510EC370005ECF5 /* TrackPostTests.m */; };
+		06285B6F1510EC690005ECF5 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06285B6E1510EC690005ECF5 /* icon@2x.png */; };
+		06285B721510EC6C0005ECF5 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 06285B711510EC6C0005ECF5 /* icon.png */; };
+		06285B801510ED890005ECF5 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B7D1510ED890005ECF5 /* IIViewDeckController.m */; };
+		06285B811510ED890005ECF5 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B7F1510ED890005ECF5 /* WrapController.m */; };
+		06285B841510EE9F0005ECF5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B831510EE9F0005ECF5 /* LeftViewController.m */; };
+		06285B871510EEBD0005ECF5 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B861510EEBD0005ECF5 /* RightViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		06285B571510EC370005ECF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06285B251510EC370005ECF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06285B2D1510EC370005ECF5;
+			remoteInfo = TrackPost;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		06285B2E1510EC370005ECF5 /* TrackPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06285B321510EC370005ECF5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		06285B341510EC370005ECF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		06285B361510EC370005ECF5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		06285B3A1510EC370005ECF5 /* TrackPost-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrackPost-Info.plist"; sourceTree = "<group>"; };
+		06285B3C1510EC370005ECF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		06285B3E1510EC370005ECF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		06285B401510EC370005ECF5 /* TrackPost-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrackPost-Prefix.pch"; sourceTree = "<group>"; };
+		06285B411510EC370005ECF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		06285B421510EC370005ECF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		06285B451510EC370005ECF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		06285B471510EC370005ECF5 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		06285B481510EC370005ECF5 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		06285B521510EC370005ECF5 /* TrackPostTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackPostTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06285B531510EC370005ECF5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		06285B5B1510EC370005ECF5 /* TrackPostTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrackPostTests-Info.plist"; sourceTree = "<group>"; };
+		06285B5D1510EC370005ECF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		06285B5F1510EC370005ECF5 /* TrackPostTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackPostTests.h; sourceTree = "<group>"; };
+		06285B601510EC370005ECF5 /* TrackPostTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrackPostTests.m; sourceTree = "<group>"; };
+		06285B6E1510EC690005ECF5 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		06285B711510EC6C0005ECF5 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		06285B7C1510ED890005ECF5 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		06285B7D1510ED890005ECF5 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		06285B7E1510ED890005ECF5 /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrapController.h; sourceTree = "<group>"; };
+		06285B7F1510ED890005ECF5 /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrapController.m; sourceTree = "<group>"; };
+		06285B821510EE9F0005ECF5 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		06285B831510EE9F0005ECF5 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		06285B851510EEBD0005ECF5 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		06285B861510EEBD0005ECF5 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		06285B2B1510EC370005ECF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06285B331510EC370005ECF5 /* UIKit.framework in Frameworks */,
+				06285B351510EC370005ECF5 /* Foundation.framework in Frameworks */,
+				06285B371510EC370005ECF5 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06285B4E1510EC370005ECF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06285B541510EC370005ECF5 /* SenTestingKit.framework in Frameworks */,
+				06285B551510EC370005ECF5 /* UIKit.framework in Frameworks */,
+				06285B561510EC370005ECF5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06285B231510EC370005ECF5 = {
+			isa = PBXGroup;
+			children = (
+				06285B711510EC6C0005ECF5 /* icon.png */,
+				06285B6E1510EC690005ECF5 /* icon@2x.png */,
+				06285B381510EC370005ECF5 /* TrackPost */,
+				06285B591510EC370005ECF5 /* TrackPostTests */,
+				06285B311510EC370005ECF5 /* Frameworks */,
+				06285B2F1510EC370005ECF5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		06285B2F1510EC370005ECF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06285B2E1510EC370005ECF5 /* TrackPost.app */,
+				06285B521510EC370005ECF5 /* TrackPostTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06285B311510EC370005ECF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				06285B321510EC370005ECF5 /* UIKit.framework */,
+				06285B341510EC370005ECF5 /* Foundation.framework */,
+				06285B361510EC370005ECF5 /* CoreGraphics.framework */,
+				06285B531510EC370005ECF5 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		06285B381510EC370005ECF5 /* TrackPost */ = {
+			isa = PBXGroup;
+			children = (
+				06285B7B1510ED890005ECF5 /* ViewDeck */,
+				06285B411510EC370005ECF5 /* AppDelegate.h */,
+				06285B421510EC370005ECF5 /* AppDelegate.m */,
+				06285B441510EC370005ECF5 /* MainStoryboard.storyboard */,
+				06285B471510EC370005ECF5 /* MasterViewController.h */,
+				06285B481510EC370005ECF5 /* MasterViewController.m */,
+				06285B821510EE9F0005ECF5 /* LeftViewController.h */,
+				06285B831510EE9F0005ECF5 /* LeftViewController.m */,
+				06285B851510EEBD0005ECF5 /* RightViewController.h */,
+				06285B861510EEBD0005ECF5 /* RightViewController.m */,
+				06285B391510EC370005ECF5 /* Supporting Files */,
+			);
+			path = TrackPost;
+			sourceTree = "<group>";
+		};
+		06285B391510EC370005ECF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				06285B3A1510EC370005ECF5 /* TrackPost-Info.plist */,
+				06285B3B1510EC370005ECF5 /* InfoPlist.strings */,
+				06285B3E1510EC370005ECF5 /* main.m */,
+				06285B401510EC370005ECF5 /* TrackPost-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06285B591510EC370005ECF5 /* TrackPostTests */ = {
+			isa = PBXGroup;
+			children = (
+				06285B5F1510EC370005ECF5 /* TrackPostTests.h */,
+				06285B601510EC370005ECF5 /* TrackPostTests.m */,
+				06285B5A1510EC370005ECF5 /* Supporting Files */,
+			);
+			path = TrackPostTests;
+			sourceTree = "<group>";
+		};
+		06285B5A1510EC370005ECF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				06285B5B1510EC370005ECF5 /* TrackPostTests-Info.plist */,
+				06285B5C1510EC370005ECF5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06285B7B1510ED890005ECF5 /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				06285B7C1510ED890005ECF5 /* IIViewDeckController.h */,
+				06285B7D1510ED890005ECF5 /* IIViewDeckController.m */,
+				06285B7E1510ED890005ECF5 /* WrapController.h */,
+				06285B7F1510ED890005ECF5 /* WrapController.m */,
+			);
+			path = ViewDeck;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06285B2D1510EC370005ECF5 /* TrackPost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06285B641510EC370005ECF5 /* Build configuration list for PBXNativeTarget "TrackPost" */;
+			buildPhases = (
+				06285B2A1510EC370005ECF5 /* Sources */,
+				06285B2B1510EC370005ECF5 /* Frameworks */,
+				06285B2C1510EC370005ECF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrackPost;
+			productName = TrackPost;
+			productReference = 06285B2E1510EC370005ECF5 /* TrackPost.app */;
+			productType = "com.apple.product-type.application";
+		};
+		06285B511510EC370005ECF5 /* TrackPostTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06285B671510EC370005ECF5 /* Build configuration list for PBXNativeTarget "TrackPostTests" */;
+			buildPhases = (
+				06285B4D1510EC370005ECF5 /* Sources */,
+				06285B4E1510EC370005ECF5 /* Frameworks */,
+				06285B4F1510EC370005ECF5 /* Resources */,
+				06285B501510EC370005ECF5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06285B581510EC370005ECF5 /* PBXTargetDependency */,
+			);
+			name = TrackPostTests;
+			productName = TrackPostTests;
+			productReference = 06285B521510EC370005ECF5 /* TrackPostTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		06285B251510EC370005ECF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = atrac613.io;
+			};
+			buildConfigurationList = 06285B281510EC370005ECF5 /* Build configuration list for PBXProject "TrackPost" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 06285B231510EC370005ECF5;
+			productRefGroup = 06285B2F1510EC370005ECF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				06285B2D1510EC370005ECF5 /* TrackPost */,
+				06285B511510EC370005ECF5 /* TrackPostTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		06285B2C1510EC370005ECF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06285B3D1510EC370005ECF5 /* InfoPlist.strings in Resources */,
+				06285B461510EC370005ECF5 /* MainStoryboard.storyboard in Resources */,
+				06285B6F1510EC690005ECF5 /* icon@2x.png in Resources */,
+				06285B721510EC6C0005ECF5 /* icon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06285B4F1510EC370005ECF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06285B5E1510EC370005ECF5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06285B501510EC370005ECF5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06285B2A1510EC370005ECF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06285B3F1510EC370005ECF5 /* main.m in Sources */,
+				06285B431510EC370005ECF5 /* AppDelegate.m in Sources */,
+				06285B491510EC370005ECF5 /* MasterViewController.m in Sources */,
+				06285B801510ED890005ECF5 /* IIViewDeckController.m in Sources */,
+				06285B811510ED890005ECF5 /* WrapController.m in Sources */,
+				06285B841510EE9F0005ECF5 /* LeftViewController.m in Sources */,
+				06285B871510EEBD0005ECF5 /* RightViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06285B4D1510EC370005ECF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06285B611510EC370005ECF5 /* TrackPostTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		06285B581510EC370005ECF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06285B2D1510EC370005ECF5 /* TrackPost */;
+			targetProxy = 06285B571510EC370005ECF5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		06285B3B1510EC370005ECF5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06285B3C1510EC370005ECF5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		06285B441510EC370005ECF5 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06285B451510EC370005ECF5 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		06285B5C1510EC370005ECF5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06285B5D1510EC370005ECF5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		06285B621510EC370005ECF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		06285B631510EC370005ECF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		06285B651510EC370005ECF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
+				INFOPLIST_FILE = "TrackPost/TrackPost-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		06285B661510EC370005ECF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
+				INFOPLIST_FILE = "TrackPost/TrackPost-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		06285B681510EC370005ECF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TrackPost.app/TrackPost";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
+				INFOPLIST_FILE = "TrackPostTests/TrackPostTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		06285B691510EC370005ECF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TrackPost.app/TrackPost";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
+				INFOPLIST_FILE = "TrackPostTests/TrackPostTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06285B281510EC370005ECF5 /* Build configuration list for PBXProject "TrackPost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06285B621510EC370005ECF5 /* Debug */,
+				06285B631510EC370005ECF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06285B641510EC370005ECF5 /* Build configuration list for PBXNativeTarget "TrackPost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06285B651510EC370005ECF5 /* Debug */,
+				06285B661510EC370005ECF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06285B671510EC370005ECF5 /* Build configuration list for PBXNativeTarget "TrackPostTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06285B681510EC370005ECF5 /* Debug */,
+				06285B691510EC370005ECF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 06285B251510EC370005ECF5 /* Project object */;
+}
