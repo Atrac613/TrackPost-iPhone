@@ -26,6 +26,11 @@
 		06285B811510ED890005ECF5 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B7F1510ED890005ECF5 /* WrapController.m */; };
 		06285B841510EE9F0005ECF5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B831510EE9F0005ECF5 /* LeftViewController.m */; };
 		06285B871510EEBD0005ECF5 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B861510EEBD0005ECF5 /* RightViewController.m */; };
+		0676F37A1513B0BB00803D84 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3791513B0BB00803D84 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0676F3811513B17700803D84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0676F37F1513B17700803D84 /* Localizable.strings */; };
+		0676F3841513B18000803D84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0676F3821513B18000803D84 /* Localizable.strings */; };
+		0676F3871513B1D100803D84 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0676F3851513B1D100803D84 /* CFNetwork.framework */; };
+		0676F3881513B1D100803D84 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0676F3861513B1D100803D84 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +73,12 @@
 		06285B831510EE9F0005ECF5 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		06285B851510EEBD0005ECF5 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
 		06285B861510EEBD0005ECF5 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+		0676F3781513B0BB00803D84 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		0676F3791513B0BB00803D84 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		0676F3801513B17700803D84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = TrackPost/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0676F3831513B18000803D84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TrackPost/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0676F3851513B1D100803D84 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		0676F3861513B1D100803D84 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +89,8 @@
 				06285B331510EC370005ECF5 /* UIKit.framework in Frameworks */,
 				06285B351510EC370005ECF5 /* Foundation.framework in Frameworks */,
 				06285B371510EC370005ECF5 /* CoreGraphics.framework in Frameworks */,
+				0676F3871513B1D100803D84 /* CFNetwork.framework in Frameworks */,
+				0676F3881513B1D100803D84 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +116,7 @@
 				06285B591510EC370005ECF5 /* TrackPostTests */,
 				06285B311510EC370005ECF5 /* Frameworks */,
 				06285B2F1510EC370005ECF5 /* Products */,
+				0676F37C1513B0DB00803D84 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +132,8 @@
 		06285B311510EC370005ECF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0676F3851513B1D100803D84 /* CFNetwork.framework */,
+				0676F3861513B1D100803D84 /* SystemConfiguration.framework */,
 				06285B321510EC370005ECF5 /* UIKit.framework */,
 				06285B341510EC370005ECF5 /* Foundation.framework */,
 				06285B361510EC370005ECF5 /* CoreGraphics.framework */,
@@ -129,6 +145,7 @@
 		06285B381510EC370005ECF5 /* TrackPost */ = {
 			isa = PBXGroup;
 			children = (
+				0676F3771513B0BB00803D84 /* Library */,
 				06285B7B1510ED890005ECF5 /* ViewDeck */,
 				06285B411510EC370005ECF5 /* AppDelegate.h */,
 				06285B421510EC370005ECF5 /* AppDelegate.m */,
@@ -185,6 +202,40 @@
 			path = ViewDeck;
 			sourceTree = "<group>";
 		};
+		0676F3771513B0BB00803D84 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				0676F3781513B0BB00803D84 /* Appirater.h */,
+				0676F3791513B0BB00803D84 /* Appirater.m */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		0676F37C1513B0DB00803D84 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0676F37E1513B13700803D84 /* ja.lproj */,
+				0676F37D1513B12200803D84 /* en.lproj */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		0676F37D1513B12200803D84 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				0676F3821513B18000803D84 /* Localizable.strings */,
+			);
+			name = en.lproj;
+			sourceTree = "<group>";
+		};
+		0676F37E1513B13700803D84 /* ja.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				0676F37F1513B17700803D84 /* Localizable.strings */,
+			);
+			name = ja.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,6 +290,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
 			);
 			mainGroup = 06285B231510EC370005ECF5;
 			productRefGroup = 06285B2F1510EC370005ECF5 /* Products */;
@@ -260,6 +312,8 @@
 				06285B461510EC370005ECF5 /* MainStoryboard.storyboard in Resources */,
 				06285B6F1510EC690005ECF5 /* icon@2x.png in Resources */,
 				06285B721510EC6C0005ECF5 /* icon.png in Resources */,
+				0676F3811513B17700803D84 /* Localizable.strings in Resources */,
+				0676F3841513B18000803D84 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +355,7 @@
 				06285B811510ED890005ECF5 /* WrapController.m in Sources */,
 				06285B841510EE9F0005ECF5 /* LeftViewController.m in Sources */,
 				06285B871510EEBD0005ECF5 /* RightViewController.m in Sources */,
+				0676F37A1513B0BB00803D84 /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +400,22 @@
 				06285B5D1510EC370005ECF5 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0676F37F1513B17700803D84 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0676F3801513B17700803D84 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0676F3821513B18000803D84 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0676F3831513B18000803D84 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

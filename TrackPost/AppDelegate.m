@@ -11,6 +11,7 @@
 #import "MasterViewController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"
+#import "Appirater.h"
 
 @implementation AppDelegate
 
@@ -39,6 +40,8 @@
     self.window.rootViewController = deckController;
     [self.window makeKeyAndVisible];
     
+    [Appirater appLaunched:YES];
+    
     return YES;
 }
 							
@@ -56,7 +59,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
