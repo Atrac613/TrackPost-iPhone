@@ -7,12 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <SystemConfiguration/SCNetworkReachability.h>
+#include "version.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+    NSOperationQueue *operationQueue;
+    UIAlertView *_pendingAlert;
+    BOOL _locked;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (retain, nonatomic) UIViewController *centerController;
 @property (retain, nonatomic) UIViewController *leftController;
+@property (nonatomic, retain) NSOperationQueue *operationQueue;
+
+-(BOOL)hasNetworkConnection;
+-(BOOL)hasWiFiConnection;
+
+-(void)displayError:(NSString *)error withTitle:(NSString *)title;
 
 @end
