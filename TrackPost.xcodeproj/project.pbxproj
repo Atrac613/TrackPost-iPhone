@@ -26,6 +26,12 @@
 		06285B811510ED890005ECF5 /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B7F1510ED890005ECF5 /* WrapController.m */; };
 		06285B841510EE9F0005ECF5 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B831510EE9F0005ECF5 /* LeftViewController.m */; };
 		06285B871510EEBD0005ECF5 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B861510EEBD0005ECF5 /* RightViewController.m */; };
+		06285B9615147F9A0005ECF5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B9515147F9A0005ECF5 /* LoginViewController.m */; };
+		06285B9E15148DA80005ECF5 /* ScrobblerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */; };
+		06285BA91514A0AA0005ECF5 /* RecentTracksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */; };
+		06285BAD1514A91A0005ECF5 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BAC1514A91A0005ECF5 /* TrackCell.m */; };
+		06285BAF1514AAA70005ECF5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285BAE1514AAA70005ECF5 /* QuartzCore.framework */; };
+		06285BB81514ADE10005ECF5 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BAC1514A91A0005ECF5 /* TrackCell.m */; };
 		0676F37A1513B0BB00803D84 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3791513B0BB00803D84 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3811513B17700803D84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0676F37F1513B17700803D84 /* Localizable.strings */; };
 		0676F3841513B18000803D84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0676F3821513B18000803D84 /* Localizable.strings */; };
@@ -55,7 +61,6 @@
 		0676F3D41513BB0A00803D84 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0676F3D21513BB0A00803D84 /* MediaPlayer.framework */; };
 		0676F3D61513BE2200803D84 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0676F3D51513BE2200803D84 /* AVFoundation.framework */; };
 		0676F3D81513C1F300803D84 /* LastFMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F38C1513B55900803D84 /* LastFMService.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0676F3DB1513C57A00803D84 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3DA1513C57900803D84 /* TestViewController.m */; };
 		0676F3E51513CE6400803D84 /* NSData+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F38E1513B55900803D84 /* NSData+Compress.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3E61513CE6400803D84 /* NSString+LastFMTimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3901513B55900803D84 /* NSString+LastFMTimeExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3E71513CE6400803D84 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3921513B55900803D84 /* NSString+MD5.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -102,6 +107,15 @@
 		06285B831510EE9F0005ECF5 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		06285B851510EEBD0005ECF5 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
 		06285B861510EEBD0005ECF5 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+		06285B9415147F9A0005ECF5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		06285B9515147F9A0005ECF5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		06285B9C15148DA80005ECF5 /* ScrobblerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrobblerViewController.h; sourceTree = "<group>"; };
+		06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrobblerViewController.m; sourceTree = "<group>"; };
+		06285BA71514A0AA0005ECF5 /* RecentTracksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTracksViewController.h; sourceTree = "<group>"; };
+		06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTracksViewController.m; sourceTree = "<group>"; };
+		06285BAB1514A91A0005ECF5 /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
+		06285BAC1514A91A0005ECF5 /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
+		06285BAE1514AAA70005ECF5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0676F3781513B0BB00803D84 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		0676F3791513B0BB00803D84 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		0676F3801513B17700803D84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = TrackPost/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -154,8 +168,6 @@
 		0676F3D11513BB0A00803D84 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		0676F3D21513BB0A00803D84 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0676F3D51513BE2200803D84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		0676F3D91513C57900803D84 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		0676F3DA1513C57900803D84 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +194,7 @@
 				06285B541510EC370005ECF5 /* SenTestingKit.framework in Frameworks */,
 				06285B551510EC370005ECF5 /* UIKit.framework in Frameworks */,
 				06285B561510EC370005ECF5 /* Foundation.framework in Frameworks */,
+				06285BAF1514AAA70005ECF5 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +226,7 @@
 		06285B311510EC370005ECF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06285BAE1514AAA70005ECF5 /* QuartzCore.framework */,
 				0676F3D51513BE2200803D84 /* AVFoundation.framework */,
 				0676F3D11513BB0A00803D84 /* iAd.framework */,
 				0676F3D21513BB0A00803D84 /* MediaPlayer.framework */,
@@ -230,6 +244,7 @@
 		06285B381510EC370005ECF5 /* TrackPost */ = {
 			isa = PBXGroup;
 			children = (
+				06285BAA1514A90D0005ECF5 /* Cell */,
 				0676F39C1513B82600803D84 /* View */,
 				0676F39A1513B57700803D84 /* Service */,
 				0676F3771513B0BB00803D84 /* Library */,
@@ -243,8 +258,12 @@
 				06285B831510EE9F0005ECF5 /* LeftViewController.m */,
 				06285B851510EEBD0005ECF5 /* RightViewController.h */,
 				06285B861510EEBD0005ECF5 /* RightViewController.m */,
-				0676F3D91513C57900803D84 /* TestViewController.h */,
-				0676F3DA1513C57900803D84 /* TestViewController.m */,
+				06285B9415147F9A0005ECF5 /* LoginViewController.h */,
+				06285B9515147F9A0005ECF5 /* LoginViewController.m */,
+				06285B9C15148DA80005ECF5 /* ScrobblerViewController.h */,
+				06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */,
+				06285BA71514A0AA0005ECF5 /* RecentTracksViewController.h */,
+				06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */,
 				06285B391510EC370005ECF5 /* Supporting Files */,
 			);
 			path = TrackPost;
@@ -292,6 +311,15 @@
 				06285B7F1510ED890005ECF5 /* WrapController.m */,
 			);
 			path = ViewDeck;
+			sourceTree = "<group>";
+		};
+		06285BAA1514A90D0005ECF5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				06285BAB1514A91A0005ECF5 /* TrackCell.h */,
+				06285BAC1514A91A0005ECF5 /* TrackCell.m */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		0676F3771513B0BB00803D84 /* Library */ = {
@@ -517,6 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06285BB81514ADE10005ECF5 /* TrackCell.m in Sources */,
 				0676F3E51513CE6400803D84 /* NSData+Compress.m in Sources */,
 				0676F3E61513CE6400803D84 /* NSString+LastFMTimeExtensions.m in Sources */,
 				0676F3E71513CE6400803D84 /* NSString+MD5.m in Sources */,
@@ -544,7 +573,9 @@
 				0676F3C81513BA6E00803D84 /* CXMLNode_PrivateExtensions.m in Sources */,
 				0676F3C91513BA6E00803D84 /* CXMLNode_XPathExtensions.m in Sources */,
 				0676F3CA1513BA6E00803D84 /* CTidy.m in Sources */,
-				0676F3DB1513C57A00803D84 /* TestViewController.m in Sources */,
+				06285B9615147F9A0005ECF5 /* LoginViewController.m in Sources */,
+				06285B9E15148DA80005ECF5 /* ScrobblerViewController.m in Sources */,
+				06285BA91514A0AA0005ECF5 /* RecentTracksViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +589,7 @@
 				0676F3971513B55900803D84 /* NSString+LastFMTimeExtensions.m in Sources */,
 				0676F3981513B55900803D84 /* NSString+MD5.m in Sources */,
 				0676F3991513B55900803D84 /* NSString+URLEscaped.m in Sources */,
+				06285BAD1514A91A0005ECF5 /* TrackCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,7 +674,7 @@
 					"-lz",
 				);
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv6 armv7 i386";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -668,7 +700,7 @@
 				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv6 armv7 i386";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;
 		};
@@ -683,7 +715,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv6 armv7 i386";
+				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -699,7 +731,7 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv6 armv7 i386";
+				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

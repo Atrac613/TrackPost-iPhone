@@ -12,7 +12,6 @@
 #import "LeftViewController.h"
 #import "RightViewController.h"
 #import "Appirater.h"
-#import "TestViewController.h"
 
 @implementation AppDelegate
 
@@ -35,6 +34,8 @@ NSString *kUserAgent;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.operationQueue = [[NSOperationQueue alloc] init];
+    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -54,9 +55,7 @@ NSString *kUserAgent;
     self.window.rootViewController = deckController;
     [self.window makeKeyAndVisible];
     
-    self.operationQueue = [[NSOperationQueue alloc] init];
-    
-    //[Appirater appLaunched:YES];
+    [Appirater appLaunched:YES];
     
     return YES;
 }
@@ -75,7 +74,7 @@ NSString *kUserAgent;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    //[Appirater appEnteredForeground:YES];
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

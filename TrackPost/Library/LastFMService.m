@@ -439,13 +439,16 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 	if([nodes count]) {
 		CXMLNode *node = [nodes objectAtIndex:0];
 		metadata = [self _convertNode:node
-					 toDictionaryWithXPaths:[NSArray arrayWithObjects:@"./name", @"./artist/name", @"./duration", @"./playcount", @"./listeners", @"./userplaycount", @"./wiki/summary", @"./album/image[@size=\"extralarge\"]", @"./album/title", nil]
-													forKeys:[NSArray arrayWithObjects:@"name", @"artist", @"duration", @"playcount", @"listeners", @"userplaycount", @"wiki", @"image", @"album", nil]];
+					 toDictionaryWithXPaths:[NSArray arrayWithObjects:@"./name", @"./artist/name", @"./duration", @"./playcount", @"./listeners", @"./userplaycount", @"./wiki/summary", @"./album/image[@size=\"extralarge\"]", @"./album/title", @"./toptags/tag/name", @"./userloved", nil]
+													forKeys:[NSArray arrayWithObjects:@"name", @"artist", @"duration", @"playcount", @"listeners", @"userplaycount", @"wiki", @"image", @"album", @"tags", @"userloved", nil]];
 	}
 	return metadata;
 }
 - (void)loveTrack:(NSString *)title byArtist:(NSString *)artist {
 	[self doMethod:@"track.love" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], nil];
+}
+- (void)unloveTrack:(NSString *)title byArtist:(NSString *)artist {
+	[self doMethod:@"track.unlove" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], nil];
 }
 - (void)addTrackToLibrary:(NSString *)title byArtist:(NSString *)artist {
 	[self doMethod:@"library.addTrack" maxCacheAge:0 XPath:@"." withParameters:[NSString stringWithFormat:@"track=%@", [title URLEscaped]], [NSString stringWithFormat:@"artist=%@", [artist URLEscaped]], nil];
@@ -650,6 +653,13 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 	return [self _convertNodes:nodes
 					 toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./url", nil]
 										 forKeys:[NSArray arrayWithObjects:@"name", @"url", nil]];
+}
+
+- (NSArray *)lovedTracksForUser:(NSString *)username {
+	NSArray *nodes = [self doMethod:@"user.getLovedTracks" maxCacheAge:5*MINUTES XPath:@"./lovedtracks/track" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
+	return [self _convertNodes:nodes
+             toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./playcount", @"./artist/name", @"./image[@size=\"large\"]", nil]
+                       forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"artist", @"image", nil]];
 }
 
 #pragma mark Tag methods

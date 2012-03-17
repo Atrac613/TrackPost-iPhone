@@ -20,3 +20,7 @@ BOOL shouldUseCache(NSString *file, double seconds);
 #define MINUTES 60
 #define HOURS 3600
 #define DAYS 86400
+
+#import "AppDelegate.h"
+
+#define SharedAppDelegate ((AppDelegate*)[[UIApplication sharedApplication] delegate])

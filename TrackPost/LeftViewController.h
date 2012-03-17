@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftViewController : UIViewController
+@interface LeftViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+    IBOutlet UITableView *tableView;
+    
+    IBOutlet UIImageView *profileImageView;
+    IBOutlet UILabel *userNameLabel;
+    
+    NSDictionary *userProfileDictionary;
+}
+
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIImageView *profileImageView;
+@property (nonatomic, retain) IBOutlet UILabel *userNameLabel;
+
+@property (nonatomic, retain) NSDictionary *userProfileDictionary;
 
 @end

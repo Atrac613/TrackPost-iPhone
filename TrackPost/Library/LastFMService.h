@@ -106,6 +106,7 @@ enum eventStatus {
 
 - (NSDictionary *)metadataForTrack:(NSString *)track byArtist:(NSString *)artist inLanguage:(NSString *)lang;
 - (void)loveTrack:(NSString *)title byArtist:(NSString *)artist;
+- (void)unloveTrack:(NSString *)title byArtist:(NSString *)artist;
 - (void)banTrack:(NSString *)title byArtist:(NSString *)artist;
 - (NSArray *)fansOfTrack:(NSString *)track byArtist:(NSString *)artist;
 - (NSArray *)topTagsForTrack:(NSString *)track byArtist:(NSString *)artist;
@@ -140,6 +141,7 @@ enum eventStatus {
 - (NSDictionary *)profileForUser:(NSString *)username authenticated:(BOOL)authenticated;
 - (NSDictionary *)compareArtistsOfUser:(NSString *)username withUser:(NSString *)username2;
 - (NSArray *)recentStationsForUser:(NSString *)username;
+- (NSArray *)lovedTracksForUser:(NSString *)username;
 
 #pragma mark Tag methods
 
