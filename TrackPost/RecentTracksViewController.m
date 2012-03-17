@@ -11,6 +11,7 @@
 #import "LastFMService.h"
 #import "TrackCell.h"
 #import "IIViewDeckController.h"
+#import "TrackInfoViewController.h"
 
 @interface RecentTracksViewController ()
 
@@ -163,9 +164,10 @@
     NSLog(@"completeGetTrackInfoAction");
     
     if (![error code]) {
-        //TrackInfoViewController *trackInfoViewController = [[[TrackInfoViewController alloc] init] autorelease];
-        //trackInfoViewController.trackInfo = self.trackInfo;
-        //[self.navigationController pushViewController:trackInfoViewController animated:YES];
+        TrackInfoViewController *trackInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TrackInfoViewController"];
+        trackInfoViewController.trackInfo = self.trackInfo;
+        trackInfoViewController.enabledBackButton = YES;
+        [self.navigationController pushViewController:trackInfoViewController animated:YES];
     }
 }
 

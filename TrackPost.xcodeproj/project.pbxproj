@@ -32,6 +32,7 @@
 		06285BAD1514A91A0005ECF5 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BAC1514A91A0005ECF5 /* TrackCell.m */; };
 		06285BAF1514AAA70005ECF5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285BAE1514AAA70005ECF5 /* QuartzCore.framework */; };
 		06285BB81514ADE10005ECF5 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BAC1514A91A0005ECF5 /* TrackCell.m */; };
+		06285BC31514E2700005ECF5 /* TrackInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BC21514E26F0005ECF5 /* TrackInfoViewController.m */; };
 		0676F37A1513B0BB00803D84 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3791513B0BB00803D84 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3811513B17700803D84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0676F37F1513B17700803D84 /* Localizable.strings */; };
 		0676F3841513B18000803D84 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0676F3821513B18000803D84 /* Localizable.strings */; };
@@ -116,6 +117,8 @@
 		06285BAB1514A91A0005ECF5 /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
 		06285BAC1514A91A0005ECF5 /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
 		06285BAE1514AAA70005ECF5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		06285BC11514E26F0005ECF5 /* TrackInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackInfoViewController.h; sourceTree = "<group>"; };
+		06285BC21514E26F0005ECF5 /* TrackInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackInfoViewController.m; sourceTree = "<group>"; };
 		0676F3781513B0BB00803D84 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		0676F3791513B0BB00803D84 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		0676F3801513B17700803D84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = TrackPost/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */,
 				06285BA71514A0AA0005ECF5 /* RecentTracksViewController.h */,
 				06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */,
+				06285BC11514E26F0005ECF5 /* TrackInfoViewController.h */,
+				06285BC21514E26F0005ECF5 /* TrackInfoViewController.m */,
 				06285B391510EC370005ECF5 /* Supporting Files */,
 			);
 			path = TrackPost;
@@ -576,6 +581,7 @@
 				06285B9615147F9A0005ECF5 /* LoginViewController.m in Sources */,
 				06285B9E15148DA80005ECF5 /* ScrobblerViewController.m in Sources */,
 				06285BA91514A0AA0005ECF5 /* RecentTracksViewController.m in Sources */,
+				06285BC31514E2700005ECF5 /* TrackInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,8 +2,8 @@
 //  PendingView.h
 //  kesikesi
 //
-//  Created by Osamu Noguchi on 05/07/11.
-//  Copyright 2011 atrac613.io All rights reserved.
+//  Created by Osamu Noguchi on 11/05/07.
+//  Copyright 2011 atrac613.io. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,6 +14,7 @@
     UIView *maskView;
     UILabel *titleLabel;
     UIActivityIndicatorView *indicatorView;
+    UIProgressView *progressView;
     BOOL pendingViewEnabled;
 }
 
@@ -21,6 +22,7 @@
 @property (nonatomic, retain) UIView *maskView;
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UIActivityIndicatorView *indicatorView;
+@property (nonatomic, retain) UIProgressView *progressView;
 @property (nonatomic, assign) BOOL pendingViewEnabled;
 
 -(void)showPendingView;

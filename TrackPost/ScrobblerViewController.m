@@ -32,6 +32,7 @@
 @synthesize trackInfo;
 @synthesize trackImageView;
 @synthesize lovedTrack;
+@synthesize adView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +46,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [adView setDelegate:self];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleLeftView)];
     

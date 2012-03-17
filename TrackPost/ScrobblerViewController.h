@@ -17,7 +17,7 @@
     IBOutlet UIButton *shareButton;
     IBOutlet UIButton *scrobbleButton;
     IBOutlet UIButton *loveButton;
-    ADBannerView *adView;
+    IBOutlet ADBannerView *adView;
     BOOL bannerIsVisible;
     BOOL isPlaying;
     BOOL lovedTrack;
@@ -39,6 +39,7 @@
 @property (nonatomic, assign) BOOL isPlaying;
 @property (nonatomic, assign) BOOL lovedTrack;
 
+@property (nonatomic, retain) IBOutlet ADBannerView *adView;
 @property (nonatomic, retain) UIImageView *trackImageView;
 
 @property (nonatomic, retain) UITextView *tagTextView;
