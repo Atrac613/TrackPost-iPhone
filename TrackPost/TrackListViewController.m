@@ -134,6 +134,11 @@
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setGroupingSeparator:@","];
+    [numberFormatter setGroupingSize:3];
+    
     if ([[rowData objectForKey:@"nowplaying"] boolValue]) {
         cell.dateLabel.text = @"nowplaying";
     } else {
@@ -142,8 +147,10 @@
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
             
             cell.dateLabel.text = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate:date]];
-        } else {            
-            cell.dateLabel.text = [NSString stringWithFormat:@"%d", [[rowData valueForKey:@"playcount"] intValue]];
+        } else {
+            NSString *playCount = [numberFormatter stringFromNumber:[NSNumber numberWithInt:[[rowData valueForKey:@"playcount"] intValue]]];
+            
+            cell.dateLabel.text = [NSString stringWithFormat:@"%@", playCount];
         }
     }
     
