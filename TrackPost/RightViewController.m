@@ -18,6 +18,7 @@
 @end
 
 @implementation RightViewController
+
 @synthesize button1;
 @synthesize button2;
 @synthesize button3;
@@ -91,7 +92,7 @@
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
     self.lovedTracksArray = [service lovedTracksForUser:username];
-    NSLog(@"%@", self.lovedTracksArray);
+    //NSLog(@"%@", self.lovedTracksArray);
 	[self performSelectorOnMainThread:@selector(completeGetLovedTracks:) withObject:service.error waitUntilDone:YES];
 }
 
@@ -373,9 +374,8 @@
 
 - (void)showPendingView {
     if (pendingView == nil && ![self.view.subviews containsObject:pendingView]) {
-        pendingView = [[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)];
-        pendingView.titleLabel.text = NSLocalizedString(@"PLEASE_WAIT", @"Please wait");
-        pendingView.userInteractionEnabled = NO;
+        pendingView = [[FullScreenPendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        pendingView.userInteractionEnabled = YES;
         [self.view addSubview:pendingView];
     }
     

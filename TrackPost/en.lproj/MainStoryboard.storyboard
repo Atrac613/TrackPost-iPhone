@@ -619,11 +619,11 @@
             </objects>
             <point key="canvasLocation" x="778" y="64"/>
         </scene>
-        <!--Recent Tracks View Controller-->
+        <!--Track List View Controller-->
         <scene sceneID="Whf-EJ-Sju">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKF-nd-BzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="RecentTracksViewController" id="ofc-QC-Kqh" customClass="RecentTracksViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrackListViewController" id="ofc-QC-Kqh" customClass="TrackListViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YIy-NP-kc1">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -642,7 +642,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="tableView" destination="KIg-rs-MWt" id="BjQ-Q4-S3p"/>
+                        <outlet property="tableView" destination="KIg-rs-MWt" id="JnG-kO-HGM"/>
                     </connections>
                 </viewController>
             </objects>
@@ -751,8 +751,101 @@
             </objects>
             <point key="canvasLocation" x="1560" y="64"/>
         </scene>
+        <!--About View Controller-->
+        <scene sceneID="d4K-yk-x9z">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gu6-py-g65" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="AboutViewController" id="ZiX-RG-dfr" customClass="AboutViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aTa-Uv-MdN">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uu0-ON-XHn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="khr-B6-kjM">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="74d-WH-z1c">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YBi-tU-awb">
+                                        <rect key="frame" x="0.0" y="135" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ZiX-RG-dfr" id="gdw-kf-16o"/>
+                                    <outlet property="delegate" destination="ZiX-RG-dfr" id="oaZ-ho-UKM"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="uu0-ON-XHn" id="DRh-86-mBk"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1947" y="64"/>
+        </scene>
+        <!--Third Party Notices View Controller-->
+        <scene sceneID="tYt-8i-Jcd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lyn-mb-mBW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="ThirdPartyNoticesViewController" id="mHe-o5-L1O" customClass="ThirdPartyNoticesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5eT-wN-iSd">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="5Kh-9Q-yAg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mHe-o5-L1O" id="aig-JO-M7i"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="webView" destination="5Kh-9Q-yAg" id="C1y-pw-8xJ"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2337" y="64"/>
+        </scene>
     </scenes>
     <classes>
+        <class className="AboutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="LeftViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LeftViewController.h"/>
             <relationships>
@@ -771,12 +864,6 @@
         </class>
         <class className="MasterViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MasterViewController.h"/>
-        </class>
-        <class className="RecentTracksViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentTracksViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
         </class>
         <class className="RightViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>
@@ -819,6 +906,12 @@
                 <relationship kind="outlet" name="waitingForiPodLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
+        <class className="ThirdPartyNoticesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThirdPartyNoticesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
         <class className="TrackInfoViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TrackInfoViewController.h"/>
             <relationships>
@@ -831,6 +924,12 @@
                 <relationship kind="outlet" name="trackImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="trackNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userplaycountTitleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TrackListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrackListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
     </classes>

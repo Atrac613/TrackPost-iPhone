@@ -12,12 +12,14 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "LastFMService.h"
 #import "AppDelegate.h"
+#import "NSString+MD5.h"
 
 @interface ScrobblerViewController ()
 
 @end
 
 @implementation ScrobblerViewController
+
 @synthesize artistNameLabel;
 @synthesize trackNameLabel;
 @synthesize waitingForiPodLabel;
@@ -382,13 +384,30 @@
     
     if (![error code]) {
         if ([[self.trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[self.trackInfo objectForKey:@"image"] length]) {
+            
+            NSString *hash = [[self.trackInfo objectForKey:@"image"] md5sum];
+            
+            NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track_cover_%@.dat", hash]];
+            
             NSURL *url = [NSURL URLWithString:[self.trackInfo objectForKey:@"image"]];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [[UIImage alloc] initWithData:data];
+            NSData *imageData;
+            
+            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                imageData = [NSData dataWithContentsOfURL:url];
+                [imageData writeToFile:path atomically:YES];
+                NSLog(@"Url:%@ ImageSize:%d", [url absoluteString], [imageData length]);
+            } else {
+                NSLog(@"File Exists! Url: %@", [url absoluteString]);
+                imageData = [NSData dataWithContentsOfFile:path];
+            }
+            
+            UIImage *img = [[UIImage alloc] initWithData:imageData];
             self.trackImageView.image = img;
-            self.trackImageView.clipsToBounds = NO;
             self.trackImageView.alpha = 1.f;
             self.trackImageView.backgroundColor = [UIColor clearColor];
+            self.trackImageView.layer.cornerRadius = 10.f;
+            self.trackImageView.clipsToBounds = YES;
         } else {
             self.trackImageView.image = nil;
             self.trackImageView.clipsToBounds = YES;

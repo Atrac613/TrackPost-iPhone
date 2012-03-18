@@ -11,13 +11,14 @@
 #import "LastFMService.h"
 #import <QuartzCore/QuartzCore.h>
 #import "IIViewDeckController.h"
-#import "RecentTracksViewController.h"
+#import "NSString+MD5.h"
 
 @interface TrackInfoViewController ()
 
 @end
 
 @implementation TrackInfoViewController
+
 @synthesize trackNameLabel;
 @synthesize artistNameLabel;
 @synthesize trackInfo;
@@ -71,18 +72,10 @@
     [userplaycountTitleLabel setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"YOUR_PLAY_COUNT", @"Your Play Count"), [formatter stringForObjectValue:userplaycountNumber]]];
     [tagsTitleLabel setText:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"TAGS", @"Tags")]];
     
-    if ([[trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[trackInfo objectForKey:@"image"] length]) {
-        NSURL *url = [NSURL URLWithString:[trackInfo objectForKey:@"image"]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        UIImage *img = [[UIImage alloc] initWithData:data];
-        self.trackImageView.image = img;
-        self.trackImageView.backgroundColor = [UIColor clearColor];
-    } else {
-        self.trackImageView.backgroundColor = [UIColor lightGrayColor];
-        self.trackImageView.alpha = 0.5f;
-        self.trackImageView.layer.cornerRadius = 10.f;
-        self.trackImageView.clipsToBounds = YES;
-    }
+    self.trackImageView.backgroundColor = [UIColor lightGrayColor];
+    self.trackImageView.alpha = 0.5f;
+    self.trackImageView.layer.cornerRadius = 10.f;
+    self.trackImageView.clipsToBounds = YES;
     
     if ([[trackInfo objectForKey:@"userloved"] intValue]) {
         [loveButton setHighlighted:YES];
@@ -100,6 +93,12 @@
     }
     
     tagTextView.text = tagString;
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackCoverAction) object:nil];
+    [operation setQueuePriority:NSOperationQueuePriorityHigh];
+    [appDelegate.operationQueue addOperation:operation];
 }
 
 - (void)viewDidUnload
@@ -221,6 +220,41 @@
             [tags appendFormat:@"%@(%@) ", [tag objectForKey:@"name"], [tag objectForKey:@"count"]];
         }
     }
+}
+
+- (void)synchronizeGetTrackCoverAction {
+    if ([[trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[trackInfo objectForKey:@"image"] length]) {
+        
+        NSString *hash = [[self.trackInfo objectForKey:@"image"] md5sum];
+        
+        NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track_cover_%@.dat", hash]];
+        
+        NSURL *url = [NSURL URLWithString:[self.trackInfo objectForKey:@"image"]];
+        NSData *imageData;
+        
+        if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            imageData = [NSData dataWithContentsOfURL:url];
+            [imageData writeToFile:path atomically:YES];
+            NSLog(@"Url:%@ ImageSize:%d", [url absoluteString], [imageData length]);
+        } else {
+            NSLog(@"File Exists! Url: %@", [url absoluteString]);
+            imageData = [NSData dataWithContentsOfFile:path];
+        }
+        
+        UIImage *img = [[UIImage alloc] initWithData:imageData];
+        self.trackImageView.image = img;
+        self.trackImageView.backgroundColor = [UIColor clearColor];
+        self.trackImageView.alpha = 1.f;
+        self.trackImageView.layer.cornerRadius = 10.f;
+        self.trackImageView.clipsToBounds = YES;
+    }
+    
+	[self performSelectorOnMainThread:@selector(completeGetTrackCoverAction) withObject:nil waitUntilDone:YES];
+}
+
+- (void)completeGetTrackCoverAction {
+    NSLog(@"completeGetTrackCoverAction");
 }
 
 @end

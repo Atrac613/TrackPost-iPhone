@@ -8,21 +8,24 @@
 
 #import "LeftViewController.h"
 #import "IIViewDeckController.h"
-#import "RecentTracksViewController.h"
+#import "TrackListViewController.h"
 #import "AppDelegate.h"
 #import "LastFMService.h"
 #import "ScrobblerViewController.h"
 #import "MasterViewController.h"
+#import "NSString+MD5.h"
+#import <QuartzCore/QuartzCore.h>
+#import "AboutViewController.h"
 
 @interface LeftViewController () <IIViewDeckControllerDelegate>
 
 @end
 
 @implementation LeftViewController
+
 @synthesize profileImageView;
 @synthesize userNameLabel;
 @synthesize userProfileDictionary;
-
 @synthesize tableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -112,29 +115,24 @@
 #pragma mark - TableView delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         // Last.fm section.
-        return 3;
-    } else if (section == 1) {
-        // Other section.
-        return 3;
+        return 5;
     } else {
-        // Logout section.
-        return 1;
+        // Others section.
+        return 2;
     }
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return NSLocalizedString(@"LASTFM", @"");
-    } else if (section == 1) {
-        return NSLocalizedString(@"OTHER", @"");
     } else {
-        return NSLocalizedString(@"LOGOUT", @"");
+        return NSLocalizedString(@"OTHERS", @"");
     }
 }
 
@@ -157,22 +155,12 @@
             cell.textLabel.text = NSLocalizedString(@"SCROBBLER", @"");
         } else if (indexPath.row == 1) {
             cell.textLabel.text = NSLocalizedString(@"RECENT_TRACKS", @"");
-        } else {
+        } else if (indexPath.row == 2) {
             cell.textLabel.text = NSLocalizedString(@"LOVED_TRACKS", @"");
-        }
-        
-    } else if (indexPath.section == 1) {
-        cell = [tv dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-        
-        if (indexPath.row == 0) {
-            cell.textLabel.text = NSLocalizedString(@"CLEAR_CACHE", @"");
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = NSLocalizedString(@"ABOUT_THIS_APP", @"");
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = NSLocalizedString(@"WEEKLY_TRACKS", @"");
         } else {
-            cell.textLabel.text = NSLocalizedString(@"LICENSE", @"");
+            cell.textLabel.text = NSLocalizedString(@"TOP_TRACKS", @"");
         }
         
     } else {
@@ -182,6 +170,8 @@
         }
         
         if (indexPath.row == 0) {
+            cell.textLabel.text = NSLocalizedString(@"ABOUT", @"");
+        } else if (indexPath.row == 1) {
             cell.textLabel.text = NSLocalizedString(@"LOGOUT", @"");
         }
         
@@ -203,22 +193,39 @@
                     
                     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:scrobblerViewController];
                     self.viewDeckController.centerController = navController;
-                } else if (indexPath.row == 1) {
-                    RecentTracksViewController *recentTracksViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RecentTracksViewController"];
+                } else {
+                    TrackListViewController *trackListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TrackListViewController"];
                     
-                    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:recentTracksViewController];
+                    if (indexPath.row == 2) {
+                        trackListViewController.trackMode = @"loved";
+                    } else if (indexPath.row == 3) {
+                        trackListViewController.trackMode = @"weekly";
+                    } else if (indexPath.row == 4) {
+                        trackListViewController.trackMode = @"top";
+                    } else {
+                        trackListViewController.trackMode = @"recent";
+                    }
+                    
+                    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:trackListViewController];
                     self.viewDeckController.centerController = navController;
                 }
-            } else if (indexPath.section == 2) {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_user"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_session"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [LastFMService sharedInstance].session = nil;
-                
-                MasterViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
-                
-                UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-                self.viewDeckController.centerController = navController;
+            } else if (indexPath.section == 1) {
+                if (indexPath.row == 0) {
+                    AboutViewController *aboutViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
+                    
+                    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:aboutViewController];
+                    self.viewDeckController.centerController = navController;
+                } else {
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_user"];
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_session"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [LastFMService sharedInstance].session = nil;
+                    
+                    MasterViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
+                    
+                    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+                    self.viewDeckController.centerController = navController;
+                }
             }
         }
         [NSThread sleepForTimeInterval:(300+arc4random()%700)/1000000.0]; // mimic delay... not really necessary
@@ -243,9 +250,29 @@
     
     userNameLabel.text = [userProfileDictionary valueForKey:@"realname"];
     
-    NSLog(@"ImageUrl: %@", [userProfileDictionary valueForKey:@"avatar"]);
+    NSString *hash = [[userProfileDictionary valueForKey:@"avatar"] md5sum];
+    
+    NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"avatar_%@.dat", hash]];
+    
     NSURL *url = [NSURL URLWithString:[userProfileDictionary valueForKey:@"avatar"]];
-    profileImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    NSData *imageData;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        imageData = [NSData dataWithContentsOfURL:url];
+        [imageData writeToFile:path atomically:YES];
+        NSLog(@"Avatar Url:%@ ImageSize:%d", [url absoluteString], [imageData length]);
+    } else {
+        NSLog(@"File Exists! Avatar Url: %@", [url absoluteString]);
+        imageData = [NSData dataWithContentsOfFile:path];
+    }
+
+    profileImageView.image = [UIImage imageWithData:imageData];
+    
+    self.profileImageView.alpha = 1.f;
+    self.profileImageView.backgroundColor = [UIColor clearColor];
+    self.profileImageView.layer.cornerRadius = 5.f;
+    self.profileImageView.clipsToBounds = YES;
 }
 
 @end

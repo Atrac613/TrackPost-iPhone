@@ -432,7 +432,7 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 
 - (NSDictionary *)metadataForTrack:(NSString *)track byArtist:(NSString *)artist inLanguage:(NSString *)lang {
 	NSDictionary *metadata = nil;
-	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:7*DAYS XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
+	NSArray *nodes = [self doMethod:@"track.getInfo" maxCacheAge:0 XPath:@"./track" withParameters:[NSString stringWithFormat:@"track=%@", [track URLEscaped]], 
 										[NSString stringWithFormat:@"artist=%@", [artist URLEscaped]],
 										[NSString stringWithFormat:@"username=%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"] URLEscaped]], 
 										[NSString stringWithFormat:@"lang=%@", lang], nil];
@@ -588,10 +588,16 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 										 forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"artist", @"image", nil]];
 }
 - (NSArray *)topTracksForUser:(NSString *)username {
-	NSArray *nodes = [self doMethod:@"user.getTopTracks" maxCacheAge:5*MINUTES XPath:@"./toptracks/track" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
+	NSArray *nodes = [self doMethod:@"user.getTopTracks" maxCacheAge:0 XPath:@"./toptracks/track" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
 	return [self _convertNodes:nodes
 					 toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./playcount", @"./artist/name", @"./image[@size=\"large\"]", nil]
 										 forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"artist", @"image", nil]];
+}
+- (NSArray *)weeklyTracksForUser:(NSString *)username {
+	NSArray *nodes = [self doMethod:@"user.getWeeklyTrackChart" maxCacheAge:0 XPath:@"./weeklytrackchart/track" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
+	return [self _convertNodes:nodes
+             toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./playcount", @"./artist", @"./image[@size=\"large\"]", nil]
+                       forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"artist", @"image", nil]];
 }
 - (NSArray *)tagsForUser:(NSString *)username {
 	NSArray *nodes = [self doMethod:@"user.getTopTags" maxCacheAge:0 XPath:@"./toptags/tag" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
@@ -656,10 +662,10 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 }
 
 - (NSArray *)lovedTracksForUser:(NSString *)username {
-	NSArray *nodes = [self doMethod:@"user.getLovedTracks" maxCacheAge:5*MINUTES XPath:@"./lovedtracks/track" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
+	NSArray *nodes = [self doMethod:@"user.getLovedTracks" maxCacheAge:0 XPath:@"./lovedtracks/track" withParameters:[NSString stringWithFormat:@"user=%@", [username URLEscaped]], nil];
 	return [self _convertNodes:nodes
-             toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./playcount", @"./artist/name", @"./image[@size=\"large\"]", nil]
-                       forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"artist", @"image", nil]];
+             toArrayWithXPaths:[NSArray arrayWithObjects:@"./name", @"./playcount", @"./artist/name", @"./image[@size=\"large\"]", @"./date", @"./date/@uts", nil]
+                       forKeys:[NSArray arrayWithObjects:@"name", @"playcount", @"artist", @"image", @"date", @"uts", nil]];
 }
 
 #pragma mark Tag methods

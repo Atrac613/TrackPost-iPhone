@@ -28,7 +28,6 @@
 		06285B871510EEBD0005ECF5 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B861510EEBD0005ECF5 /* RightViewController.m */; };
 		06285B9615147F9A0005ECF5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B9515147F9A0005ECF5 /* LoginViewController.m */; };
 		06285B9E15148DA80005ECF5 /* ScrobblerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */; };
-		06285BA91514A0AA0005ECF5 /* RecentTracksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */; };
 		06285BAD1514A91A0005ECF5 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BAC1514A91A0005ECF5 /* TrackCell.m */; };
 		06285BAF1514AAA70005ECF5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285BAE1514AAA70005ECF5 /* QuartzCore.framework */; };
 		06285BB81514ADE10005ECF5 /* TrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06285BAC1514A91A0005ECF5 /* TrackCell.m */; };
@@ -66,6 +65,11 @@
 		0676F3E61513CE6400803D84 /* NSString+LastFMTimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3901513B55900803D84 /* NSString+LastFMTimeExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3E71513CE6400803D84 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3921513B55900803D84 /* NSString+MD5.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3E81513CE6400803D84 /* NSString+URLEscaped.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3941513B55900803D84 /* NSString+URLEscaped.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		06BDBAC21515874C00690BEC /* TrackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC11515874C00690BEC /* TrackListViewController.m */; };
+		06BDBAC61515EA0800690BEC /* FullScreenPendingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC51515EA0800690BEC /* FullScreenPendingView.m */; };
+		06BDBACA1515ED9100690BEC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC91515ED9100690BEC /* AboutViewController.m */; };
+		06BDBAD11515FCD600690BEC /* ThirdPartyNoticesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */; };
+		06BDBAD31515FDEA00690BEC /* third_party_notices.html in Resources */ = {isa = PBXBuildFile; fileRef = 06BDBAD21515FDEA00690BEC /* third_party_notices.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,8 +116,6 @@
 		06285B9515147F9A0005ECF5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		06285B9C15148DA80005ECF5 /* ScrobblerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrobblerViewController.h; sourceTree = "<group>"; };
 		06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrobblerViewController.m; sourceTree = "<group>"; };
-		06285BA71514A0AA0005ECF5 /* RecentTracksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTracksViewController.h; sourceTree = "<group>"; };
-		06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTracksViewController.m; sourceTree = "<group>"; };
 		06285BAB1514A91A0005ECF5 /* TrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackCell.h; sourceTree = "<group>"; };
 		06285BAC1514A91A0005ECF5 /* TrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackCell.m; sourceTree = "<group>"; };
 		06285BAE1514AAA70005ECF5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -171,6 +173,15 @@
 		0676F3D11513BB0A00803D84 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		0676F3D21513BB0A00803D84 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0676F3D51513BE2200803D84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		06BDBAC01515874C00690BEC /* TrackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackListViewController.h; sourceTree = "<group>"; };
+		06BDBAC11515874C00690BEC /* TrackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackListViewController.m; sourceTree = "<group>"; };
+		06BDBAC41515EA0800690BEC /* FullScreenPendingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenPendingView.h; sourceTree = "<group>"; };
+		06BDBAC51515EA0800690BEC /* FullScreenPendingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenPendingView.m; sourceTree = "<group>"; };
+		06BDBAC81515ED9000690BEC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		06BDBAC91515ED9100690BEC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		06BDBACF1515FCD500690BEC /* ThirdPartyNoticesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPartyNoticesViewController.h; sourceTree = "<group>"; };
+		06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdPartyNoticesViewController.m; sourceTree = "<group>"; };
+		06BDBAD21515FDEA00690BEC /* third_party_notices.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = third_party_notices.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,10 +276,14 @@
 				06285B9515147F9A0005ECF5 /* LoginViewController.m */,
 				06285B9C15148DA80005ECF5 /* ScrobblerViewController.h */,
 				06285B9D15148DA80005ECF5 /* ScrobblerViewController.m */,
-				06285BA71514A0AA0005ECF5 /* RecentTracksViewController.h */,
-				06285BA81514A0AA0005ECF5 /* RecentTracksViewController.m */,
 				06285BC11514E26F0005ECF5 /* TrackInfoViewController.h */,
 				06285BC21514E26F0005ECF5 /* TrackInfoViewController.m */,
+				06BDBAC01515874C00690BEC /* TrackListViewController.h */,
+				06BDBAC11515874C00690BEC /* TrackListViewController.m */,
+				06BDBAC81515ED9000690BEC /* AboutViewController.h */,
+				06BDBAC91515ED9100690BEC /* AboutViewController.m */,
+				06BDBACF1515FCD500690BEC /* ThirdPartyNoticesViewController.h */,
+				06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */,
 				06285B391510EC370005ECF5 /* Supporting Files */,
 			);
 			path = TrackPost;
@@ -350,6 +365,7 @@
 			children = (
 				0676F37E1513B13700803D84 /* ja.lproj */,
 				0676F37D1513B12200803D84 /* en.lproj */,
+				06BDBAD21515FDEA00690BEC /* third_party_notices.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -384,6 +400,8 @@
 			children = (
 				0676F39D1513B82600803D84 /* PendingView.h */,
 				0676F39E1513B82600803D84 /* PendingView.m */,
+				06BDBAC41515EA0800690BEC /* FullScreenPendingView.h */,
+				06BDBAC51515EA0800690BEC /* FullScreenPendingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,6 +534,7 @@
 				06285B721510EC6C0005ECF5 /* icon.png in Resources */,
 				0676F3811513B17700803D84 /* Localizable.strings in Resources */,
 				0676F3841513B18000803D84 /* Localizable.strings in Resources */,
+				06BDBAD31515FDEA00690BEC /* third_party_notices.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,8 +599,11 @@
 				0676F3CA1513BA6E00803D84 /* CTidy.m in Sources */,
 				06285B9615147F9A0005ECF5 /* LoginViewController.m in Sources */,
 				06285B9E15148DA80005ECF5 /* ScrobblerViewController.m in Sources */,
-				06285BA91514A0AA0005ECF5 /* RecentTracksViewController.m in Sources */,
 				06285BC31514E2700005ECF5 /* TrackInfoViewController.m in Sources */,
+				06BDBAC21515874C00690BEC /* TrackListViewController.m in Sources */,
+				06BDBAC61515EA0800690BEC /* FullScreenPendingView.m in Sources */,
+				06BDBACA1515ED9100690BEC /* AboutViewController.m in Sources */,
+				06BDBAD11515FCD600690BEC /* ThirdPartyNoticesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

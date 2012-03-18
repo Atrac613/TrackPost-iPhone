@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PendingView.h"
+#import "FullScreenPendingView.h"
 
 @interface RightViewController : UIViewController {
     IBOutlet UIButton *button1;
@@ -35,7 +35,7 @@
     NSMutableArray *rankArray;
     
     NSDictionary *trackInfo;
-    PendingView *pendingView;
+    FullScreenPendingView *pendingView;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *button1;
@@ -63,7 +63,7 @@
 @property (nonatomic, retain) NSMutableArray *rankArray;
 
 @property (nonatomic, retain) NSDictionary *trackInfo;
-@property (nonatomic, retain) PendingView *pendingView;
+@property (nonatomic, retain) FullScreenPendingView *pendingView;
 
 - (void)button1Pressed;
 - (void)button2Pressed;

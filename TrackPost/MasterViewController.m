@@ -42,9 +42,9 @@
     if ([session length]) {
         NSLog(@"Session key found.");
         
-        // Refresh ViewDeck Controller.
-        self.viewDeckController.centerController = SharedAppDelegate.centerController;
-        self.viewDeckController.leftController = SharedAppDelegate.leftController;
+        // Refresh Side Controller.
+        [[self.viewDeckController rightController] viewWillAppear:YES];
+        [[self.viewDeckController leftController] viewWillAppear:YES];
         
         ScrobblerViewController *scrobblerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScrobblerViewController"];
         [self.navigationController pushViewController:scrobblerViewController animated:NO];

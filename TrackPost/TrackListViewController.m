@@ -1,25 +1,27 @@
 //
-//  RecentTracksViewController.m
+//  TrackListViewController.m
 //  TrackPost
 //
-//  Created by Osamu Noguchi on 3/17/12.
+//  Created by Osamu Noguchi on 3/18/12.
 //  Copyright (c) 2012 atrac613.io. All rights reserved.
 //
 
-#import "RecentTracksViewController.h"
+#import "TrackListViewController.h"
 #import "AppDelegate.h"
 #import "LastFMService.h"
 #import "TrackCell.h"
 #import "IIViewDeckController.h"
 #import "TrackInfoViewController.h"
 
-@interface RecentTracksViewController ()
+@interface TrackListViewController ()
 
 @end
 
-@implementation RecentTracksViewController
+@implementation TrackListViewController
+
 @synthesize tableView;
-@synthesize recentTracksArray;
+@synthesize trackMode;
+@synthesize trackListsArray;
 @synthesize trackInfo;
 @synthesize pendingView;
 
@@ -36,13 +38,21 @@
 {
     [super viewDidLoad];
     
-	[self.navigationItem setTitle:NSLocalizedString(@"RECENT_TRACKS", @"")];
+    if ([trackMode isEqualToString:@"loved"]) {
+        [self.navigationItem setTitle:NSLocalizedString(@"LOVED_TRACKS", @"")];
+    } else if ([trackMode isEqualToString:@"top"]) {
+        [self.navigationItem setTitle:NSLocalizedString(@"TOP_TRACKS", @"")];
+    } else if ([trackMode isEqualToString:@"weekly"]) {
+        [self.navigationItem setTitle:NSLocalizedString(@"WEEKLY_TRACKS", @"")];
+    } else {
+        [self.navigationItem setTitle:NSLocalizedString(@"RECENT_TRACKS", @"")];
+    }
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleLeftView)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(recentTracksUpdate)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(trackListsUpdate)];
     
-    [self recentTracksUpdate];
+    [self trackListsUpdate];
 }
 
 - (void)viewDidUnload
@@ -62,29 +72,38 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)recentTracksUpdate {
+- (void)trackListsUpdate {
     [self showPendingView];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetRecentTracksAction) object:nil];
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTracksAction) object:nil];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
     [appDelegate.operationQueue addOperation:operation];
 }
 
-- (void)synchronizeGetRecentTracksAction {
+- (void)synchronizeGetTracksAction {
 	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
     LastFMService *service = [[LastFMService alloc] init];
     service.session = session;
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
-    self.recentTracksArray = [service recentlyPlayedTracksForUser:username];
     
-	[self performSelectorOnMainThread:@selector(completeGetRecentTracksAction:) withObject:service.error waitUntilDone:YES];
+    if ([trackMode isEqualToString:@"loved"]) {
+        self.trackListsArray = [service lovedTracksForUser:username];
+    } else if ([trackMode isEqualToString:@"top"]) {
+        self.trackListsArray = [service topTracksForUser:username];
+    } else if ([trackMode isEqualToString:@"weekly"]) {
+        self.trackListsArray = [service weeklyTracksForUser:username];
+    } else {
+        self.trackListsArray = [service recentlyPlayedTracksForUser:username];
+    }
+    
+	[self performSelectorOnMainThread:@selector(completeGetTracksAction:) withObject:service.error waitUntilDone:YES];
 }
 
-- (void)completeGetRecentTracksAction:(NSError*)error {
-    NSLog(@"completeGetRecentTracksAction");
+- (void)completeGetTracksAction:(NSError*)error {
+    NSLog(@"completeGetTracksAction");
     
     [self hidePendingView];
     
@@ -96,7 +115,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.recentTracksArray count];
+    return [self.trackListsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,7 +125,7 @@
         cell = [[TrackCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    NSDictionary *rowData = [NSDictionary dictionaryWithDictionary:[self.recentTracksArray objectAtIndex:indexPath.row]];
+    NSDictionary *rowData = [NSDictionary dictionaryWithDictionary:[self.trackListsArray objectAtIndex:indexPath.row]];
     
     cell.artistNameLabel.text = [rowData objectForKey:@"artist"];
     cell.trackNameLabel.text = [rowData objectForKey:@"name"];
@@ -118,10 +137,14 @@
     if ([[rowData objectForKey:@"nowplaying"] boolValue]) {
         cell.dateLabel.text = @"nowplaying";
     } else {
-        NSTimeInterval timeInterval = [[rowData objectForKey:@"uts"] doubleValue];
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-        
-        cell.dateLabel.text = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+        if ([rowData valueForKey:@"uts"]) {
+            NSTimeInterval timeInterval = [[rowData objectForKey:@"uts"] doubleValue];
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+            
+            cell.dateLabel.text = [[NSString alloc] initWithFormat:@"%@", [dateFormatter stringFromDate:date]];
+        } else {            
+            cell.dateLabel.text = [NSString stringWithFormat:@"%d", [[rowData valueForKey:@"playcount"] intValue]];
+        }
     }
     
     return cell;
@@ -130,7 +153,7 @@
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSDictionary *rowData = [self.recentTracksArray objectAtIndex:indexPath.row];
+    NSDictionary *rowData = [self.trackListsArray objectAtIndex:indexPath.row];
     
     NSString *artistName = [rowData objectForKey:@"artist"];
     NSString *trackName = [rowData objectForKey:@"name"];
