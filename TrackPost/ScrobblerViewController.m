@@ -13,6 +13,7 @@
 #import "LastFMService.h"
 #import "AppDelegate.h"
 #import "NSString+MD5.h"
+#import "ShareViewController.h"
 
 @interface ScrobblerViewController ()
 
@@ -49,8 +50,6 @@
 {
     [super viewDidLoad];
     
-    [adView setDelegate:self];
-
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleLeftView)];
     
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
@@ -124,6 +123,9 @@
 
 - (IBAction)shareButtonPressed:(id)sender {
     NSLog(@"shareButtonPressed");
+    
+    ShareViewController *shareViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShareViewController"];
+    [self presentModalViewController:shareViewController animated:YES];
 }
 
 - (void)refreshCurrentTracks {

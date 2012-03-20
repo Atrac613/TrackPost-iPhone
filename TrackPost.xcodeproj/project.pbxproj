@@ -70,6 +70,9 @@
 		06BDBACA1515ED9100690BEC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC91515ED9100690BEC /* AboutViewController.m */; };
 		06BDBAD11515FCD600690BEC /* ThirdPartyNoticesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */; };
 		06BDBAD31515FDEA00690BEC /* third_party_notices.html in Resources */ = {isa = PBXBuildFile; fileRef = 06BDBAD21515FDEA00690BEC /* third_party_notices.html */; };
+		06BDBAD61518CD2100690BEC /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAD51518CD2100690BEC /* ShareViewController.m */; };
+		06BDBAEC1518DC0700690BEC /* facebook_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06BDBAEA1518DC0700690BEC /* facebook_icon.jpg */; };
+		06BDBAED1518DC0700690BEC /* twitter_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06BDBAEB1518DC0700690BEC /* twitter_icon.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +185,10 @@
 		06BDBACF1515FCD500690BEC /* ThirdPartyNoticesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPartyNoticesViewController.h; sourceTree = "<group>"; };
 		06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdPartyNoticesViewController.m; sourceTree = "<group>"; };
 		06BDBAD21515FDEA00690BEC /* third_party_notices.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = third_party_notices.html; sourceTree = "<group>"; };
+		06BDBAD41518CD2000690BEC /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		06BDBAD51518CD2100690BEC /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		06BDBAEA1518DC0700690BEC /* facebook_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = facebook_icon.jpg; path = TrackPost/images/facebook_icon.jpg; sourceTree = "<group>"; };
+		06BDBAEB1518DC0700690BEC /* twitter_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = twitter_icon.jpg; path = TrackPost/images/twitter_icon.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +291,8 @@
 				06BDBAC91515ED9100690BEC /* AboutViewController.m */,
 				06BDBACF1515FCD500690BEC /* ThirdPartyNoticesViewController.h */,
 				06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */,
+				06BDBAD41518CD2000690BEC /* ShareViewController.h */,
+				06BDBAD51518CD2100690BEC /* ShareViewController.m */,
 				06285B391510EC370005ECF5 /* Supporting Files */,
 			);
 			path = TrackPost;
@@ -363,6 +372,7 @@
 		0676F37C1513B0DB00803D84 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				06BDBAE91518DBFC00690BEC /* images */,
 				0676F37E1513B13700803D84 /* ja.lproj */,
 				0676F37D1513B12200803D84 /* en.lproj */,
 				06BDBAD21515FDEA00690BEC /* third_party_notices.html */,
@@ -456,6 +466,15 @@
 			path = Tidy;
 			sourceTree = "<group>";
 		};
+		06BDBAE91518DBFC00690BEC /* images */ = {
+			isa = PBXGroup;
+			children = (
+				06BDBAEA1518DC0700690BEC /* facebook_icon.jpg */,
+				06BDBAEB1518DC0700690BEC /* twitter_icon.jpg */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,6 +554,8 @@
 				0676F3811513B17700803D84 /* Localizable.strings in Resources */,
 				0676F3841513B18000803D84 /* Localizable.strings in Resources */,
 				06BDBAD31515FDEA00690BEC /* third_party_notices.html in Resources */,
+				06BDBAEC1518DC0700690BEC /* facebook_icon.jpg in Resources */,
+				06BDBAED1518DC0700690BEC /* twitter_icon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +625,7 @@
 				06BDBAC61515EA0800690BEC /* FullScreenPendingView.m in Sources */,
 				06BDBACA1515ED9100690BEC /* AboutViewController.m in Sources */,
 				06BDBAD11515FCD600690BEC /* ThirdPartyNoticesViewController.m in Sources */,
+				06BDBAD61518CD2100690BEC /* ShareViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
