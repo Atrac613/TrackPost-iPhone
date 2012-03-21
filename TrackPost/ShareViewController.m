@@ -76,13 +76,23 @@
     
     NSInteger toolBarY = self.view.frame.size.height - keyboardSize.height - 40;
 
-    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, toolBarY, 320, 40)];
+    toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 40)];
     
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeButtonPressed)];
     [toolBar setItems:[[NSArray alloc] initWithObjects:flexibleSpace, closeButton,nil]];
+    [toolBar setAlpha:0.9f];
     
     [self.view addSubview:toolBar];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    [toolBar setFrame:CGRectMake(0, toolBarY, 320, 40)];
+    
+    [UIView commitAnimations];
 }
 
 - (void)closeButtonPressed {
@@ -110,7 +120,7 @@
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 80.f;
+            return 70.f;
         }
     }
     
@@ -120,9 +130,9 @@
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return NSLocalizedString(@"MESSAGE", @"");
+    } else {
+        return NSLocalizedString(@"SHARING", @"");
     }
-    
-    return @"";
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -143,7 +153,7 @@
         if (indexPath.row == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 5, 300, 75)];
+            UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 5, 300, 65)];
             [textView setTag:1001];
             [textView setBackgroundColor:[UIColor clearColor]];
             
@@ -154,6 +164,8 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         if (indexPath.row == 0) {
             
