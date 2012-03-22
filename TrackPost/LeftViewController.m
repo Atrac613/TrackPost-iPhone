@@ -16,6 +16,7 @@
 #import "NSString+MD5.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AboutViewController.h"
+#import "OptionViewController.h"
 
 @interface LeftViewController () <IIViewDeckControllerDelegate>
 
@@ -124,7 +125,7 @@
         return 5;
     } else {
         // Others section.
-        return 2;
+        return 3;
     }
 }
 
@@ -172,6 +173,8 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = NSLocalizedString(@"ABOUT", @"");
         } else if (indexPath.row == 1) {
+            cell.textLabel.text = NSLocalizedString(@"OPTION", @"");
+        } else if (indexPath.row == 2) {
             cell.textLabel.text = NSLocalizedString(@"LOGOUT", @"");
         }
         
@@ -214,6 +217,11 @@
                     AboutViewController *aboutViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
                     
                     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:aboutViewController];
+                    self.viewDeckController.centerController = navController;
+                } else if (indexPath.row == 1) {
+                    OptionViewController *optionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OptionViewController"];
+                    
+                    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:optionViewController];
                     self.viewDeckController.centerController = navController;
                 } else {
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_user"];

@@ -73,6 +73,7 @@
 		06BDBAD61518CD2100690BEC /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAD51518CD2100690BEC /* ShareViewController.m */; };
 		06BDBAEC1518DC0700690BEC /* facebook_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06BDBAEA1518DC0700690BEC /* facebook_icon.jpg */; };
 		06BDBAED1518DC0700690BEC /* twitter_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 06BDBAEB1518DC0700690BEC /* twitter_icon.jpg */; };
+		06BDBAF0151B8DA900690BEC /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAEF151B8DA900690BEC /* OptionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,8 @@
 		06BDBAD51518CD2100690BEC /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		06BDBAEA1518DC0700690BEC /* facebook_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = facebook_icon.jpg; path = TrackPost/images/facebook_icon.jpg; sourceTree = "<group>"; };
 		06BDBAEB1518DC0700690BEC /* twitter_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = twitter_icon.jpg; path = TrackPost/images/twitter_icon.jpg; sourceTree = "<group>"; };
+		06BDBAEE151B8DA800690BEC /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
+		06BDBAEF151B8DA900690BEC /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +296,8 @@
 				06BDBAD01515FCD600690BEC /* ThirdPartyNoticesViewController.m */,
 				06BDBAD41518CD2000690BEC /* ShareViewController.h */,
 				06BDBAD51518CD2100690BEC /* ShareViewController.m */,
+				06BDBAEE151B8DA800690BEC /* OptionViewController.h */,
+				06BDBAEF151B8DA900690BEC /* OptionViewController.m */,
 				06285B391510EC370005ECF5 /* Supporting Files */,
 			);
 			path = TrackPost;
@@ -626,6 +631,7 @@
 				06BDBACA1515ED9100690BEC /* AboutViewController.m in Sources */,
 				06BDBAD11515FCD600690BEC /* ThirdPartyNoticesViewController.m in Sources */,
 				06BDBAD61518CD2100690BEC /* ShareViewController.m in Sources */,
+				06BDBAF0151B8DA900690BEC /* OptionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
