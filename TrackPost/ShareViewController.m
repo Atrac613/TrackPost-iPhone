@@ -19,6 +19,11 @@
 @synthesize navigationBar;
 @synthesize navigationItem;
 @synthesize toolBar;
+@synthesize artistName;
+@synthesize trackName;
+@synthesize lastfmPage;
+@synthesize shareMessage;
+@synthesize shareMessageMinimum;
 @synthesize pendingView;
 @synthesize doTweet;
 @synthesize doFacebook;
@@ -35,15 +40,52 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
 	
     [self.navigationItem setTitle:NSLocalizedString(@"SHARE", @"")];
+    
+    appDelegate.facebook = [[Facebook alloc] initWithAppId:@"352034171506780" andDelegate:self];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
-
+    
+    NSString *shareTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"share_title"];
+    if ([shareTitle length] <= 0) {
+        shareTitle = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"NOW_PLAYING", @"")];
+    }
+    
+    BOOL prefixEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_prefix"];
+    BOOL suffixEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_suffix"];
+    BOOL addLastfmPageEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_add_lastfm_page"];
+    
+    shareMessage = [NSString stringWithFormat:@"%@ - %@", artistName, trackName];
+    
+    if (prefixEnabled) {
+        shareMessage = [NSString stringWithFormat:@"%@ %@", shareTitle, shareMessage];
+    }
+    
+    if (suffixEnabled) {
+        shareMessage = [NSString stringWithFormat:@"%@ %@", shareMessage, shareTitle];
+    }
+    
+    shareMessageMinimum = shareMessage;
+    
+    if (addLastfmPageEnabled) {
+        if ([lastfmPage length] > 0) {
+            shareMessage = [NSString stringWithFormat:@"%@ %@", shareMessage, lastfmPage];
+        }
+    }
 }
 
 - (void)viewDidUnload
@@ -62,7 +104,35 @@
 }
 
 - (void)doneButtonPressed {
+    [self showPendingView];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(operationSendTwitter) object:nil];
+    [operation setQueuePriority:NSOperationQueuePriorityHigh];
+    [appDelegate.operationQueue addOperation:operation];
+}
 
+- (void)operationSendTwitter {
+    NSLog(@"operationSendTwitter");
+    
+    if (doTweet) {
+        [self sendTwitter:shareMessage];
+    } else {
+        [self performSelectorOnMainThread:@selector(operationSendFacebook) withObject:nil waitUntilDone:YES];
+    }
+}
+
+- (void)operationSendFacebook {
+    NSLog(@"operationSendFacebook");
+    
+    if (doFacebook) {
+        [self sendFacebook:shareMessage url:lastfmPage];
+    } else {
+        NSLog(@"Completed.");
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 - (void)keyboardChanged:(NSNotification*)notification {
@@ -157,6 +227,8 @@
             [textView setTag:1001];
             [textView setBackgroundColor:[UIColor clearColor]];
             
+            [textView setText:shareMessage];
+            
             [cell addSubview:textView];
         }
     } else if (indexPath.section == 1) {
@@ -220,7 +292,7 @@
 
 - (void)switchChanged:(id)sender {
     UISwitch* switchControl = sender;
-    NSLog(@"Tweet is %@", switchControl.on ? @"ON" : @"OFF");
+    NSLog(@"Switch is %@", switchControl.on ? @"ON" : @"OFF");
     
     if (switchControl.tag == 11001) {
         doTweet = switchControl.on;
@@ -228,22 +300,12 @@
         doFacebook = switchControl.on;
         
         if (doFacebook) {
-            /*
-            AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            
-            appDelegate.facebook = [[Facebook alloc] initWithAppId:@"132918306826766" andDelegate:self];
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            if ([defaults objectForKey:@"FBAccessTokenKey"] 
-                && [defaults objectForKey:@"FBExpirationDateKey"]) {
-                appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-                appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-            }
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             
             if (![appDelegate.facebook isSessionValid]) {
                 NSArray *permissions = [NSArray arrayWithObjects:@"publish_stream", @"offline_access",nil];
                 [appDelegate.facebook authorize:permissions];
-            }*/
+            }
         }
     }
 }
@@ -252,6 +314,98 @@
     [textView resignFirstResponder];
     
     return YES;
+}
+
+- (void)sendTwitter:(NSString *)message {
+    // Create an account store object.
+	ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+	
+	// Create an account type that ensures Twitter accounts are retrieved.
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+	
+	// Request access from the user to use their Twitter accounts.
+    [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+        if(granted) {
+			// Get the list of Twitter accounts.
+            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+			
+			// For the sake of brevity, we'll assume there is only one Twitter account present.
+			// You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+			if ([accountsArray count] > 0) {
+				// Grab the initial Twitter account to tweet from.
+				ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+				
+				// Create a request, which in this example, posts a tweet to the user's timeline.
+				// This example uses version 1 of the Twitter API.
+				// This may need to be changed to whichever version is currently appropriate.
+				TWRequest *postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:message forKey:@"status"] requestMethod:TWRequestMethodPOST];
+				
+				// Set the account used to post the tweet.
+				[postRequest setAccount:twitterAccount];
+				
+				// Perform the request created above and create a handler block to handle the response.
+				[postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+					NSString *output = [NSString stringWithFormat:@"HTTP response status: %i", [urlResponse statusCode]];
+                    NSLog(@"%@", output);
+					
+                    [self performSelectorOnMainThread:@selector(operationSendFacebook) withObject:nil waitUntilDone:YES];
+				}];
+			}
+        }
+	}];
+}
+
+- (void)sendFacebook:(NSString *)message url:(NSString*)url {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if ([appDelegate.facebook isSessionValid]) {
+        if ([url length] > 0) {
+            NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys: url, @"link", message, @"message", nil];
+            
+            [appDelegate.facebook requestWithGraphPath:@"me/links" andParams:params andHttpMethod:@"POST" andDelegate:self];
+        } else {
+            NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys: message, @"message", nil];
+            
+            [appDelegate.facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+        }
+    } else {
+        NSLog(@"Facebook session is invalid.");
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
+}
+
+#pragma mark - Facebook delegate
+
+- (void)fbDidLogin {
+    NSLog(@"fbDidLogin");
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[appDelegate.facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[appDelegate.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"fbDidNotLogin");
+}
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"request didReceiveResponse");
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSLog(@"request didLoad");
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"didFailWithError");
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)showPendingView {

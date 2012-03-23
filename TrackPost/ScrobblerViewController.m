@@ -29,6 +29,7 @@
 @synthesize scrobbleButton;
 @synthesize loveButton;
 @synthesize bannerIsVisible;
+@synthesize lastfmPage;
 @synthesize isPlaying;
 @synthesize tagTextView;
 @synthesize tagArray;
@@ -125,6 +126,9 @@
     NSLog(@"shareButtonPressed");
     
     ShareViewController *shareViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShareViewController"];
+    shareViewController.artistName = artistNameLabel.text;
+    shareViewController.trackName = trackNameLabel.text;
+    shareViewController.lastfmPage = lastfmPage;
     [self presentModalViewController:shareViewController animated:YES];
 }
 
@@ -434,6 +438,10 @@
         
         NSLog(@"Tags: %@", tagString);
         tagTextView.text = tagString;
+        
+        self.lastfmPage = [self.trackInfo objectForKey:@"url"];
+    } else {
+        self.lastfmPage = @"";
     }
     
     [shareButton setEnabled:YES];

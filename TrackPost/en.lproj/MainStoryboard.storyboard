@@ -491,6 +491,63 @@
             </objects>
             <point key="canvasLocation" x="1170" y="644"/>
         </scene>
+        <!--More Apps View Controller-->
+        <scene sceneID="Fyg-yQ-rYd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="psr-ag-hwc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="MoreAppsViewController" id="mWp-bY-gg2" customClass="MoreAppsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ob-4i-VqA">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="zTl-Bg-ByM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mWp-bY-gg2" id="9Nr-iN-BRH"/>
+                                </connections>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="9LB-zq-r7m">
+                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem image="btn_back.png" style="plain" id="LKG-at-YRH">
+                                        <connections>
+                                            <action selector="goBack" destination="zTl-Bg-ByM" id="dD7-mb-yPo"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0p8-Ni-2Ds"/>
+                                    <barButtonItem image="btn_next.png" style="plain" id="Go3-9R-IA0">
+                                        <connections>
+                                            <action selector="goForward" destination="zTl-Bg-ByM" id="bgn-YH-vB8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="dFn-Wq-7Nx"/>
+                                    <barButtonItem style="plain" systemItem="stop" id="2S3-YI-hKw">
+                                        <connections>
+                                            <action selector="stopLoading" destination="zTl-Bg-ByM" id="vJA-Mx-dcR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kIK-IE-Qbx"/>
+                                    <barButtonItem style="plain" systemItem="refresh" id="yUw-UY-32o">
+                                        <connections>
+                                            <action selector="reload" destination="zTl-Bg-ByM" id="dJe-Y4-xMn"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="webView" destination="zTl-Bg-ByM" id="J6B-ms-I5k"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1560" y="644"/>
+        </scene>
         <!--Scrobbler View Controller-->
         <scene sceneID="9I0-HI-dpc">
             <objects>
@@ -828,7 +885,7 @@
                                 </connections>
                             </webView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -905,6 +962,124 @@
             <point key="canvasLocation" x="3114" y="64"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="btn_back.png" width="17" height="22"/>
+        <image name="btn_next.png" width="17" height="22"/>
+    </resources>
+    <classes>
+        <class className="AboutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="LeftViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LeftViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="navigationItem" candidateClass="UINavigationItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="MasterViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MasterViewController.h"/>
+        </class>
+        <class className="MoreAppsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MoreAppsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="OptionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="RightViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RightViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="button1" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button10" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button11" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button12" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button13" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button14" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button15" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button16" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button17" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button18" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button19" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button2" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button20" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button3" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button4" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button5" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button6" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button7" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button8" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="button9" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="ScrobblerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScrobblerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="shareButtonPressed:"/>
+                <relationship kind="outlet" name="adView" candidateClass="ADBannerView"/>
+                <relationship kind="outlet" name="artistNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="loveButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrobbleButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tagTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="tagsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="trackImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="trackNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="waitingForiPodLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ShareViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShareViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="navigationItem" candidateClass="UINavigationItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ThirdPartyNoticesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ThirdPartyNoticesViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="TrackInfoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrackInfoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="artistNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="listenersTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="loveButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="playcountTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="tagTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="tagsTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="trackImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="trackNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userplaycountTitleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TrackListViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrackListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "ThirdPartyNoticesViewController.h"
+#import "MoreAppsViewController.h"
 
 @interface AboutViewController ()
 
@@ -64,7 +65,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 3;
     } else if (section == 1) {
         return 1;
     } else if (section == 2) {
@@ -117,15 +118,25 @@
             [cell addSubview:appNameLabel];
             
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-            UILabel *appVersionLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 45, 200, 15)];
+            UILabel *appVersionLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 40, 200, 15)];
             [appVersionLabel setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"VERSION", @""), version]];
             [appVersionLabel setFont:[UIFont systemFontOfSize:10.f]];
             [appVersionLabel setTextColor:[UIColor blackColor]];
             [appVersionLabel setBackgroundColor:[UIColor clearColor]];
             [cell addSubview:appVersionLabel];
-        } else {
+            
+            UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 52, 200, 15)];
+            [authorLabel setText:[NSString stringWithFormat:@"%@: Osamu Noguchi", NSLocalizedString(@"AUTHOR", @"")]];
+            [authorLabel setFont:[UIFont systemFontOfSize:10.f]];
+            [authorLabel setTextColor:[UIColor blackColor]];
+            [authorLabel setBackgroundColor:[UIColor clearColor]];
+            [cell addSubview:authorLabel];
+        } else if (indexPath.row == 1) {
             [cell.textLabel setTextAlignment:UITextAlignmentCenter];
             [cell.textLabel setText:NSLocalizedString(@"SOURCE_CODE_REPOSITORY", @"")];
+        }else {
+            [cell.textLabel setTextAlignment:UITextAlignmentCenter];
+            [cell.textLabel setText:NSLocalizedString(@"MORE_APPS", @"")];
         }
     } else if (indexPath.section == 1) {
         cell = [tv dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -160,6 +171,9 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/Atrac613/TrackPost-iPhone"]];
+        } else if (indexPath.row == 2) {
+            MoreAppsViewController *moreAppsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreAppsViewController"];
+            [self.navigationController pushViewController:moreAppsViewController animated:YES];
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {

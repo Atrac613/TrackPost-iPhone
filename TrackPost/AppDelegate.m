@@ -19,6 +19,7 @@
 @synthesize centerController = _viewController;
 @synthesize leftController = _leftController;
 @synthesize operationQueue;
+@synthesize facebook;
 
 NSString *kUserAgent;
 
@@ -58,6 +59,10 @@ NSString *kUserAgent;
     [Appirater appLaunched:YES];
     
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [facebook handleOpenURL:url];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

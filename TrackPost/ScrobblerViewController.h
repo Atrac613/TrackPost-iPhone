@@ -18,6 +18,7 @@
     IBOutlet UIButton *scrobbleButton;
     IBOutlet UIButton *loveButton;
     IBOutlet ADBannerView *adView;
+    NSString *lastfmPage;
     BOOL bannerIsVisible;
     BOOL isPlaying;
     BOOL lovedTrack;
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) UIButton *shareButton;
 @property (nonatomic, retain) UIButton *scrobbleButton;
 @property (nonatomic, retain) UIButton *loveButton;
+@property (nonatomic, retain) NSString *lastfmPage;
 @property (nonatomic, assign) BOOL bannerIsVisible;
 @property (nonatomic, assign) BOOL isPlaying;
 @property (nonatomic, assign) BOOL lovedTrack;

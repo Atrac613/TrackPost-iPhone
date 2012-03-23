@@ -34,7 +34,7 @@
     
     [self.viewDeckController setPanningMode:IIViewDeckNoPanning];
     
-	[webView setDelegate:self];
+    [webView setDelegate:self];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"third_party_notices" ofType:@"html"];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];

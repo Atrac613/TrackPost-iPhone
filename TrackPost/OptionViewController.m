@@ -79,46 +79,58 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         if (indexPath.row == 0) {
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(5, 12, 290, 25)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 12, 280, 25)];
             [textField setDelegate:self];
-            [textField setText:NSLocalizedString(@"NOW_PLAYING", @"")];
+            
+            NSString *titleString = [[NSUserDefaults standardUserDefaults] objectForKey:@"share_title"];
+            if ([titleString length] <= 0) {
+                titleString = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"NOW_PLAYING", @"")];
+            }
+            
+            [textField setText:titleString];
             [cell.contentView addSubview:textField];
         } else if (indexPath.row == 1) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 30)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 30)];
             label.text = NSLocalizedString(@"PREFIX", @"");
+            label.font = [UIFont boldSystemFontOfSize:18];
             label.backgroundColor = [UIColor clearColor];
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             switchView.tag = 11001;
+            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_prefix"];
             cell.accessoryView = switchView;
             
-            [switchView setOn:NO animated:NO];
+            //[switchView setOn:NO animated:NO];
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
             [cell.contentView addSubview:label];
         } else if (indexPath.row == 2) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 100, 30)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, 100, 30)];
             label.text = NSLocalizedString(@"SUFFIX", @"");
+            label.font = [UIFont boldSystemFontOfSize:18];
             label.backgroundColor = [UIColor clearColor];
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-            switchView.tag = 11001;
+            switchView.tag = 11002;
+            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_suffix"];
             cell.accessoryView = switchView;
             
-            [switchView setOn:NO animated:NO];
+            //[switchView setOn:NO animated:NO];
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
             [cell.contentView addSubview:label];
         } else if (indexPath.row == 3) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 200, 30)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, 200, 30)];
             label.text = NSLocalizedString(@"ADD_LASTFM_PAGE", @"");
+            label.font = [UIFont boldSystemFontOfSize:18];
             label.backgroundColor = [UIColor clearColor];
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-            switchView.tag = 11001;
+            switchView.tag = 11003;
+            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_add_lastfm_page"];
             cell.accessoryView = switchView;
             
-            [switchView setOn:NO animated:NO];
+            //[switchView setOn:NO animated:NO];
             [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
             
             [cell.contentView addSubview:label];
@@ -135,10 +147,23 @@
 - (void)switchChanged:(id)sender {
     UISwitch* switchControl = sender;
     NSLog(@"Switch is %@", switchControl.on ? @"ON" : @"OFF");
+    
+    if (switchControl.tag == 11001) {
+        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:@"share_prefix"];
+    } else if (switchControl.tag == 11002) {
+        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:@"share_suffix"];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:@"share_add_lastfm_page"];
+    }
+
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"share_title"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     return YES;
 }

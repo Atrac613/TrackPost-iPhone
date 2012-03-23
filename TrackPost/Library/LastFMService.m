@@ -439,8 +439,8 @@ BOOL shouldUseCache(NSString *file, double seconds) {
 	if([nodes count]) {
 		CXMLNode *node = [nodes objectAtIndex:0];
 		metadata = [self _convertNode:node
-					 toDictionaryWithXPaths:[NSArray arrayWithObjects:@"./name", @"./artist/name", @"./duration", @"./playcount", @"./listeners", @"./userplaycount", @"./wiki/summary", @"./album/image[@size=\"extralarge\"]", @"./album/title", @"./toptags/tag/name", @"./userloved", nil]
-													forKeys:[NSArray arrayWithObjects:@"name", @"artist", @"duration", @"playcount", @"listeners", @"userplaycount", @"wiki", @"image", @"album", @"tags", @"userloved", nil]];
+					 toDictionaryWithXPaths:[NSArray arrayWithObjects:@"./name", @"./artist/name", @"./duration", @"./playcount", @"./listeners", @"./userplaycount", @"./wiki/summary", @"./album/image[@size=\"extralarge\"]", @"./album/title", @"./toptags/tag/name", @"./userloved", @"./url", nil]
+													forKeys:[NSArray arrayWithObjects:@"name", @"artist", @"duration", @"playcount", @"listeners", @"userplaycount", @"wiki", @"image", @"album", @"tags", @"userloved", @"url", nil]];
 	}
 	return metadata;
 }
