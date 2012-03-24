@@ -2,3 +2,70 @@
 "Rate %@" = "%@の評価";
 "No, Thanks" ="いいえ";
 "Remind me later" = "後で見る";
+
+"PLEASE_WAIT" = "お待ちください";
+"LOGOUT" = "ログアウト";
+"LOGIN" = "ログイン";
+"TAGS" = "タグ";
+"LOVE" = "Love";
+"SHARE" = "共有";
+"LASTFM_ACCOUNT" = "Last.fm アカウント";
+"USERNAME" = "アカウント";
+"PASSWORD" = "パスワード";
+"CANCEL" = "キャンセル";
+"OK" = "OK";
+"SCROBBLE" = "スクラブ";
+"REFRESH" = "更新";
+
+"LASTFM" = "Last.fm";
+"OTHERS" = "その他";
+
+"SCROBBLER" = "スクラバー";
+"LOVED_TRACKS" = "好きなトラック";
+"WEEKLY_TRACKS" = "今週のトラック";
+"TOP_TRACKS" = "トップトラック";
+
+"ABOUT" = "アプリについて";
+"OPTION" = "オプション";
+
+"LOGOUT_TITLE" = "ログアウト";
+"LOGOUT_BODY" = "本当にログアウトしますか？";
+
+"WAITING_FOR_PLAYING" = "iPod を再生してください。";
+"POST_SUCCESS_BODY" = "スクラブしました。";
+
+"LOVE_SUCCESS_BODY" = "Love の設定をしました。";
+"UNLOVE_SUCCESS_BODY" = "Love を解除しました。";
+
+"RECENT_TRACKS" = "最近再生したトラック";
+
+"TRACK_INFO" = "トラック情報";
+"LISTENERS" = "リスナー";
+"PLAY_COUNT" = "再生回数";
+"YOUR_PLAY_COUNT" = "あなたの再生回数";
+
+"AUTH_ERROR_TITLE" = "認証に失敗";
+
+"TRACKPOST" = "TrackPost";
+"VERSION" = "バージョン";
+"AUTHOR" = "作者";
+
+"SOURCE_CODE_REPOSITORY" = "Get Source Code";
+"MORE_APPS" = "More Apps";
+
+"THIRD_PARTY_NOTICES" = "ライセンス";
+
+"CLEAR_CACHE" = "キャッシュを消す";
+
+"LICENSE" = "ライセンス";
+
+"SHARE_OPTION" = "共有オプション";
+"NOW_PLAYING" = "Now Playing";
+"PREFIX" = "接頭辞";
+"SUFFIX" = "接尾辞";
+"ADD_LASTFM_PAGE" = "Last.fm のページを追加";
+
+"MESSAGE" = "メッセージ";
+"SHARING" = "共有";
+"TWITTER" = "Twitter";
+"FACEBOOK" = "Facebook";

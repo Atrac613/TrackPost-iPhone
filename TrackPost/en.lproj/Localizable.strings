@@ -2,3 +2,71 @@
 "Rate %@" = "Rate %@";
 "No, Thanks" = "No, Thanks";
 "Remind me later" = "Remind me later";
+
+"PLEASE_WAIT" = "Please wait";
+"LOGOUT" = "Logout";
+"LOGIN" = "Login";
+"TAGS" = "Tags";
+"LOVE" = "Love";
+"SHARE" = "Share";
+"LASTFM_ACCOUNT" = "Last.fm Account";
+"USERNAME" = "Username";
+"PASSWORD" = "Password";
+"CANCEL" = "Cancel";
+"OK" = "OK";
+"SCROBBLE" = "Scrobble";
+"REFRESH" = "Refresh";
+
+"LASTFM" = "Last.fm";
+"OTHERS" = "Others";
+
+"SCROBBLER" = "Scrobbler";
+"LOVED_TRACKS" = "Loved Tracks";
+"WEEKLY_TRACKS" = "Weekly Tracks";
+"TOP_TRACKS" = "Top Tracks";
+
+"ABOUT" = "About";
+"OPTION" = "Option";
+
+"LOGOUT_TITLE" = "Logout";
+"LOGOUT_BODY" = "Are you sure you want to logout?";
+
+"WAITING_FOR_PLAYING" = "Waiting for playing.";
+
+"POST_SUCCESS_BODY" = "Scrobble successful.";
+
+"LOVE_SUCCESS_BODY" = "Love successful.";
+"UNLOVE_SUCCESS_BODY" = "Unlove successful.";
+
+"RECENT_TRACKS" = "Recent Tracks";
+
+"TRACK_INFO" = "Track Info";
+"LISTENERS" = "Listeners";
+"PLAY_COUNT" = "Play Count";
+"YOUR_PLAY_COUNT" = "Your Play Count";
+
+"AUTH_ERROR_TITLE" = "Failed Authentication";
+
+"TRACKPOST" = "TrackPost";
+"VERSION" = "Version";
+"AUTHOR" = "Author";
+
+"SOURCE_CODE_REPOSITORY" = "Get Source Code";
+"MORE_APPS" = "More Apps";
+
+"THIRD_PARTY_NOTICES" = "Third Party Notices";
+
+"CLEAR_CACHE" = "Clear Cache";
+
+"LICENSE" = "License";
+
+"SHARE_OPTION" = "Share Option";
+"NOW_PLAYING" = "Now Playing";
+"PREFIX" = "Prefix";
+"SUFFIX" = "Suffix";
+"ADD_LASTFM_PAGE" = "Add Last.fm Page";
+
+"MESSAGE" = "Message";
+"SHARING" = "Sharing";
+"TWITTER" = "Twitter";
+"FACEBOOK" = "Facebook";

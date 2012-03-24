@@ -247,6 +247,7 @@
             
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(45, 5, 100, 30)];
             label.text = NSLocalizedString(@"TWITTER", @"");
+            label.font = [UIFont boldSystemFontOfSize:18];
             label.backgroundColor = [UIColor clearColor];
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
@@ -267,6 +268,7 @@
             
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(45, 5, 100, 30)];
             label.text = NSLocalizedString(@"FACEBOOK", @"");
+            label.font = [UIFont boldSystemFontOfSize:18];
             label.backgroundColor = [UIColor clearColor];
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];

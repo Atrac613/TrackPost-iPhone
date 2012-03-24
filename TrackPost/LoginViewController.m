@@ -164,7 +164,7 @@
         NSLog(@"Login Success");
 	}
     
-    [self performSelectorOnMainThread:@selector(completeLoginAction:) withObject:[LastFMService sharedInstance].error waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(completeLoginAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeLoginAction:(NSError*)error {
