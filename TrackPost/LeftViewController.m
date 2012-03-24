@@ -9,8 +9,6 @@
 #import "LeftViewController.h"
 #import "IIViewDeckController.h"
 #import "TrackListViewController.h"
-#import "AppDelegate.h"
-#import "LastFMService.h"
 #import "ScrobblerViewController.h"
 #import "MasterViewController.h"
 #import "NSString+MD5.h"
@@ -56,13 +54,11 @@
     
     NSLog(@"Left viewWillAppear");
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
+    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_SESSION];
     if ([session length]) {
         NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetProfile) object:nil];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
-        [appDelegate.operationQueue addOperation:operation];
+        [SharedAppDelegate.operationQueue addOperation:operation];
     }
 }
 
@@ -224,10 +220,17 @@
                     UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:optionViewController];
                     self.viewDeckController.centerController = navController;
                 } else {
-                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_user"];
-                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"lastfm_session"];
+                    // Last.fm
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LASTFM_KEY_USER];
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LASTFM_KEY_SESSION];
+                    
+                    // Facebook
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:FACEBOOK_KEY_ACCESS_TOKEN];
+                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:FACEBOOK_KEY_EXPIRATION_DATE];
+                    
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                    [LastFMService sharedInstance].session = nil;
+                    
+                    SharedAppDelegate.lastfmService.session = nil;
                     
                     MasterViewController *masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MasterViewController"];
                     
@@ -243,14 +246,10 @@
 - (void)synchronizeGetProfile {
     NSLog(@"synchronizeGetProfile");
     
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
+	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_USER];
+    self.userProfileDictionary = [SharedAppDelegate.lastfmService profileForUser:username authenticated:YES];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
-    self.userProfileDictionary = [service profileForUser:username authenticated:YES];
-    
-	[self performSelectorOnMainThread:@selector(completeGetProfile:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetProfile:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetProfile:(NSError*)error {
@@ -258,22 +257,11 @@
     
     userNameLabel.text = [userProfileDictionary valueForKey:@"realname"];
     
-    NSString *hash = [[userProfileDictionary valueForKey:@"avatar"] md5sum];
-    
-    NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"avatar_%@.dat", hash]];
-    
     NSURL *url = [NSURL URLWithString:[userProfileDictionary valueForKey:@"avatar"]];
-    NSData *imageData;
+    NSString *hash = [[userProfileDictionary valueForKey:@"avatar"] md5sum];
+    NSString *key = [NSString stringWithFormat:@"avatar_%@", hash];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        imageData = [NSData dataWithContentsOfURL:url];
-        [imageData writeToFile:path atomically:YES];
-        NSLog(@"Avatar Url:%@ ImageSize:%d", [url absoluteString], [imageData length]);
-    } else {
-        NSLog(@"File Exists! Avatar Url: %@", [url absoluteString]);
-        imageData = [NSData dataWithContentsOfFile:path];
-    }
+    NSData *imageData = [SharedAppDelegate.fileUtil getDataFromUrlAndKey:url key:key];
 
     profileImageView.image = [UIImage imageWithData:imageData];
     

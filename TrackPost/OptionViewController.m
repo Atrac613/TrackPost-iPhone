@@ -80,9 +80,10 @@
         
         if (indexPath.row == 0) {
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 12, 280, 25)];
+            [textField setReturnKeyType:UIReturnKeyDone];
             [textField setDelegate:self];
             
-            NSString *titleString = [[NSUserDefaults standardUserDefaults] objectForKey:@"share_title"];
+            NSString *titleString = [[NSUserDefaults standardUserDefaults] objectForKey:OPTION_KEY_SHARE_TITLE];
             if ([titleString length] <= 0) {
                 titleString = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"NOW_PLAYING", @"")];
             }
@@ -97,7 +98,7 @@
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             switchView.tag = 11001;
-            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_prefix"];
+            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:OPTION_KEY_SHARE_PREFIX];
             cell.accessoryView = switchView;
             
             //[switchView setOn:NO animated:NO];
@@ -112,7 +113,7 @@
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             switchView.tag = 11002;
-            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_suffix"];
+            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:OPTION_KEY_SHARE_SUFFIX];
             cell.accessoryView = switchView;
             
             //[switchView setOn:NO animated:NO];
@@ -127,7 +128,7 @@
             
             UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
             switchView.tag = 11003;
-            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_add_lastfm_page"];
+            switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:OPTION_KEY_SHARE_ADD_LASTFM_PAGE];
             cell.accessoryView = switchView;
             
             //[switchView setOn:NO animated:NO];
@@ -149,11 +150,11 @@
     NSLog(@"Switch is %@", switchControl.on ? @"ON" : @"OFF");
     
     if (switchControl.tag == 11001) {
-        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:@"share_prefix"];
+        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:OPTION_KEY_SHARE_PREFIX];
     } else if (switchControl.tag == 11002) {
-        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:@"share_suffix"];
+        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:OPTION_KEY_SHARE_SUFFIX];
     } else {
-        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:@"share_add_lastfm_page"];
+        [[NSUserDefaults standardUserDefaults] setBool:switchControl.on forKey:OPTION_KEY_SHARE_ADD_LASTFM_PAGE];
     }
 
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -162,7 +163,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
-    [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:@"share_title"];
+    [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:OPTION_KEY_SHARE_TITLE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     return YES;

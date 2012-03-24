@@ -9,7 +9,6 @@
 #import "AboutViewController.h"
 #import "IIViewDeckController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AppDelegate.h"
 #import "ThirdPartyNoticesViewController.h"
 #import "MoreAppsViewController.h"
 
@@ -166,8 +165,6 @@
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tv deselectRowAtIndexPath:indexPath animated:YES];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     if (indexPath.section == 0) {
         if (indexPath.row == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/Atrac613/TrackPost-iPhone"]];
@@ -186,7 +183,7 @@
             
             NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeClearCacheAction) object:nil];
             [operation setQueuePriority:NSOperationQueuePriorityHigh];
-            [appDelegate.operationQueue addOperation:operation];
+            [SharedAppDelegate.operationQueue addOperation:operation];
         }
     }
 }

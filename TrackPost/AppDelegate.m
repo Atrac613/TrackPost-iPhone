@@ -19,7 +19,9 @@
 @synthesize centerController = _viewController;
 @synthesize leftController = _leftController;
 @synthesize operationQueue;
+@synthesize fileUtil;
 @synthesize facebook;
+@synthesize lastfmService;
 
 NSString *kUserAgent;
 
@@ -35,6 +37,8 @@ NSString *kUserAgent;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.fileUtil = [[FileUtil alloc] init];
+    self.lastfmService = [[LastFMService alloc] init];
     self.operationQueue = [[NSOperationQueue alloc] init];
     
     // Override point for customization after application launch.

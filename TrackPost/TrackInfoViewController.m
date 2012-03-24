@@ -7,8 +7,6 @@
 //
 
 #import "TrackInfoViewController.h"
-#import "AppDelegate.h"
-#import "LastFMService.h"
 #import <QuartzCore/QuartzCore.h>
 #import "IIViewDeckController.h"
 #import "NSString+MD5.h"
@@ -47,7 +45,6 @@
     [super viewDidLoad];
 	
     [self.navigationItem setTitle:NSLocalizedString(@"TRACK_INFO", @"Track Info")];
-    
     
     if (!enabledBackButton) {
         [self.navigationItem setHidesBackButton:YES];
@@ -94,11 +91,9 @@
     
     tagTextView.text = tagString;
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackCoverAction) object:nil];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
 }
 
 - (void)viewDidUnload
@@ -112,7 +107,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
 - (IBAction)lovedButtonPressed:(id)sender {
     NSLog(@"lovedButtonPressed");
     
@@ -125,30 +119,24 @@
     [loveButton setEnabled:NO];
     [loveButton setAlpha:0.5f];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeLoveAction) object:nil];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
 }
 
 - (void)synchronizeLoveAction {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    
-    if (lovedTrack) {
+	if (lovedTrack) {
         NSLog(@"loveTrack");
-        [service loveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+        [SharedAppDelegate.lastfmService loveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
     } else {
         NSLog(@"unloveTrack");
-        [service unloveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+        [SharedAppDelegate.lastfmService unloveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
     }
     
     //NSLog(@"%d", [LastFMService sharedInstance].error.code);
     //NSLog(@"%@", [LastFMService sharedInstance].error.domain);
 	
-	[self performSelectorOnMainThread:@selector(completeLoveAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeLoveAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeLoveAction:(NSError*)error {
@@ -196,17 +184,12 @@
 }
 
 - (void)synchronizeGetTagsAction {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    //NSLog(@"session: %@", session);
-    
-    tagArray = [service tagsForTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+	tagArray = [SharedAppDelegate.lastfmService tagsForTrack:trackNameLabel.text byArtist:artistNameLabel.text];
     //NSLog(@"tagArray: %@", tagArray);
     //NSLog(@"%d", [LastFMService sharedInstance].error.code);
     //NSLog(@"%@", [LastFMService sharedInstance].error.domain);
 	
-	[self performSelectorOnMainThread:@selector(completeGetTagsAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetTagsAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetTagsAction:(NSError*)error {

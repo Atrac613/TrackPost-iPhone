@@ -7,8 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "AppDelegate.h"
-#import "LastFMService.h"
 
 @interface LoginViewController ()
 
@@ -37,6 +35,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(loginButtonPressed)];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
 	
     [self.navigationItem setTitle:NSLocalizedString(@"LOGIN", @"")];
 }
@@ -65,11 +64,9 @@
     
     [self showPendingView];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeLoginAction) object:nil];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -132,12 +129,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    
+    UITextField *usernameField = (UITextField*)[self.view viewWithTag:100];
+    UITextField *passwordField = (UITextField*)[self.view viewWithTag:101];
+    
+    if ([usernameField.text length] > 0 && [passwordField.text length] > 0) {
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    } else {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    }
     
     return YES;
 }
@@ -149,14 +151,14 @@
     NSString *username = usernameField.text;
     NSString *password = passwordField.text;
     
-    NSLog(@"Username: %@, Password: %@", username, password);
+    //NSLog(@"Username: %@, Password: %@", username, password);
     
-    NSDictionary *session = [[LastFMService sharedInstance] getMobileSessionForUser:username password:password];
+    NSDictionary *session = [SharedAppDelegate.lastfmService getMobileSessionForUser:username password:password];
     NSLog(@"%@", session);
     if([[session objectForKey:@"key"] length]) {
-        [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"lastfm_user"];
-        [[NSUserDefaults standardUserDefaults] setObject:[session objectForKey:@"key"] forKey:@"lastfm_session"];
-        [[NSUserDefaults standardUserDefaults] setObject:[session objectForKey:@"subscriber"] forKey:@"lastfm_subscriber"];
+        [[NSUserDefaults standardUserDefaults] setObject:username forKey:LASTFM_KEY_USER];
+        [[NSUserDefaults standardUserDefaults] setObject:[session objectForKey:@"key"] forKey:LASTFM_KEY_SESSION];
+        [[NSUserDefaults standardUserDefaults] setObject:[session objectForKey:@"subscriber"] forKey:LASTFM_KEY_SUBSCRIBER];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         NSLog(@"Login Success");
@@ -189,7 +191,7 @@
 
 - (void)showPendingView {
     if (pendingView == nil && ![self.view.subviews containsObject:pendingView]) {
-        pendingView = [[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-40)];
+        pendingView = [[PendingView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         pendingView.titleLabel.text = NSLocalizedString(@"PLEASE_WAIT", @"Please wait");
         pendingView.userInteractionEnabled = NO;
         [self.view addSubview:pendingView];

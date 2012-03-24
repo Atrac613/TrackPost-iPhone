@@ -7,15 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#include <SystemConfiguration/SCNetworkReachability.h>
-#include "version.h"
+#import <SystemConfiguration/SCNetworkReachability.h>
+#import "version.h"
 #import "FBConnect.h"
+#import "LastFMService.h"
+#import "FileUtil.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     NSOperationQueue *operationQueue;
     UIAlertView *_pendingAlert;
     BOOL _locked;
     
+    FileUtil *fileUtil;
+    LastFMService *lastfmService;
     Facebook *facebook;
 }
 
@@ -25,6 +29,8 @@
 @property (retain, nonatomic) UIViewController *leftController;
 @property (nonatomic, retain) NSOperationQueue *operationQueue;
 
+@property (nonatomic, retain) FileUtil *fileUtil;
+@property (nonatomic, retain) LastFMService *lastfmService;
 @property (nonatomic, retain) Facebook *facebook;
 
 -(BOOL)hasNetworkConnection;

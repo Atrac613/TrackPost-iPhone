@@ -7,8 +7,6 @@
 //
 
 #import "TrackListViewController.h"
-#import "AppDelegate.h"
-#import "LastFMService.h"
 #import "TrackCell.h"
 #import "IIViewDeckController.h"
 #import "TrackInfoViewController.h"
@@ -75,31 +73,25 @@
 - (void)trackListsUpdate {
     [self showPendingView];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTracksAction) object:nil];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
 }
 
 - (void)synchronizeGetTracksAction {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
+	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_USER];
     
     if ([trackMode isEqualToString:@"loved"]) {
-        self.trackListsArray = [service lovedTracksForUser:username];
+        self.trackListsArray = [SharedAppDelegate.lastfmService lovedTracksForUser:username];
     } else if ([trackMode isEqualToString:@"top"]) {
-        self.trackListsArray = [service topTracksForUser:username];
+        self.trackListsArray = [SharedAppDelegate.lastfmService topTracksForUser:username];
     } else if ([trackMode isEqualToString:@"weekly"]) {
-        self.trackListsArray = [service weeklyTracksForUser:username];
+        self.trackListsArray = [SharedAppDelegate.lastfmService weeklyTracksForUser:username];
     } else {
-        self.trackListsArray = [service recentlyPlayedTracksForUser:username];
+        self.trackListsArray = [SharedAppDelegate.lastfmService recentlyPlayedTracksForUser:username];
     }
     
-	[self performSelectorOnMainThread:@selector(completeGetTracksAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetTracksAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetTracksAction:(NSError*)error {
@@ -158,8 +150,6 @@
 }
 
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSDictionary *rowData = [self.trackListsArray objectAtIndex:indexPath.row];
     
     NSString *artistName = [rowData objectForKey:@"artist"];
@@ -173,21 +163,17 @@
     
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackInfoAction:) object:rowData];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
     
 }
 
 - (void)synchronizeGetTrackInfoAction:(NSDictionary*)rowData {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    
-    NSString *artistName = [rowData objectForKey:@"artist"];
+	NSString *artistName = [rowData objectForKey:@"artist"];
     NSString *trackName = [rowData objectForKey:@"name"];
     
-    trackInfo = [service metadataForTrack:trackName byArtist:artistName inLanguage:@""];
+    trackInfo = [SharedAppDelegate.lastfmService metadataForTrack:trackName byArtist:artistName inLanguage:@""];
     
-	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetTrackInfoAction:(NSError*)error {

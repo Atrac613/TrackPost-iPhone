@@ -24,3 +24,16 @@ BOOL shouldUseCache(NSString *file, double seconds);
 #import "AppDelegate.h"
 
 #define SharedAppDelegate ((AppDelegate*)[[UIApplication sharedApplication] delegate])
+
+#define LASTFM_KEY_USER ((NSString*)@"lastfm_user")
+#define LASTFM_KEY_SESSION ((NSString*)@"lastfm_session")
+#define LASTFM_KEY_SUBSCRIBER ((NSString*)@"lastfm_subscriber")
+
+#define FACEBOOK_KEY_APP_ID ((NSString*)@"352034171506780")
+#define FACEBOOK_KEY_ACCESS_TOKEN ((NSString*)@"FBAccessTokenKey")
+#define FACEBOOK_KEY_EXPIRATION_DATE ((NSString*)@"FBExpirationDateKey")
+
+#define OPTION_KEY_SHARE_TITLE ((NSString*)@"share_title")
+#define OPTION_KEY_SHARE_PREFIX ((NSString*)@"share_prefix")
+#define OPTION_KEY_SHARE_SUFFIX ((NSString*)@"share_suffix")
+#define OPTION_KEY_SHARE_ADD_LASTFM_PAGE ((NSString*)@"share_add_lastfm_page")

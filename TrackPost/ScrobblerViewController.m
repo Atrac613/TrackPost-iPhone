@@ -10,8 +10,6 @@
 #import "IIViewDeckController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "LastFMService.h"
-#import "AppDelegate.h"
 #import "NSString+MD5.h"
 #import "ShareViewController.h"
 
@@ -53,7 +51,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleLeftView)];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_USER];
     
     UIView *titleView = [[UIView alloc] init];
     [titleView setFrame:CGRectMake(0, 0, 140, 44)];
@@ -133,8 +131,6 @@
 }
 
 - (void)refreshCurrentTracks {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     MPMusicPlayerController *iPodController = [MPMusicPlayerController iPodMusicPlayer];
     
     float time = [iPodController currentPlaybackTime];
@@ -149,7 +145,7 @@
         
         NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackInfoAction) object:nil];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
-        [appDelegate.operationQueue addOperation:operation];
+        [SharedAppDelegate.operationQueue addOperation:operation];
         
         [artistNameLabel setHidden:NO];
         [trackNameLabel setHidden:NO];
@@ -193,11 +189,9 @@
         [scrobbleButton setEnabled:NO];
         [scrobbleButton setAlpha:0.5f];
         
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        
         NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeScrobbleAction) object:nil];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
-        [appDelegate.operationQueue addOperation:operation];
+        [SharedAppDelegate.operationQueue addOperation:operation];
     }
 }
 
@@ -215,32 +209,24 @@
         [loveButton setEnabled:NO];
         [loveButton setAlpha:0.5f];
         
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        
         NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeLoveAction) object:nil];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
-        [appDelegate.operationQueue addOperation:operation];
+        [SharedAppDelegate.operationQueue addOperation:operation];
     }
     
 }
 
 - (void)synchronizeScrobbleAction {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    //NSLog(@"session: %@", session);
+	time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
     
-    time_t unixTime = (time_t) [[NSDate date] timeIntervalSince1970];
+    [SharedAppDelegate.lastfmService scrobbleTrack:trackNameLabel.text byArtist:artistNameLabel.text onAlbum:@"" withDuration:1 timestamp:unixTime streamId:@""];
     
-    //[service nowPlayingTrack:trackNameLabel.text byArtist:artistNameLabel.text onAlbum:@"" withDuration:1];
-    [service scrobbleTrack:trackNameLabel.text byArtist:artistNameLabel.text onAlbum:@"" withDuration:1 timestamp:unixTime streamId:@""];
-    
-    NSLog(@"code %d", [service.error code]);
-    NSLog(@"domain %@", [service.error domain]);
-    NSLog(@"desc %@", [service.error localizedDescription]);
-    NSLog(@"Time: %ld", unixTime);
+    //NSLog(@"code %d", [SharedAppDelegate.lastfmService.error code]);
+    //NSLog(@"domain %@", [SharedAppDelegate.lastfmService.error domain]);
+    //NSLog(@"desc %@", [SharedAppDelegate.lastfmService.error localizedDescription]);
+    //NSLog(@"Time: %ld", unixTime);
 	
-	[self performSelectorOnMainThread:@selector(completeScrobbleAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeScrobbleAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeScrobbleAction:(NSError*)error {
@@ -273,25 +259,18 @@
 
 
 - (void)synchronizeLoveAction {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    
-    //NSLog(@"session: %@", session);
-    //NSLog(@"loved: %d", lovedTrack);
-    
-    if (lovedTrack) {
+	if (lovedTrack) {
         NSLog(@"loveTrack");
-        [service loveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+        [SharedAppDelegate.lastfmService loveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
     } else {
         NSLog(@"unloveTrack");
-        [service unloveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
+        [SharedAppDelegate.lastfmService unloveTrack:trackNameLabel.text byArtist:artistNameLabel.text];
     }
     
-    NSLog(@"%d", [LastFMService sharedInstance].error.code);
-    NSLog(@"%@", [LastFMService sharedInstance].error.domain);
+    //NSLog(@"%d", [LastFMService sharedInstance].error.code);
+    //NSLog(@"%@", [LastFMService sharedInstance].error.domain);
 	
-	[self performSelectorOnMainThread:@selector(completeLoveAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeLoveAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeLoveAction:(NSError*)error {
@@ -362,23 +341,18 @@
 }
 
 - (void)synchronizeGetTrackInfoAction {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    //NSLog(@"session: %@", session);
-    
-    NSString *artistName = artistNameLabel.text;
+	NSString *artistName = artistNameLabel.text;
     NSString *trackName = trackNameLabel.text;
     
     //NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
-    self.trackInfo = [service metadataForTrack:trackName byArtist:artistName inLanguage:@""];
+    self.trackInfo = [SharedAppDelegate.lastfmService metadataForTrack:trackName byArtist:artistName inLanguage:@""];
     NSLog(@"trackInfo: %@", self.trackInfo);
     
-    NSLog(@"code %d", [service.error code]);
-    NSLog(@"domain %@", [service.error domain]);
-    NSLog(@"desc %@", [service.error localizedDescription]);
+    //NSLog(@"code %d", [service.error code]);
+    //NSLog(@"domain %@", [service.error domain]);
+    //NSLog(@"desc %@", [service.error localizedDescription]);
 	
-	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetTrackInfoAction:(NSError*)error {
@@ -391,22 +365,11 @@
     if (![error code]) {
         if ([[self.trackInfo objectForKey:@"image"] isKindOfClass:[NSString class]] && [[self.trackInfo objectForKey:@"image"] length]) {
             
-            NSString *hash = [[self.trackInfo objectForKey:@"image"] md5sum];
-            
-            NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track_cover_%@.dat", hash]];
-            
             NSURL *url = [NSURL URLWithString:[self.trackInfo objectForKey:@"image"]];
-            NSData *imageData;
+            NSString *hash = [[self.trackInfo objectForKey:@"image"] md5sum];
+            NSString *key = [NSString stringWithFormat:@"track_cover_%@", hash];
             
-            if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-                imageData = [NSData dataWithContentsOfURL:url];
-                [imageData writeToFile:path atomically:YES];
-                NSLog(@"Url:%@ ImageSize:%d", [url absoluteString], [imageData length]);
-            } else {
-                NSLog(@"File Exists! Url: %@", [url absoluteString]);
-                imageData = [NSData dataWithContentsOfFile:path];
-            }
+            NSData *imageData = [SharedAppDelegate.fileUtil getDataFromUrlAndKey:url key:key];
             
             UIImage *img = [[UIImage alloc] initWithData:imageData];
             self.trackImageView.image = img;

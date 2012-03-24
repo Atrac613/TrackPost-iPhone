@@ -41,33 +41,32 @@
 {
     [super viewDidLoad];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
 	
     [self.navigationItem setTitle:NSLocalizedString(@"SHARE", @"")];
     
-    appDelegate.facebook = [[Facebook alloc] initWithAppId:@"352034171506780" andDelegate:self];
+    SharedAppDelegate.facebook = [[Facebook alloc] initWithAppId:FACEBOOK_KEY_APP_ID andDelegate:self];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        appDelegate.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        appDelegate.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    if ([defaults objectForKey:FACEBOOK_KEY_ACCESS_TOKEN] 
+        && [defaults objectForKey:FACEBOOK_KEY_EXPIRATION_DATE]) {
+        SharedAppDelegate.facebook.accessToken = [defaults objectForKey:FACEBOOK_KEY_ACCESS_TOKEN];
+        SharedAppDelegate.facebook.expirationDate = [defaults objectForKey:FACEBOOK_KEY_EXPIRATION_DATE];
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
     
-    NSString *shareTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"share_title"];
+    NSString *shareTitle = [[NSUserDefaults standardUserDefaults] objectForKey:OPTION_KEY_SHARE_TITLE];
     if ([shareTitle length] <= 0) {
         shareTitle = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"NOW_PLAYING", @"")];
     }
     
-    BOOL prefixEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_prefix"];
-    BOOL suffixEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_suffix"];
-    BOOL addLastfmPageEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"share_add_lastfm_page"];
+    BOOL prefixEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:OPTION_KEY_SHARE_PREFIX];
+    BOOL suffixEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:OPTION_KEY_SHARE_SUFFIX];
+    BOOL addLastfmPageEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:OPTION_KEY_SHARE_ADD_LASTFM_PAGE];
     
     shareMessage = [NSString stringWithFormat:@"%@ - %@", artistName, trackName];
     
@@ -106,11 +105,9 @@
 - (void)doneButtonPressed {
     [self showPendingView];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(operationSendTwitter) object:nil];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
 }
 
 - (void)operationSendTwitter {
@@ -127,7 +124,7 @@
     NSLog(@"operationSendFacebook");
     
     if (doFacebook) {
-        [self sendFacebook:shareMessage url:lastfmPage];
+        [self sendFacebook:shareMessageMinimum url:lastfmPage];
     } else {
         NSLog(@"Completed.");
         
@@ -308,6 +305,12 @@
             }
         }
     }
+    
+    if (doFacebook || doTweet) {
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    } else {
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    }
 }
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
@@ -356,17 +359,15 @@
 }
 
 - (void)sendFacebook:(NSString *)message url:(NSString*)url {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if ([appDelegate.facebook isSessionValid]) {
+    if ([SharedAppDelegate.facebook isSessionValid]) {
         if ([url length] > 0) {
             NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys: url, @"link", message, @"message", nil];
             
-            [appDelegate.facebook requestWithGraphPath:@"me/links" andParams:params andHttpMethod:@"POST" andDelegate:self];
+            [SharedAppDelegate.facebook requestWithGraphPath:@"me/links" andParams:params andHttpMethod:@"POST" andDelegate:self];
         } else {
             NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys: message, @"message", nil];
             
-            [appDelegate.facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+            [SharedAppDelegate.facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
         }
     } else {
         NSLog(@"Facebook session is invalid.");
@@ -380,11 +381,9 @@
 - (void)fbDidLogin {
     NSLog(@"fbDidLogin");
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[appDelegate.facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[appDelegate.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults setObject:[SharedAppDelegate.facebook accessToken] forKey:FACEBOOK_KEY_ACCESS_TOKEN];
+    [defaults setObject:[SharedAppDelegate.facebook expirationDate] forKey:FACEBOOK_KEY_EXPIRATION_DATE];
     [defaults synchronize];
 }
 

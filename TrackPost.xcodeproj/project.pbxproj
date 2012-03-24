@@ -93,6 +93,7 @@
 		06F71BF6151CDA05009285D0 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F71BE7151CDA04009285D0 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		06F71BFF151CE804009285D0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F71BFE151CE804009285D0 /* Accounts.framework */; };
 		06F71C01151CE81A009285D0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06F71C00151CE81A009285D0 /* Twitter.framework */; };
+		06F71C19151DE1B6009285D0 /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F71C18151DE1B6009285D0 /* FileUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -253,6 +254,8 @@
 		06F71BE7151CDA04009285D0 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		06F71BFE151CE804009285D0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		06F71C00151CE81A009285D0 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		06F71C17151DE1B6009285D0 /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
+		06F71C18151DE1B6009285D0 /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +337,7 @@
 		06285B381510EC370005ECF5 /* TrackPost */ = {
 			isa = PBXGroup;
 			children = (
+				06F71C16151DE19A009285D0 /* Util */,
 				06285BAA1514A90D0005ECF5 /* Cell */,
 				0676F39C1513B82600803D84 /* View */,
 				0676F39A1513B57700803D84 /* Service */,
@@ -602,6 +606,15 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		06F71C16151DE19A009285D0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				06F71C17151DE1B6009285D0 /* FileUtil.h */,
+				06F71C18151DE1B6009285D0 /* FileUtil.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -787,6 +800,7 @@
 				06F71BF4151CDA05009285D0 /* SBJsonBase.m in Sources */,
 				06F71BF5151CDA05009285D0 /* SBJsonParser.m in Sources */,
 				06F71BF6151CDA05009285D0 /* SBJsonWriter.m in Sources */,
+				06F71C19151DE1B6009285D0 /* FileUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

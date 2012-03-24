@@ -7,8 +7,6 @@
 //
 
 #import "RightViewController.h"
-#import "AppDelegate.h"
-#import "LastFMService.h"
 #import "NSString+MD5.h"
 #import "TrackInfoViewController.h"
 #import "IIViewDeckController.h"
@@ -68,13 +66,11 @@
     [super viewWillAppear:animated];
     NSLog(@"Right viewWillAppear");
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
+    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_SESSION];
     if ([session length]) {
         NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetLovedTracks) object:nil];
         [operation setQueuePriority:NSOperationQueuePriorityHigh];
-        [appDelegate.operationQueue addOperation:operation];
+        [SharedAppDelegate.operationQueue addOperation:operation];
     }
 }
 
@@ -86,20 +82,14 @@
 - (void)synchronizeGetLovedTracks {
     NSLog(@"synchronizeGetLovedTracks");
     
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_user"];
-    self.lovedTracksArray = [service lovedTracksForUser:username];
+	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_USER];
+    self.lovedTracksArray = [SharedAppDelegate.lastfmService lovedTracksForUser:username];
     //NSLog(@"%@", self.lovedTracksArray);
-	[self performSelectorOnMainThread:@selector(completeGetLovedTracks:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetLovedTracks:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetLovedTracks:(NSError*)error {
     NSLog(@"completeGetLovedTracks");
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSInvocationOperation *operation;
     
@@ -127,7 +117,7 @@
             
             operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetLovedTracksCoverImage:) object:[[NSArray alloc] initWithObjects:[NSURL URLWithString:imageUrl], [NSNumber numberWithInt:imageCount], hash, nil]];
             [operation setQueuePriority:NSOperationQueuePriorityLow];
-            [appDelegate.operationQueue addOperation:operation];
+            [SharedAppDelegate.operationQueue addOperation:operation];
             
             if (imageCount >= maxImage) {
                 break;
@@ -145,16 +135,9 @@
     NSInteger rank = [[object objectAtIndex:1] intValue];
     NSString *hash = [object objectAtIndex:2];
     
-    NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track_cover_%@.dat", hash]];
+    NSString *key = [NSString stringWithFormat:@"track_cover_%@", hash];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        [imageData writeToFile:path atomically:YES];
-        NSLog(@"Url:%@ ImageSize:%d", [url absoluteString], [imageData length]);
-    } else {
-        NSLog(@"File Exists! Url: %@", [url absoluteString]);
-    }
+    [SharedAppDelegate.fileUtil createCacheFileFromUrlAndKey:url key:key];
     
 	[self performSelectorOnMainThread:@selector(completeGetLovedTracksCoverImage:) withObject:[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:rank], nil] waitUntilDone:YES];
 }
@@ -171,12 +154,10 @@
     // 2: trackName
     NSString *hash = [trackInfoArray objectAtIndex:0];
     
-    NSString *applicationDocumentsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [applicationDocumentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track_cover_%@.dat", hash]];
+    NSString *key = [NSString stringWithFormat:@"track_cover_%@", hash];
     
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-    
-    NSLog(@"Hash: %@ ImageSize: %d", hash, [[NSData dataWithContentsOfFile:path] length]);
+    NSData *imageData = [SharedAppDelegate.fileUtil getDataFromKey:key];
+    UIImage *image = [UIImage imageWithData:imageData];
     
     // I really hate this code...
     if (rank == 0) {
@@ -323,30 +304,24 @@
 }
 
 - (void)getTrackInfo:(NSArray*)object {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     [self showPendingView];
     
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(synchronizeGetTrackInfoAction:) object:object];
     [operation setQueuePriority:NSOperationQueuePriorityHigh];
-    [appDelegate.operationQueue addOperation:operation];
+    [SharedAppDelegate.operationQueue addOperation:operation];
 }
 
 - (void)synchronizeGetTrackInfoAction:(NSArray*)object {
-	NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
-    LastFMService *service = [[LastFMService alloc] init];
-    service.session = session;
-    
-    // Array key index.
+	// Array key index.
     // 0: hash
     // 1: artistName
     // 2: trackName
     NSString *artistName = [object objectAtIndex:1];
     NSString *trackName = [object objectAtIndex:2];
     
-    trackInfo = [service metadataForTrack:trackName byArtist:artistName inLanguage:@""];
+    trackInfo = [SharedAppDelegate.lastfmService metadataForTrack:trackName byArtist:artistName inLanguage:@""];
     
-	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:service.error waitUntilDone:YES];
+	[self performSelectorOnMainThread:@selector(completeGetTrackInfoAction:) withObject:SharedAppDelegate.lastfmService.error waitUntilDone:YES];
 }
 
 - (void)completeGetTrackInfoAction:(NSError*)error {
@@ -360,9 +335,6 @@
                 TrackInfoViewController *trackInfoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TrackInfoViewController"];
                 trackInfoViewController.trackInfo = self.trackInfo;
                 trackInfoViewController.enabledBackButton = NO;
-                
-                //UINavigationController *navController = (UINavigationController*)controller.centerController;
-                //[navController pushViewController:trackInfoViewController animated:NO];
                 
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:trackInfoViewController];
                 self.viewDeckController.centerController = navController;

@@ -8,8 +8,6 @@
 
 #import "MasterViewController.h"
 #import "IIViewDeckController.h"
-#import "LastFMService.h"
-#import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "ScrobblerViewController.h"
 
@@ -38,9 +36,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastfm_session"];
+    NSString *session = [[NSUserDefaults standardUserDefaults] objectForKey:LASTFM_KEY_SESSION];
     if ([session length]) {
         NSLog(@"Session key found.");
+        
+        SharedAppDelegate.lastfmService.session = session;
         
         // Refresh Side Controller.
         [[self.viewDeckController rightController] viewWillAppear:YES];
