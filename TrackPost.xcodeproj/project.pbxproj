@@ -65,6 +65,7 @@
 		0676F3E61513CE6400803D84 /* NSString+LastFMTimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3901513B55900803D84 /* NSString+LastFMTimeExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3E71513CE6400803D84 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3921513B55900803D84 /* NSString+MD5.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0676F3E81513CE6400803D84 /* NSString+URLEscaped.m in Sources */ = {isa = PBXBuildFile; fileRef = 0676F3941513B55900803D84 /* NSString+URLEscaped.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		06B4F134151F62950040744C /* welcome_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 06B4F133151F62950040744C /* welcome_background.png */; };
 		06BDBAC21515874C00690BEC /* TrackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC11515874C00690BEC /* TrackListViewController.m */; };
 		06BDBAC61515EA0800690BEC /* FullScreenPendingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC51515EA0800690BEC /* FullScreenPendingView.m */; };
 		06BDBACA1515ED9100690BEC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BDBAC91515ED9100690BEC /* AboutViewController.m */; };
@@ -204,6 +205,7 @@
 		0676F3D11513BB0A00803D84 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		0676F3D21513BB0A00803D84 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0676F3D51513BE2200803D84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		06B4F133151F62950040744C /* welcome_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome_background.png; path = TrackPost/images/welcome_background.png; sourceTree = "<group>"; };
 		06BDBAC01515874C00690BEC /* TrackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackListViewController.h; sourceTree = "<group>"; };
 		06BDBAC11515874C00690BEC /* TrackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackListViewController.m; sourceTree = "<group>"; };
 		06BDBAC41515EA0800690BEC /* FullScreenPendingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenPendingView.h; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 		06BDBAE91518DBFC00690BEC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				06B4F133151F62950040744C /* welcome_background.png */,
 				06F71BBD151CC9C6009285D0 /* btn_back.png */,
 				06F71BBE151CC9C6009285D0 /* btn_back@2x.png */,
 				06F71BBF151CC9C6009285D0 /* btn_next.png */,
@@ -717,6 +720,7 @@
 				06F71BC3151CC9C6009285D0 /* btn_next.png in Resources */,
 				06F71BC4151CC9C6009285D0 /* btn_next@2x.png in Resources */,
 				06F71BEC151CDA05009285D0 /* FBDialog.bundle in Resources */,
+				06B4F134151F62950040744C /* welcome_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,7 +913,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Osamu Noguchi";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Osamu Noguchi";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -923,6 +928,8 @@
 					"-ObjC",
 					"-lz",
 				);
+				PROVISIONING_PROFILE = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv6 armv7";
@@ -948,6 +955,8 @@
 		06285B661510EC370005ECF5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Osamu Noguchi";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Osamu Noguchi";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
 				INFOPLIST_FILE = "TrackPost/TrackPost-Info.plist";
@@ -956,6 +965,8 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
