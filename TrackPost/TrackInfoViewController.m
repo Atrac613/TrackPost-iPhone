@@ -148,7 +148,7 @@
     UIAlertView *alert;
     
     if ([error code]) {
-        alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_ERROR_TITLE", @"Love error title")
+        alert = [[UIAlertView alloc] initWithTitle:nil
                                             message:NSLocalizedString([error localizedDescription], @"error")
                                            delegate:self
                                   cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
@@ -160,13 +160,13 @@
         }
     } else {
         if (lovedTrack) {
-            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_SUCCESS_TITLE", @"Love successful title")
+            alert = [[UIAlertView alloc] initWithTitle:nil
                                                 message:NSLocalizedString(@"LOVE_SUCCESS_BODY",@"Love successfull")
                                                delegate:self
                                       cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
                                       otherButtonTitles:nil, nil];
         } else {
-            alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOVE_SUCCESS_TITLE", @"Love successful title")
+            alert = [[UIAlertView alloc] initWithTitle:nil
                                                 message:NSLocalizedString(@"UNLOVE_SUCCESS_BODY",@"Unlove successfull")
                                                delegate:self
                                       cancelButtonTitle:NSLocalizedString(@"OK", @"ok")
