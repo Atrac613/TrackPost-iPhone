@@ -79,6 +79,8 @@
     self.navigationItem.titleView = titleView;
     
     self.bannerIsVisible = NO;
+    adView.frame = CGRectOffset(adView.frame, 0, 50);
+    
     self.lovedTrack = NO;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshCurrentTracks)];
@@ -106,7 +108,15 @@
     
     [self.viewDeckController setPanningMode:IIViewDeckFullViewPanning];
     
+    adView.delegate = self;
+    
     [self refreshCurrentTracks];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    adView.delegate = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -322,7 +332,7 @@
     {
         [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
         // banner is invisible now and moved out of the screen on 50 px
-        banner.frame = CGRectOffset(banner.frame, 0, 50);
+        banner.frame = CGRectOffset(banner.frame, 0, -50);
         [UIView commitAnimations];
         self.bannerIsVisible = YES;
     }
@@ -334,7 +344,7 @@
     {
         [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
         // banner is visible and we move it out of the screen, due to connection issue
-        banner.frame = CGRectOffset(banner.frame, 0, -50);
+        banner.frame = CGRectOffset(banner.frame, 0, 50);
         [UIView commitAnimations];
         self.bannerIsVisible = NO;
     }
