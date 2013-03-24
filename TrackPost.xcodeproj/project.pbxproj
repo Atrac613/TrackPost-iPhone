@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060CB56416FF43AD008B6C8E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 060CB56316FF43AD008B6C8E /* Default-568h@2x.png */; };
 		06285B331510EC370005ECF5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B321510EC370005ECF5 /* UIKit.framework */; };
 		06285B351510EC370005ECF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B341510EC370005ECF5 /* Foundation.framework */; };
 		06285B371510EC370005ECF5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06285B361510EC370005ECF5 /* CoreGraphics.framework */; };
@@ -115,6 +116,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		060CB56316FF43AD008B6C8E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		06285B2E1510EC370005ECF5 /* TrackPost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackPost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06285B321510EC370005ECF5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06285B341510EC370005ECF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -296,6 +298,7 @@
 		06285B231510EC370005ECF5 = {
 			isa = PBXGroup;
 			children = (
+				060CB56316FF43AD008B6C8E /* Default-568h@2x.png */,
 				06285B711510EC6C0005ECF5 /* icon.png */,
 				06285B6E1510EC690005ECF5 /* icon@2x.png */,
 				06285B381510EC370005ECF5 /* TrackPost */,
@@ -721,6 +724,7 @@
 				06F71BC4151CC9C6009285D0 /* btn_next@2x.png in Resources */,
 				06F71BEC151CDA05009285D0 /* FBDialog.bundle in Resources */,
 				06B4F134151F62950040744C /* welcome_background.png in Resources */,
+				060CB56416FF43AD008B6C8E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,8 +932,8 @@
 					"-ObjC",
 					"-lz",
 				);
-				PROVISIONING_PROFILE = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
+				PROVISIONING_PROFILE = "913FBA79-EFF6-4255-AA44-7B4619633705";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "913FBA79-EFF6-4255-AA44-7B4619633705";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv6 armv7";
@@ -939,6 +943,8 @@
 		06285B651510EC370005ECF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Osamu Noguchi (BQY439J4V9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Osamu Noguchi (BQY439J4V9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrackPost/TrackPost-Prefix.pch";
 				INFOPLIST_FILE = "TrackPost/TrackPost-Info.plist";
@@ -947,6 +953,8 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7C97524F-9AFE-41AA-85C5-9D85A78237A4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7C97524F-9AFE-41AA-85C5-9D85A78237A4";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};
@@ -965,8 +973,8 @@
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8B32ECD7-21C8-4486-ACA5-E1CF3A8F053D";
+				PROVISIONING_PROFILE = "913FBA79-EFF6-4255-AA44-7B4619633705";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "913FBA79-EFF6-4255-AA44-7B4619633705";
 				VALID_ARCHS = "armv6 armv7";
 				WRAPPER_EXTENSION = app;
 			};

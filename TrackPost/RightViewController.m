@@ -37,6 +37,10 @@
 @synthesize button18;
 @synthesize button19;
 @synthesize button20;
+@synthesize button21;
+@synthesize button22;
+@synthesize button23;
+@synthesize button24;
 @synthesize lovedTracksArray;
 @synthesize rankArray;
 @synthesize trackInfo;
@@ -93,7 +97,7 @@
     
     NSInvocationOperation *operation;
     
-    NSInteger maxImage = 20;
+    NSInteger maxImage = 24;
     NSInteger imageCount = 0;
     NSString *hash;
     NSString *artistName;
@@ -220,6 +224,18 @@
     } else if (rank == 19) {
         [button20 setBackgroundImage:image forState:UIControlStateNormal];
         [button20 addTarget:self action:@selector(button20Pressed) forControlEvents:UIControlEventTouchUpInside];
+    } else if (rank == 20) {
+        [button21 setBackgroundImage:image forState:UIControlStateNormal];
+        [button21 addTarget:self action:@selector(button21Pressed) forControlEvents:UIControlEventTouchUpInside];
+    } else if (rank == 21) {
+        [button22 setBackgroundImage:image forState:UIControlStateNormal];
+        [button22 addTarget:self action:@selector(button22Pressed) forControlEvents:UIControlEventTouchUpInside];
+    } else if (rank == 22) {
+        [button23 setBackgroundImage:image forState:UIControlStateNormal];
+        [button23 addTarget:self action:@selector(button23Pressed) forControlEvents:UIControlEventTouchUpInside];
+    } else if (rank == 23) {
+        [button24 setBackgroundImage:image forState:UIControlStateNormal];
+        [button24 addTarget:self action:@selector(button24Pressed) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -301,6 +317,22 @@
 
 - (void)button20Pressed {
     [self getTrackInfo:[rankArray objectAtIndex:19]];
+}
+
+- (void)button21Pressed {
+    [self getTrackInfo:[rankArray objectAtIndex:20]];
+}
+
+- (void)button22Pressed {
+    [self getTrackInfo:[rankArray objectAtIndex:21]];
+}
+
+- (void)button23Pressed {
+    [self getTrackInfo:[rankArray objectAtIndex:22]];
+}
+
+- (void)button24Pressed {
+    [self getTrackInfo:[rankArray objectAtIndex:23]];
 }
 
 - (void)getTrackInfo:(NSArray*)object {

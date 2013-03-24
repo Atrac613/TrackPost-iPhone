@@ -30,6 +30,10 @@
     IBOutlet UIButton *button18;
     IBOutlet UIButton *button19;
     IBOutlet UIButton *button20;
+    IBOutlet UIButton *button21;
+    IBOutlet UIButton *button22;
+    IBOutlet UIButton *button23;
+    IBOutlet UIButton *button24;
     
     NSArray *lovedTracksArray;
     NSMutableArray *rankArray;
@@ -58,6 +62,10 @@
 @property (nonatomic, retain) IBOutlet UIButton *button18;
 @property (nonatomic, retain) IBOutlet UIButton *button19;
 @property (nonatomic, retain) IBOutlet UIButton *button20;
+@property (nonatomic, retain) IBOutlet UIButton *button21;
+@property (nonatomic, retain) IBOutlet UIButton *button22;
+@property (nonatomic, retain) IBOutlet UIButton *button23;
+@property (nonatomic, retain) IBOutlet UIButton *button24;
 
 @property (nonatomic, retain) NSArray *lovedTracksArray;
 @property (nonatomic, retain) NSMutableArray *rankArray;
@@ -85,6 +93,10 @@
 - (void)button18Pressed;
 - (void)button19Pressed;
 - (void)button20Pressed;
+- (void)button21Pressed;
+- (void)button22Pressed;
+- (void)button23Pressed;
+- (void)button24Pressed;
 
 - (void)getTrackInfo:(NSArray*)object;
 
